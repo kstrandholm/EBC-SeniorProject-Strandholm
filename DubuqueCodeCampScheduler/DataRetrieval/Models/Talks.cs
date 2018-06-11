@@ -10,6 +10,7 @@ namespace DubuqueCodeCampScheduler
 
         public string Summary { get; private set; }
 
-        public string DateGiven { get; private set; }
+        // Ignoring this for now while I get the program set up to hanlde just one event
+        //public string DateGiven { get; private set; }
     }
 }
