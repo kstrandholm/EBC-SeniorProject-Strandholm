@@ -5,27 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DubuqueCodeCampScheduler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="486.885" Width="598.975">
-    <Grid>
+        Title="Dubuque Code Camp Schedule Creator" Height="486.885" Width="598.975">
+    <Grid Margin="15 25">
 
     <!-- Divide the window into 3 vertical segments -->
     <Grid.RowDefinitions>
-        <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="Auto"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
 
     <!-- The main content will go in the middle of the window -->
-      <StackPanel Grid.Row="1">
-      <Grid>
-
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+      <StackPanel Grid.Row="0">
         
-        <TextBlock Grid.Column="0"></TextBlock>
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        
         
       </Grid>
 
