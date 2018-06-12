@@ -66,7 +66,6 @@
     </Compile>
     <Compile Include="DatabaseConnection\DatabaseConnection.cs" />
     <Compile Include="DataRetrieval\Models\ProposedSchedule.cs" />
-    <Compile Include="DataRetrieval\Models\BasePerson.cs" />
     <Compile Include="DataRetrieval\Models\Registrant.cs" />
     <Compile Include="DataRetrieval\Models\Room.cs" />
     <Compile Include="DataRetrieval\Models\Sessions.cs" />
