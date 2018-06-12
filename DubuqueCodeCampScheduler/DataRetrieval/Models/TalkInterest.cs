@@ -8,10 +8,10 @@ namespace DubuqueCodeCampScheduler
 {
     public class TalkInterest
     {
-        public Guid ID { get; private set; }
+        public int ID { get; private set; }
 
-        public Guid TalkID { get; private set; }
+        public Talk TalkID { get; private set; }
 
-        public Guid InterestedRegistrantID { get; private set; }
+        public Registrant InterestedRegistrantID { get; private set; }
     }
 }

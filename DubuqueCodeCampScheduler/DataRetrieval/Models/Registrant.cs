@@ -2,9 +2,9 @@
 
 namespace DubuqueCodeCampScheduler
 {
-    public class Registrants
+    public class Registrant
     {
-        public Guid ID { get; private set; }
+        public int ID { get; private set; }
 
         public string FirstName { get; private set; }
 

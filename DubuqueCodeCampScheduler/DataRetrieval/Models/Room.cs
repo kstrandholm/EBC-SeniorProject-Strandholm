@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DubuqueCodeCampScheduler
 {
-    public class Rooms
+    public class Room
     {
-        public Guid ID { get; private set; }
+        public int ID { get; private set; }
 
         public string RoomName { get; private set; }
 
