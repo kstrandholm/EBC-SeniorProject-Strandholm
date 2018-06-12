@@ -21,33 +21,19 @@ namespace DCCRegistrantFileDownload
             Console.WriteLine("File Name: " + fileToDownload);
             Console.WriteLine("FTP File Location: " + FTPFileLocation);
 
-            try
+            using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
             {
-                using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
-                {
-                    sftp.Connect();
+                sftp.Connect();
 
-                    GetFileUsingFileStream(fileToDownload, sftp);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+                GetFileUsingFileStream(fileToDownload, sftp);
             }
         }
 
         private static void GetFileUsingFileStream(string fileToDownload, SftpClient sftp)
         {
-            try
+            using (Stream fileStream = File.OpenWrite(LocalFileLocation + fileToDownload))
             {
-                using (Stream fileStream = File.OpenWrite(LocalFileLocation + fileToDownload))
-                {
-                    sftp.DownloadFile(FTPFileLocation + fileToDownload, fileStream);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                sftp.DownloadFile(FTPFileLocation + fileToDownload, fileStream);
             }
         }
     }
