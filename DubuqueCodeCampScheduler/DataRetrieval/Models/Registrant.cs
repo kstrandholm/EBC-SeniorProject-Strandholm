@@ -2,11 +2,11 @@
 
 namespace DubuqueCodeCampScheduler
 {
-    public class Registrant : IPerson
+    public class Registrant
     {
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int ID { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
 
     }
 }
