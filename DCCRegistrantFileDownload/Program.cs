@@ -11,7 +11,7 @@ namespace DCCRegistrantFileDownload
                 Console.WriteLine("Getting File...");
 
                 // Download the file
-                FTPOperations.GetFileUsingSFTPClient("SampleFile.txt");
+                SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
                 // If it suceeded, write so to the console
                 // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
