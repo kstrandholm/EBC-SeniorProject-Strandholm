@@ -29,11 +29,6 @@ namespace DubuqueCodeCamp.Downloader
 
             var records = csvreader.GetRecords<RegistrantInformation>().ToList();
 
-            foreach (var regInfo in records)
-            {
-                Console.WriteLine(regInfo.FirstName + " " + regInfo.LastName + " " + regInfo.IsSpeaker);
-            }
-
             Console.WriteLine("\nFinished reading file " + filePath);
 
             return records;

@@ -5,37 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
         mc:Ignorable="d"
-        Title="Dubuque Code Camp Schedule Creator" Height="486.885" Width="598.975">
+        Title="Dubuque Code Camp Schedule Creator"
+        Height="486.885" Width="598.975"
+        Padding="15 20">
+  
   <Grid Margin="15 20">
 
-    <!-- Divide the window into 3 vertical segments -->
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
 
-    <!-- The main content will go in the middle of the window -->
     <StackPanel Grid.Row="0">
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"></ColumnDefinition>
-          <ColumnDefinition Width="*"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
 
+          <Button>
+            <TextBlock TextAlignment="Center">
+              Create<LineBreak />Proposed Schedule
+            </TextBlock>
+          </Button>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+
+          <Button Margin="5 25 5 5">Add Session</Button>
+          <Button Margin="5">Remove Session</Button>
+          
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+
+          <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
+
+          <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250" >
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+            <ListBoxItem>Hello World</ListBoxItem>
+
+          </ListBox>
+
+        </StackPanel>
 
 
       </Grid>
 
     </StackPanel>
 
-    <Border Padding="15" Grid.Row="1">
-      <StackPanel>
+    <Grid Grid.Row="1" Margin="0 15 0 0">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <TextBlock FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
+        <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
 
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" >
+        <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" >
           <ListBoxItem>Hello World</ListBoxItem>
           <ListBoxItem>Hello World</ListBoxItem>
           <ListBoxItem>Hello World</ListBoxItem>
@@ -49,8 +88,8 @@
 
         </ListBox>
 
-      </StackPanel>
-    </Border>
+      </Grid>
+    </Grid>
 
   </Grid>
 </Window>

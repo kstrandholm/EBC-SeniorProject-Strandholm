@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 
 namespace DubuqueCodeCamp.Downloader
 {
@@ -42,6 +43,12 @@ namespace DubuqueCodeCamp.Downloader
                 Console.WriteLine(
                     "\nOh no, something went wrong with parsing the file!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
                 Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+
+            Console.WriteLine();
+            foreach (var registrant in registrants)
+            {
+                Console.WriteLine(registrant.FirstName + " " + registrant.LastName + " " + registrant.IsSpeaker);
             }
 
 #if DEBUG

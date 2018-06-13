@@ -13,3 +13,5 @@ C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\De
 C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.csproj.CoreCompileInputs.cache
 C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.exe
 C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.pdb
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\App.baml
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\Buttons.baml
