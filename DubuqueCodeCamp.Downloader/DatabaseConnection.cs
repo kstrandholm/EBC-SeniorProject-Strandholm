@@ -11,6 +11,7 @@ namespace DubuqueCodeCamp.Downloader
     public class DatabaseConnection
     {
         private DataContext _context;
+        public Table<RegistrantInformation> Registrants;
 
         public DatabaseConnection(string connection)
         {
@@ -19,7 +20,7 @@ namespace DubuqueCodeCamp.Downloader
 
         public void WriteRegistrantToDatabase()
         {
-            var Registrants = _context.GetTable<RegistrantInformation>();
+            var myRegistrants = _context.GetTable<RegistrantInformation>();
             var newRegistrants = new RegistrantInformation()
             {
                 FirstName = "Kelly",
