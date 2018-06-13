@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 
 namespace DCCRegistrantFileDownload
 {
@@ -6,9 +9,14 @@ namespace DCCRegistrantFileDownload
     {
         public static void Main(string[] args)
         {
+            var registrants = new List<RegistrantInformation>();
+
+            var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
+            var fileName = "SampleFile.txt";
+
             try
             {
-                Console.WriteLine("Getting File...");
+                Console.WriteLine("Getting File " + fileName + "...\n");
 
                 // Download the file
                 SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
@@ -21,7 +29,19 @@ namespace DCCRegistrantFileDownload
             {
                 // Something went wrong - indicate so
                 // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
-                Console.WriteLine("\nOh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
+                Console.WriteLine(
+                    "\nOh no, something went wrong with the file download!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+
+            try
+            {
+                registrants = FileParser.ParseFile(localFileLocation + fileName).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    "\nOh no, something went wrong with parsing the file!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
                 Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
             }
 
