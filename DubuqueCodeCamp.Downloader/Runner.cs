@@ -9,6 +9,7 @@ namespace DubuqueCodeCamp.Downloader
 {
     public class Runner
     {
+
         public static void Main(string[] args)
         {
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
@@ -22,8 +23,11 @@ namespace DubuqueCodeCamp.Downloader
                 // Parse the file from the local file path
                 var registrants = GetParsedFileRecords(localFileLocation, fileName);
 
-                // Write the records to the database
-                WriteRecords(registrants);
+                using (var database = new DCCKellyDatabase())
+                {
+                    // Write the records to the database
+                    WriteRecords(database, registrants);
+                }
             }
             catch (Exception ex)
             {
@@ -60,19 +64,19 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private static void WriteRecords(IEnumerable<RegistrantInformation> registrantInformation)
+        private static void WriteRecords(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation)
         {
             Console.WriteLine("Writing records to the table...");
+                //var myregistrants = database.Registrant;
+                //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
 
-            var database = new DCCKellyDatabase();
-            //var myregistrants = database.Registrant;
-            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+                var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
 
-            var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
+                // TODO: Implement logic to prevent existing people from being added
+                // TODO: Requires equality checks
+                database.Registrants.InsertAllOnSubmit(registrantTable);
 
-            database.Registrants.InsertAllOnSubmit(registrantTable);
-
-            database.SubmitChanges();
+                database.SubmitChanges(); 
         }
 
         private static IEnumerable<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
