@@ -214,3 +214,6 @@ ModelManifest.xml
 
 # Rider idea folder
 .idea/
+
+# Server/SQLite
+*.ide-wal
