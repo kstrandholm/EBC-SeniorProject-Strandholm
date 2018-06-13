@@ -22,7 +22,7 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
 
 
 
@@ -48,7 +48,7 @@
           <ListBoxItem>Hello World</ListBoxItem>
 
         </ListBox>
-        
+
       </StackPanel>
     </Border>
 

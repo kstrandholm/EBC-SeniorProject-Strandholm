@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DubuqueCodeCampScheduler.Properties
+namespace DubuqueCodeCamp.Scheduler.Properties
 {
 
 
