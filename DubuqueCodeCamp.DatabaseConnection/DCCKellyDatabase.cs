@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+﻿using System.Configuration;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DubuqueCodeCamp.Downloader
+namespace DubuqueCodeCamp.DatabaseConnection
 {
     [Database(Name = "DCC_Kelly")]
     public class DCCKellyDatabase : DataContext

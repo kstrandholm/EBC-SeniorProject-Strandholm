@@ -1,6 +1,6 @@
 ﻿using System.Data.Linq.Mapping;
 
-namespace DubuqueCodeCamp.Downloader
+namespace DubuqueCodeCamp.DatabaseConnection
 {
     [Table(Name = "Registrants")]
     public class Registrant
