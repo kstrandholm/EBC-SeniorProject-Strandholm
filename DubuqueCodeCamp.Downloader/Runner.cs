@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DubuqueCodeCamp.Downloader
 {
-    public class Program
+    public class Runner
     {
         public static void Main(string[] args)
         {

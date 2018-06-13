@@ -5,7 +5,7 @@ using Renci.SshNet;
 
 namespace DubuqueCodeCamp.Downloader
 {
-    class SFTPDownload
+    public class SFTPDownload
     {
         private static string FTPHost => ConfigurationManager.AppSettings["RegistrantInformationFilePath"];
         private static string FTPUserName => ConfigurationManager.AppSettings["FTPUserName"];
