@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DubuqueCodeCampScheduler
+﻿namespace DCCRegistrantFileDownload
 {
     public class TalkInterest
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
-        public Talk TalkID { get; private set; }
+        public int TalkID { get; set; }
 
-        public Registrant InterestedRegistrantID { get; private set; }
+        public int InterestedRegistrantID { get; set; }
     }
 }
