@@ -10,37 +10,26 @@ namespace DubuqueCodeCamp.Downloader
     {
         public static void Main(string[] args)
         {
-            var database = new DCCKellyDatabase();
-            //var myregistrants = database.Registrants;
-            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
-
-            var newRegistrant = new RegistrantInformation()
-            {
-                FirstName = "Kelly",
-                LastName = "Strandholm",
-                City = "Dubuque",
-                IsSpeaker = false
-            };
-
-            database.Registrants.InsertOnSubmit(newRegistrant);
-
-            database.SubmitChanges();
-
-            //database.WriteRegistrantToDatabase();
-            return;
-
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
 
-            // Download the file from the FTP site
-            DownloadFile(fileName, localFileLocation);
+            try
+            {
+                // Download the file from the FTP site
+                DownloadFile(fileName, localFileLocation);
 
-            // Parse the file from the local file path
-            var registrants = GetParsedFileRecords(localFileLocation, fileName);
+                // Parse the file from the local file path
+                var registrants = GetParsedFileRecords(localFileLocation, fileName);
 
-            // Write the records to the database
-            WriteRecords(registrants);
-
+                // Write the records to the database
+                WriteRecords(registrants);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    "\nOh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
+                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
 
 #if DEBUG
             Console.WriteLine("\nPress any key to Continue...");
@@ -50,58 +39,60 @@ namespace DubuqueCodeCamp.Downloader
 
         private static void DownloadFile(string fileName, string localFileLocation)
         {
-            try
-            {
-                Console.WriteLine("Getting File " + fileName + "...\n");
+            Console.WriteLine("Getting File " + fileName + "...\n");
 
-                var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
+            var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
-                // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
-                var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
-                Console.WriteLine(messageToUse);
-            }
-            catch (Exception ex)
-            {
-                // Something went wrong - indicate so
-                // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
-                Console.WriteLine(
-                    "\nOh no, something went wrong with the file download!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
-                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
-            }
+            // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
+            var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
+            Console.WriteLine(messageToUse);
         }
 
         private static IEnumerable<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
         {
             var filePath = localFileLocation + fileName;
-            try
+            if (File.Exists(filePath))
+                return FileParser.ParseFile(filePath).ToList();
+            else
             {
-                if (File.Exists(filePath))
-                    return FileParser.ParseFile(filePath).ToList();
-                else
-                    throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    "\nOh no, something went wrong with parsing the file!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
-                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
-                return new List<RegistrantInformation>();
+                throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
             }
         }
 
-        private static void WriteRecords(IEnumerable<RegistrantInformation> registrants)
+        private static void WriteRecords(IEnumerable<RegistrantInformation> registrantInformation)
         {
-            Console.WriteLine();
-            foreach (var registrant in registrants)
+            Console.WriteLine("Writing records to the table...");
+
+            var database = new DCCKellyDatabase();
+            //var myregistrants = database.Registrant;
+            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+
+            var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
+
+            database.Registrants.InsertAllOnSubmit(registrantTable);
+
+            database.SubmitChanges();
+        }
+
+        private static IEnumerable<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
+        {
+            var registrantsTable = new List<Registrant>();
+            foreach (var regInfo in registrants)
             {
-                Console.WriteLine(registrant.FirstName + " " + registrant.LastName + " " + registrant.IsSpeaker);
+                var reg = new Registrant()
+                {
+                    FirstName = regInfo.FirstName,
+                    LastName = regInfo.LastName,
+                    StreetAddress = regInfo.StreetAddress,
+                    City = regInfo.City,
+                    State = regInfo.State,
+                    EmailAddress = regInfo.EmailAddress,
+                    IsSpeaker = regInfo.IsSpeaker
+                };
+                registrantsTable.Add(reg);
             }
 
-            try { }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            return registrantsTable;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DubuqueCodeCamp.Downloader
 
         public DCCKellyDatabase() : base(ConfigurationManager.ConnectionStrings["DCCDatabase"].ConnectionString) { }
 
-        public Table<RegistrantInformation> Registrants;
+        public Table<Registrant> Registrants;
 
         //public Table<Room> Rooms;
 
