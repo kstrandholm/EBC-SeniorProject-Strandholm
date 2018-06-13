@@ -216,4 +216,4 @@ ModelManifest.xml
 .idea/
 
 # SourceTree's files created during a Stash operation
-.stackdump
+*.stackdump

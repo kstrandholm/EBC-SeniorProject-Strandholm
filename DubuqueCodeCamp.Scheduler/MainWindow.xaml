@@ -6,30 +6,51 @@
         xmlns:local="clr-namespace:DubuqueCodeCampScheduler"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator" Height="486.885" Width="598.975">
-    <Grid Margin="15 25">
+  <Grid Margin="15 20">
 
     <!-- Divide the window into 3 vertical segments -->
     <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
 
     <!-- The main content will go in the middle of the window -->
-      <StackPanel Grid.Row="0">
-        
-
+    <StackPanel Grid.Row="0">
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
 
-        
-        
+
+
       </Grid>
 
     </StackPanel>
-      
-    </Grid>
+
+    <Border Padding="15" Grid.Row="1">
+      <StackPanel>
+
+        <TextBlock FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
+
+        <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" >
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+          <ListBoxItem>Hello World</ListBoxItem>
+
+        </ListBox>
+        
+      </StackPanel>
+    </Border>
+
+  </Grid>
 </Window>
