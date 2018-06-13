@@ -10,13 +10,21 @@ namespace DubuqueCodeCamp.Downloader
     {
         public static void Main(string[] args)
         {
-
-
-            var connectionString = ConfigurationManager.ConnectionStrings["DCCDatabase"].ConnectionString;
-            //var database = new DatabaseConnection(connectionString);
             var database = new DCCKellyDatabase();
-            var myregistrants = database.Registrants;
-            var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+            //var myregistrants = database.Registrants;
+            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+
+            var newRegistrant = new RegistrantInformation()
+            {
+                FirstName = "Kelly",
+                LastName = "Strandholm",
+                City = "Dubuque",
+                IsSpeaker = false
+            };
+
+            database.Registrants.InsertOnSubmit(newRegistrant);
+
+            database.SubmitChanges();
 
             //database.WriteRegistrantToDatabase();
             return;
