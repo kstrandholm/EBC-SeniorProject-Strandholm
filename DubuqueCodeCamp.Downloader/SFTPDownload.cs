@@ -2,10 +2,11 @@
 using System.Configuration;
 using System.IO;
 using Renci.SshNet;
+using Renci.SshNet.Sftp;
 
 namespace DubuqueCodeCamp.Downloader
 {
-    class SFTPDownload
+    public class SFTPDownload
     {
         private static string FTPHost => ConfigurationManager.AppSettings["RegistrantInformationFilePath"];
         private static string FTPUserName => ConfigurationManager.AppSettings["FTPUserName"];
@@ -13,11 +14,14 @@ namespace DubuqueCodeCamp.Downloader
         private static string FTPFileLocation => ConfigurationManager.AppSettings["FTPFileLocation"];
 
 
-        public static void DownloadFileUsingSftpClient(string fileToDownload, string localFileLocation)
+
+        public static bool DownloadFileUsingSftpClient(string fileToDownload, string localFileLocation)
         {
             Console.WriteLine("Local File Location: " + localFileLocation);
             Console.WriteLine("File Name: " + fileToDownload);
             Console.WriteLine("FTP File Location: " + FTPFileLocation);
+
+            var fileDownloaded = false;
 
             using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
             {
@@ -25,20 +29,38 @@ namespace DubuqueCodeCamp.Downloader
                 {
                     sftp.Connect();
 
-                    GetFileUsingFileStream(fileToDownload, sftp, localFileLocation);
+                    fileDownloaded = DownloadFileUsingFileStream(fileToDownload, sftp, localFileLocation);
                 }
                 finally
                 {
                     sftp.Dispose();
                 }
             }
+
+            return fileDownloaded;
         }
 
-        private static void GetFileUsingFileStream(string fileToDownload, SftpClient sftp, string localFileLocation)
+        private static bool DownloadFileUsingFileStream(string fileToDownload, SftpClient sftp, string localFileLocation)
         {
-            using (Stream fileStream = File.Create(localFileLocation + fileToDownload))
+            var fullLocalPath = localFileLocation + fileToDownload;
+
+            // Open an existing file or create a new one
+            using (Stream fileStream = File.OpenWrite(fullLocalPath))
             {
+                var newFileInfo = sftp.GetAttributes(FTPFileLocation + fileToDownload);
+
+                // If the file already exists in the local directory, compare the dates on the two files
+                if (File.Exists(fullLocalPath))
+                {
+                    var existingFile = new FileInfo(fullLocalPath);
+
+                    // If the file on the FTP site is not newer than our current file, the file won't be downloaded
+                    if (newFileInfo.LastWriteTime < existingFile.LastWriteTime)
+                        return false;
+                }
+
                 sftp.DownloadFile(FTPFileLocation + fileToDownload, fileStream);
+                return true;    // Indicates the file was downloaded
             }
         }
     }
