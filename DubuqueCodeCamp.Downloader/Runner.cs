@@ -10,6 +10,12 @@ namespace DubuqueCodeCamp.Downloader
     {
         public static void Main(string[] args)
         {
+
+            //var connectionString = ConfigurationManager.ConnectionStrings["DCCDatabase"].ConnectionString;
+            //var database = new DatabaseConnection(connectionString);
+            //database.WriteRegistrantToDatabase();
+            //return;
+
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
 
