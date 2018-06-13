@@ -1,0 +1,15 @@
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.csprojAssemblyReference.cache
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\MainWindow.g.cs
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\App.g.cs
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler_MarkupCompile.cache
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler_MarkupCompile.lref
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\bin\Debug\DubuqueCodeCamp.Scheduler.exe.config
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\bin\Debug\DubuqueCodeCamp.Scheduler.exe
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\bin\Debug\DubuqueCodeCamp.Scheduler.pdb
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\MainWindow.baml
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.g.resources
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.Properties.Resources.resources
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.csproj.GenerateResource.cache
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.csproj.CoreCompileInputs.cache
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.exe
+C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Scheduler\obj\Debug\DubuqueCodeCamp.Scheduler.pdb
