@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 
 namespace DCCRegistrantFileDownload
 {
@@ -6,6 +7,9 @@ namespace DCCRegistrantFileDownload
     {
         public static void Main(string[] args)
         {
+            var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
+            var fileName = "SampleFile.txt";
+
             try
             {
                 Console.WriteLine("Getting File...");
