@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubuqueCodeCampScheduler", "DubuqueCodeCampScheduler\DubuqueCodeCampScheduler.csproj", "{AC40AF1A-E7C5-4085-BBA2-4B48991EDF64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubuqueCodeCamp.Scheduler", "DubuqueCodeCampScheduler\DubuqueCodeCamp.Scheduler.csproj", "{AC40AF1A-E7C5-4085-BBA2-4B48991EDF64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCCRegistrantFileDownload", "DCCRegistrantFileDownload\DCCRegistrantFileDownload.csproj", "{81882CAB-F4EA-49D2-B3D3-FD89F9CA9B62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubuqueCodeCamp.Download", "DCCRegistrantFileDownload\DubuqueCodeCamp.Download.csproj", "{81882CAB-F4EA-49D2-B3D3-FD89F9CA9B62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
