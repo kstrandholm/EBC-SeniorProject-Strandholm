@@ -9,6 +9,8 @@ namespace DubuqueCodeCamp.DatabaseConnection
 {
     public class Logging : ILogger
     {
+        #region ForContext
+
         /// <inheritdoc />
         public ILogger ForContext(ILogEventEnricher enricher)
         {
@@ -38,6 +40,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         {
             throw new NotImplementedException();
         }
+
+        #endregion ForContext
+
+        #region Write
 
         /// <inheritdoc />
         public void Write(LogEvent logEvent)
@@ -106,11 +112,15 @@ namespace DubuqueCodeCamp.DatabaseConnection
             throw new NotImplementedException();
         }
 
+        #endregion Write
+
         /// <inheritdoc />
         public bool IsEnabled(LogEventLevel level)
         {
             throw new NotImplementedException();
         }
+
+        #region Verbose
 
         /// <inheritdoc />
         public void Verbose(string messageTemplate)
@@ -172,6 +182,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
             throw new NotImplementedException();
         }
 
+        #endregion Verbose
+
+        #region Debug
+
         /// <inheritdoc />
         public void Debug(string messageTemplate)
         {
@@ -231,6 +245,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         {
             throw new NotImplementedException();
         }
+
+        #endregion Debug
+
+        #region Information
 
         /// <inheritdoc />
         public void Information(string messageTemplate)
@@ -292,6 +310,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
             throw new NotImplementedException();
         }
 
+        #endregion Information
+
+        #region Warning
+
         /// <inheritdoc />
         public void Warning(string messageTemplate)
         {
@@ -351,6 +373,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         {
             throw new NotImplementedException();
         }
+
+        #endregion Warning
+
+        #region Error
 
         /// <inheritdoc />
         public void Error(string messageTemplate)
@@ -412,6 +438,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
             throw new NotImplementedException();
         }
 
+        #endregion Error
+
+        #region Fatal
+
         /// <inheritdoc />
         public void Fatal(string messageTemplate)
         {
@@ -472,6 +502,8 @@ namespace DubuqueCodeCamp.DatabaseConnection
             throw new NotImplementedException();
         }
 
+        #endregion Fatal
+
         /// <inheritdoc />
         public bool BindMessageTemplate(string messageTemplate, object[] propertyValues, out MessageTemplate parsedTemplate,
             out IEnumerable<LogEventProperty> boundProperties)
@@ -483,6 +515,11 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public bool BindProperty(string propertyName, object value, bool destructureObjects, out LogEventProperty property)
         {
             throw new NotImplementedException();
+        }
+
+        public void BaseLogger(Exception exception, string messageTemplate, params object[] propertyValues)
+        {
+            
         }
     }
 }
