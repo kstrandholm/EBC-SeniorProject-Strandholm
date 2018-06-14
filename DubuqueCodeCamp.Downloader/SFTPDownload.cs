@@ -43,23 +43,23 @@ namespace DubuqueCodeCamp.Downloader
         private static bool DownloadFileUsingFileStream(string fileToDownload, SftpClient sftp, string localFileLocation)
         {
             var fullLocalPath = localFileLocation + fileToDownload;
+            var fullSFTPPath = FTPFileLocation + fileToDownload;
+            var newFileInfo = sftp.GetAttributes(fullSFTPPath);
+
+            // If the file already exists in the local directory, compare the dates on the two files
+            if (File.Exists(fullLocalPath))
+            {
+                var existingFile = new FileInfo(fullLocalPath);
+
+                // If the file on the FTP site is not newer than our current file, the file won't be downloaded
+                if (newFileInfo.LastWriteTime < existingFile.LastWriteTime)
+                    return false;   // Indicates the file wasn't downloaded
+            }
 
             // Open an existing file or create a new one
             using (Stream fileStream = File.OpenWrite(fullLocalPath))
             {
-                var newFileInfo = sftp.GetAttributes(FTPFileLocation + fileToDownload);
-
-                // If the file already exists in the local directory, compare the dates on the two files
-                if (File.Exists(fullLocalPath))
-                {
-                    var existingFile = new FileInfo(fullLocalPath);
-
-                    // If the file on the FTP site is not newer than our current file, the file won't be downloaded
-                    if (newFileInfo.LastWriteTime < existingFile.LastWriteTime)
-                        return false;
-                }
-
-                sftp.DownloadFile(FTPFileLocation + fileToDownload, fileStream);
+                sftp.DownloadFile(fullSFTPPath, fileStream);
                 return true;    // Indicates the file was downloaded
             }
         }
