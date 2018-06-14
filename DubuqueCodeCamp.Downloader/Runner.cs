@@ -107,17 +107,20 @@ namespace DubuqueCodeCamp.Downloader
                 // TODO: put this in a new class or method??
                 try
                 {
-                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{REGISTRANTS}...", newRegistrants, DATABASE, REGISTRANTS);
+                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{REGISTRANTS}...", newRegistrants, DATABASE,
+                        REGISTRANTS);
 
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     database.SubmitChanges();
 
-                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{REGISTRANTS}.", newRegistrants, DATABASE, REGISTRANTS);
+                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{REGISTRANTS}.", newRegistrants, DATABASE,
+                        REGISTRANTS);
                 }
                 catch (Exception ex)
                 {
-                    logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, REGISTRANTS);
+                    logger.ForContext<DCCKellyDatabase>()
+                          .Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, REGISTRANTS);
                 }
             }
 
@@ -126,13 +129,19 @@ namespace DubuqueCodeCamp.Downloader
             List<(string FirstName, string LastName, List<int> Interests)> interests =
                 registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
 
-            //var talkInterests = MapRegistrantInterestsToTalkInterestTable(interests);
-
             try
             {
                 logger.Information($"Writing {interests} to {DATABASE}.{TALKINTERESTS}...", interests, DATABASE, TALKINTERESTS);
-                var talkIDs = database
-                //database.TalkInterests.InsertAllOnSubmit(interests);
+                var talkInterestList = (from record in interests
+                                        from interest in record.Interests
+                                        let talkID = database.Talks.Where(talk => talk.ID == interest)
+                                        let registrantID = database.Registrants.Single(reg => reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID
+                                        select new TalkInterest()
+                                        {
+                                            InterestedRegistrantID = database.Registrants.Single(reg => reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
+                                            TalkID = database.Talks.Single(talk => talk.ID == interest).ID
+                                        }).ToList();
+                database.TalkInterests.InsertAllOnSubmit(talkInterestList);
 
                 database.SubmitChanges();
 
@@ -142,12 +151,6 @@ namespace DubuqueCodeCamp.Downloader
             {
                 logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", interests, DATABASE, TALKINTERESTS);
             }
-
-        }
-
-        private static List<TalkInterest> MapRegistrantInterestsToTalkInterestTable(List<(string FirstName, string LastName, List<int> Interests)> interests)
-        {
-            throw new NotImplementedException();
         }
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
