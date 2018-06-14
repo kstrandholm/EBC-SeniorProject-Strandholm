@@ -130,6 +130,7 @@ namespace DubuqueCodeCamp.Downloader
                                   UpdateTime = DateTime.Now,
                                   DiagnosticInfo = new StackTrace().ToString()
                               })
+                              .Distinct()
                               .ToList();
         }
     }
