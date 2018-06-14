@@ -106,6 +106,8 @@ namespace DubuqueCodeCamp.Downloader
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     database.SubmitChanges();
+
+                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{TABLE}.", newRegistrants, DATABASE, TABLE);
                 }
                 catch (Exception ex)
                 {
