@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using Serilog;
+using Serilog.Events;
 
 namespace DubuqueCodeCamp.Downloader
 {
@@ -14,6 +16,9 @@ namespace DubuqueCodeCamp.Downloader
         {
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
+            var consoleLogger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+            var databaseLogger = new LoggerConfiguration()
+                .WriteTo.MSSqlServer(ConfigurationManager.ConnectionStrings["DCCKellyDatabase"].ConnectionString, "Log").CreateLogger();
 
             try
             {
