@@ -85,7 +85,7 @@ namespace DubuqueCodeCamp.Downloader
             ILogger logger)
         {
             const string DATABASE = nameof(database);
-            const string TABLE = nameof(database.Registrants);
+            const string REGISTRANTS = nameof(database.Registrants);
 
             var databaseRegistrants = database.Registrants;
 
@@ -107,19 +107,47 @@ namespace DubuqueCodeCamp.Downloader
                 // TODO: put this in a new class or method??
                 try
                 {
-                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", newRegistrants, DATABASE, TABLE);
+                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{REGISTRANTS}...", newRegistrants, DATABASE, REGISTRANTS);
 
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     database.SubmitChanges();
 
-                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{TABLE}.", newRegistrants, DATABASE, TABLE);
+                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{REGISTRANTS}.", newRegistrants, DATABASE, REGISTRANTS);
                 }
                 catch (Exception ex)
                 {
-                    logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, TABLE);
+                    logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, REGISTRANTS);
                 }
             }
+
+            // Now map the registrant's Talk Interests
+            const string TALKINTERESTS = nameof(database.TalkInterests);
+            List<(string FirstName, string LastName, List<int> Interests)> interests =
+                registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
+
+            //var talkInterests = MapRegistrantInterestsToTalkInterestTable(interests);
+
+            try
+            {
+                logger.Information($"Writing {interests} to {DATABASE}.{TALKINTERESTS}...", interests, DATABASE, TALKINTERESTS);
+                var talkIDs = database
+                //database.TalkInterests.InsertAllOnSubmit(interests);
+
+                database.SubmitChanges();
+
+                logger.Information($"Finished writing {interests} to {DATABASE}.{TALKINTERESTS}.", interests, DATABASE, TALKINTERESTS);
+            }
+            catch (Exception ex)
+            {
+                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", interests, DATABASE, TALKINTERESTS);
+            }
+
+        }
+
+        private static List<TalkInterest> MapRegistrantInterestsToTalkInterestTable(List<(string FirstName, string LastName, List<int> Interests)> interests)
+        {
+            throw new NotImplementedException();
         }
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
@@ -132,7 +160,6 @@ namespace DubuqueCodeCamp.Downloader
                                   City = regInfo.City,
                                   State = regInfo.State,
                                   EmailAddress = regInfo.EmailAddress,
-                                  IsSpeaker = regInfo.IsSpeaker,
                                   UpdateTime = DateTime.Now,
                                   DiagnosticInfo = new StackTrace().ToString()
                               })
