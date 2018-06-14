@@ -92,6 +92,7 @@ namespace DubuqueCodeCamp.Downloader
             // Convert the RegistrantInformation from the parser into a format that can be saved to the database
             var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
 
+            // TODO: Get Equality overrides to work
             // If the record is not a duplicate of what is already in the database, add it to the database
             var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
                 dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
