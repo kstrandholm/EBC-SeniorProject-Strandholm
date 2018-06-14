@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DCCKellyDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Registrant.cs" />
   </ItemGroup>
 </Project>

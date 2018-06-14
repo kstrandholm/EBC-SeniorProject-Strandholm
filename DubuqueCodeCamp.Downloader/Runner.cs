@@ -14,11 +14,7 @@ namespace DubuqueCodeCamp.Downloader
         {
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
-            var logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.MSSqlServer(ConfigurationManager.ConnectionStrings["DCCKellyDatabase"].ConnectionString, "Log")
-                .WriteTo.RollingFile(ConfigurationManager.AppSettings["LoggingFileLocation"])
-                .CreateLogger();
+            var logger = LoggingInitializer.InitializeLogger();
 
             try
             {
@@ -36,9 +32,7 @@ namespace DubuqueCodeCamp.Downloader
             }
             catch (Exception ex)
             {
-                Console.WriteLine(
-                    "\nOh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
-                Console.WriteLine(ex.Message + Environment.NewLine + ex.StackTrace);
+                logger.ForContext<Runner>().Error(ex, "\nOh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
             }
 
 #if DEBUG
