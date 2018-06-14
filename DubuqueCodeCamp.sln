@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubuqueCodeCamp.Downloader"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DubuqueCodeCamp.DatabaseConnection", "DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.shproj", "{7C60EF4D-7BCF-482F-8262-123AE99450A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DubuqueCodeCamp.Registration", "DubuqueCodeCamp.Registration\DubuqueCodeCamp.Registration.csproj", "{60950D16-E689-49E0-AB2B-7A74BBCA8CB6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems*{7c60ef4d-7bcf-482f-8262-123ae99450a4}*SharedItemsImports = 13
@@ -27,6 +29,10 @@ Global
 		{8CF9BD3D-4649-4C2D-AAFA-0EAEA8BBBA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CF9BD3D-4649-4C2D-AAFA-0EAEA8BBBA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CF9BD3D-4649-4C2D-AAFA-0EAEA8BBBA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60950D16-E689-49E0-AB2B-7A74BBCA8CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60950D16-E689-49E0-AB2B-7A74BBCA8CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60950D16-E689-49E0-AB2B-7A74BBCA8CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60950D16-E689-49E0-AB2B-7A74BBCA8CB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
