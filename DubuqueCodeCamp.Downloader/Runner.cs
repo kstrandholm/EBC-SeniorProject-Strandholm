@@ -84,7 +84,8 @@ namespace DubuqueCodeCamp.Downloader
         private static void WriteRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
-            const string DATABASE = nameof(database);
+            // TODO: Break this up into smaller methods
+            var databaseType = database.GetType().ToString();
             const string REGISTRANTS = nameof(database.Registrants);
 
             var databaseRegistrants = database.Registrants;
@@ -104,58 +105,65 @@ namespace DubuqueCodeCamp.Downloader
 
             if (uniqueRegistrants.Any())
             {
-                // TODO: put this in a new class or method??
                 try
                 {
-                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{REGISTRANTS}...", newRegistrants, DATABASE,
+                    logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
                         REGISTRANTS);
 
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     database.SubmitChanges();
 
-                    logger.Information($"Finished writing {registrantInformation} to {DATABASE}.{REGISTRANTS}.", newRegistrants, DATABASE,
+                    logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants, databaseType,
                         REGISTRANTS);
                 }
                 catch (Exception ex)
                 {
                     logger.ForContext<DCCKellyDatabase>()
-                          .Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, REGISTRANTS);
+                          .Error(ex, $"Failed to write {0} to {1}.{2}", newRegistrants, databaseType, REGISTRANTS);
                 }
+            }
+            else
+            {
+                logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
             }
 
             // Now map the registrant's Talk Interests
-            const string TALKINTERESTS = nameof(database.TalkInterests);
+            const string TALKINTERESTS = nameof(database.TalkInterest);
             List<(string FirstName, string LastName, List<int> Interests)> interests =
                 registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
 
             try
             {
-                logger.Information($"Writing {interests} to {DATABASE}.{TALKINTERESTS}...", interests, DATABASE, TALKINTERESTS);
+                logger.Information($"Writing {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
                 var talkInterestList = (from record in interests
                                         from interest in record.Interests
                                         let talkID = database.Talks.Where(talk => talk.ID == interest)
-                                        let registrantID = database.Registrants.Single(reg => reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID
-                                        select new TalkInterest()
+                                        let registrantID = database.Registrants.Single(reg =>
+                                                            reg.FirstName == record.FirstName &&
+                                                            reg.LastName == record.LastName).ID
+                                        select new TalkInterest
                                         {
-                                            InterestedRegistrantID = database.Registrants.Single(reg => reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
+                                            InterestedRegistrantID =
+                                                database.Registrants.Single(reg =>
+                                                            reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
                                             TalkID = database.Talks.Single(talk => talk.ID == interest).ID
                                         }).ToList();
-                database.TalkInterests.InsertAllOnSubmit(talkInterestList);
+                database.TalkInterest.InsertAllOnSubmit(talkInterestList);
 
                 database.SubmitChanges();
 
-                logger.Information($"Finished writing {interests} to {DATABASE}.{TALKINTERESTS}.", interests, DATABASE, TALKINTERESTS);
+                logger.Information($"Finished writing {interests} to {databaseType}.{TALKINTERESTS}.", interests, databaseType, TALKINTERESTS);
             }
             catch (Exception ex)
             {
-                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", interests, DATABASE, TALKINTERESTS);
+                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write {0} to {1}.{2}", interests, databaseType, TALKINTERESTS);
             }
         }
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
         {
-            return registrants.Select(regInfo => new Registrant()
+            return registrants.Select(regInfo => new Registrant
                               {
                                   FirstName = regInfo.FirstName,
                                   LastName = regInfo.LastName,
