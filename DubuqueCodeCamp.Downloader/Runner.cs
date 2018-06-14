@@ -38,7 +38,8 @@ namespace DubuqueCodeCamp.Downloader
             }
             catch (Exception ex)
             {
-                logger.ForContext<FileParser>().Fatal(ex, $"Failed to parse {fileName} at '{localFileLocation}'.", fileName, localFileLocation);
+                logger.ForContext<FileParser>()
+                      .Fatal(ex, $"Failed to parse {fileName} at '{localFileLocation}'.", fileName, localFileLocation);
             }
 
             // If the parser could not get any records, don't try to save to the database
@@ -48,7 +49,7 @@ namespace DubuqueCodeCamp.Downloader
                 {
                     // Write the records to the database
                     WriteRecords(database, registrants, logger);
-                } 
+                }
             }
 
 #if DEBUG
@@ -80,7 +81,7 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private static void WriteRecords(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
+        private static void WriteRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
             const string DATABASE = nameof(database);
@@ -96,12 +97,16 @@ namespace DubuqueCodeCamp.Downloader
                 dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
                 dataReg.City == newReg.City && dataReg.State == newReg.State)).ToList();
 
+            // Try using the new Equals operator I implemented - can't figure out how to get this to work
+            //var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
+            //    dataReg == newReg)).ToList();
+
             if (uniqueRegistrants.Any())
             {
                 // TODO: put this in a new class or method??
                 try
                 {
-                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", nameof(registrantInformation), DATABASE, TABLE);
+                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", newRegistrants, DATABASE, TABLE);
 
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
@@ -112,7 +117,7 @@ namespace DubuqueCodeCamp.Downloader
                 catch (Exception ex)
                 {
                     logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, TABLE);
-                } 
+                }
             }
         }
 
