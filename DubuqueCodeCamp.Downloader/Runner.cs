@@ -12,38 +12,54 @@ namespace DubuqueCodeCamp.Downloader
     {
         public static void Main(string[] args)
         {
+#if DEBUG
+            Serilog.Debugging.SelfLog.Enable(Console.Error);
+#endif
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
-            var logger = LoggingInitializer.InitializeLogger();
+            var logger = LoggingInitializer.GetLogger();
 
             try
             {
                 // Download the file from the FTP site
                 DownloadFile(fileName, localFileLocation, logger);
+            }
+            catch (Exception ex)
+            {
+                logger.ForContext<SFTPDownload>().Error(ex, "SFTP Download failed.");
+            }
 
+            var registrants = new List<RegistrantInformation>();
+            try
+            {
                 // Parse the file from the local file path
-                var registrants = GetParsedFileRecords(localFileLocation, fileName);
+                registrants = GetParsedFileRecords(localFileLocation, fileName);
+            }
+            catch (Exception ex)
+            {
+                logger.ForContext<FileParser>().Fatal(ex, $"Failed to parse {fileName} at '{localFileLocation}'.", fileName, localFileLocation);
+            }
 
+            // If the parser could not get any records, don't try to save to the database
+            if (registrants.Any())
+            {
                 using (var database = new DCCKellyDatabase())
                 {
                     // Write the records to the database
                     WriteRecords(database, registrants, logger);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.ForContext<Runner>().Error(ex, "\nOh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nHere's what I know:");
+                } 
             }
 
 #if DEBUG
             Console.WriteLine("\nPress any key to Continue...");
             Console.ReadKey();
 #endif
+            logger.Dispose();
         }
 
         private static void DownloadFile(string fileName, string localFileLocation, ILogger logger)
         {
-            logger.Information("Getting File " + fileName + "...\n");
+            logger.Information("Getting File {fileName}...\n", fileName);
 
             var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
@@ -52,7 +68,7 @@ namespace DubuqueCodeCamp.Downloader
             logger.Information(messageToUse);
         }
 
-        private static IEnumerable<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
+        private static List<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
         {
             var filePath = localFileLocation + fileName;
             if (File.Exists(filePath))
@@ -66,20 +82,37 @@ namespace DubuqueCodeCamp.Downloader
         private static void WriteRecords(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
-            logger.Information("Writing records to the table...");
-            //var myregistrants = database.Registrant;
-            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+            const string DATABASE = nameof(database);
+            const string TABLE = nameof(database.Registrants);
 
+            logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", nameof(registrantInformation), DATABASE, TABLE);
+            var databaseRegistrants = database.Registrants;
+
+            // Convert the RegistrantInformation from the parser into a format that can be saved to the database
             var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
 
-            // TODO: Implement logic to prevent existing people from being added
-            // TODO: Requires equality checks
-            database.Registrants.InsertAllOnSubmit(registrantTable);
+            var uniqueRegistrants = new List<Registrant>();
+            foreach (var databaseReg in databaseRegistrants)
+            {
+                // TODO: Implement equality checks elsewhere for reuse
+                uniqueRegistrants.AddRange(registrantTable.Where(newReg =>
+                    !(newReg.FirstName == databaseReg.FirstName && newReg.LastName == databaseReg.LastName &&
+                      newReg.City == databaseReg.City && newReg.State == databaseReg.State)));
+            }
 
-            database.SubmitChanges();
+            try
+            {
+                database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
+
+                database.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", registrantTable, DATABASE, TABLE);
+            }
         }
 
-        private static IEnumerable<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
+        private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
         {
             var registrantsTable = new List<Registrant>();
             foreach (var regInfo in registrants)
