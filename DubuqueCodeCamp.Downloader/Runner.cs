@@ -1,29 +1,29 @@
 ﻿using DubuqueCodeCamp.DatabaseConnection;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using Serilog;
-using Serilog.Events;
 
 namespace DubuqueCodeCamp.Downloader
 {
     public class Runner
     {
-
         public static void Main(string[] args)
         {
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
-            var consoleLogger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
-            var databaseLogger = new LoggerConfiguration()
-                .WriteTo.MSSqlServer(ConfigurationManager.ConnectionStrings["DCCKellyDatabase"].ConnectionString, "Log").CreateLogger();
+            var logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.MSSqlServer(ConfigurationManager.ConnectionStrings["DCCKellyDatabase"].ConnectionString, "Log")
+                .WriteTo.RollingFile(ConfigurationManager.AppSettings["LoggingFileLocation"])
+                .CreateLogger();
 
             try
             {
                 // Download the file from the FTP site
-                DownloadFile(fileName, localFileLocation);
+                DownloadFile(fileName, localFileLocation, logger);
 
                 // Parse the file from the local file path
                 var registrants = GetParsedFileRecords(localFileLocation, fileName);
@@ -31,7 +31,7 @@ namespace DubuqueCodeCamp.Downloader
                 using (var database = new DCCKellyDatabase())
                 {
                     // Write the records to the database
-                    WriteRecords(database, registrants);
+                    WriteRecords(database, registrants, logger);
                 }
             }
             catch (Exception ex)
@@ -47,15 +47,15 @@ namespace DubuqueCodeCamp.Downloader
 #endif
         }
 
-        private static void DownloadFile(string fileName, string localFileLocation)
+        private static void DownloadFile(string fileName, string localFileLocation, ILogger logger)
         {
-            Console.WriteLine("Getting File " + fileName + "...\n");
+            logger.Information("Getting File " + fileName + "...\n");
 
             var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
             // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
             var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
-            Console.WriteLine(messageToUse);
+            logger.Information(messageToUse);
         }
 
         private static IEnumerable<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
@@ -69,19 +69,20 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private static void WriteRecords(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation)
+        private static void WriteRecords(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
+            ILogger logger)
         {
-            Console.WriteLine("Writing records to the table...");
-                //var myregistrants = database.Registrant;
-                //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
+            logger.Information("Writing records to the table...");
+            //var myregistrants = database.Registrant;
+            //var mystuff = myregistrants.Where(r => r.LastName == "Strandholm");
 
-                var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
+            var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
 
-                // TODO: Implement logic to prevent existing people from being added
-                // TODO: Requires equality checks
-                database.Registrants.InsertAllOnSubmit(registrantTable);
+            // TODO: Implement logic to prevent existing people from being added
+            // TODO: Requires equality checks
+            database.Registrants.InsertAllOnSubmit(registrantTable);
 
-                database.SubmitChanges(); 
+            database.SubmitChanges();
         }
 
         private static IEnumerable<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
