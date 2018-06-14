@@ -3,6 +3,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -114,23 +115,19 @@ namespace DubuqueCodeCamp.Downloader
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
         {
-            var registrantsTable = new List<Registrant>();
-            foreach (var regInfo in registrants)
-            {
-                var reg = new Registrant()
-                {
-                    FirstName = regInfo.FirstName,
-                    LastName = regInfo.LastName,
-                    StreetAddress = regInfo.StreetAddress,
-                    City = regInfo.City,
-                    State = regInfo.State,
-                    EmailAddress = regInfo.EmailAddress,
-                    IsSpeaker = regInfo.IsSpeaker
-                };
-                registrantsTable.Add(reg);
-            }
-
-            return registrantsTable;
+            return registrants.Select(regInfo => new Registrant()
+                              {
+                                  FirstName = regInfo.FirstName,
+                                  LastName = regInfo.LastName,
+                                  StreetAddress = regInfo.StreetAddress,
+                                  City = regInfo.City,
+                                  State = regInfo.State,
+                                  EmailAddress = regInfo.EmailAddress,
+                                  IsSpeaker = regInfo.IsSpeaker,
+                                  UpdateTime = DateTime.Now,
+                                  DiagnosticInfo = new StackTrace().ToString()
+                              })
+                              .ToList();
         }
     }
 }

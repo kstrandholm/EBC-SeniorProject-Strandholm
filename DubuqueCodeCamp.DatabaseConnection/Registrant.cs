@@ -1,10 +1,14 @@
-﻿using System.Data.Linq.Mapping;
+﻿using System;
+using System.Data.Linq.Mapping;
 
 namespace DubuqueCodeCamp.DatabaseConnection
 {
     [Table(Name = "Registrants")]
     public class Registrant
     {
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        public int ID { get; set; }
+
         [Column]
         public string FirstName { get; set; }
 
@@ -26,7 +30,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         [Column]
         public bool IsSpeaker { get; set; }
 
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        public int ID { get; set; }
+        [Column]
+        public DateTime UpdateTime { get; set; }
+
+        [Column]
+        public string DiagnosticInfo { get; set; }
     }
 }
