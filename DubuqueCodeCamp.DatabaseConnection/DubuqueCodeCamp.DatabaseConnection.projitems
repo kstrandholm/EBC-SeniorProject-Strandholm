@@ -11,5 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DCCKellyDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Registrant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IRegistrant.cs" />
   </ItemGroup>
 </Project>
