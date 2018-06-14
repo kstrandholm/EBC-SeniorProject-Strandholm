@@ -26,6 +26,7 @@ namespace DubuqueCodeCamp.Downloader
             csvreader.Configuration.IgnoreBlankLines = true;
             csvreader.Configuration.TrimOptions = TrimOptions.Trim;
             csvreader.Configuration.AllowComments = true;
+            csvreader.Configuration.DetectColumnCountChanges = false;
 
             var records = csvreader.GetRecords<RegistrantInformation>().ToList();
 

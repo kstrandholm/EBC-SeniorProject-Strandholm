@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Linq.Mapping;
+using Serilog.Configuration;
 
 namespace DubuqueCodeCamp.DatabaseConnection
 {
@@ -26,9 +28,6 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         [Column(CanBeNull = true)]
         public string EmailAddress { get; set; }
-
-        [Column]
-        public bool IsSpeaker { get; set; }
 
         [Column]
         public DateTime UpdateTime { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DubuqueCodeCamp.DatabaseConnection;
 
 namespace DubuqueCodeCamp.Downloader
@@ -17,7 +18,7 @@ namespace DubuqueCodeCamp.Downloader
 
         public string EmailAddress { get; set; }
 
-        public bool IsSpeaker { get; set; }
+        public List<int> TalkInterests { get; set; }
 
         public bool Equals(RegistrantInformation other)
         {
