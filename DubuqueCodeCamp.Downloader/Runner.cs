@@ -86,30 +86,31 @@ namespace DubuqueCodeCamp.Downloader
             const string DATABASE = nameof(database);
             const string TABLE = nameof(database.Registrants);
 
-            logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", nameof(registrantInformation), DATABASE, TABLE);
             var databaseRegistrants = database.Registrants;
 
             // Convert the RegistrantInformation from the parser into a format that can be saved to the database
-            var registrantTable = MapRegistrantInformationToRegistrantTable(registrantInformation);
+            var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
 
-            var uniqueRegistrants = new List<Registrant>();
-            foreach (var databaseReg in databaseRegistrants)
-            {
-                // TODO: Implement equality checks elsewhere for reuse
-                uniqueRegistrants.AddRange(registrantTable.Where(newReg =>
-                    !(newReg.FirstName == databaseReg.FirstName && newReg.LastName == databaseReg.LastName &&
-                      newReg.City == databaseReg.City && newReg.State == databaseReg.State)));
-            }
+            // If the record is not a duplicate of what is already in the database, add it to the database
+            var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
+                dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
+                dataReg.City == newReg.City && dataReg.State == newReg.State)).ToList();
 
-            try
+            if (uniqueRegistrants.Any())
             {
-                database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
+                // TODO: put this in a new class or method??
+                try
+                {
+                    logger.Information($"Writing {registrantInformation} to {DATABASE}.{TABLE}...", nameof(registrantInformation), DATABASE, TABLE);
 
-                database.SubmitChanges();
-            }
-            catch (Exception ex)
-            {
-                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", registrantTable, DATABASE, TABLE);
+                    database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
+
+                    database.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    logger.ForContext<DCCKellyDatabase>().Error(ex, $"Writing {0} to {1}.{2} failed.", newRegistrants, DATABASE, TABLE);
+                } 
             }
         }
 
