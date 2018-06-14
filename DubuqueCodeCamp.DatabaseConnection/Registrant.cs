@@ -28,6 +28,5 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         public int ID { get; set; }
-
     }
 }
