@@ -12,8 +12,16 @@ namespace DubuqueCodeCamp.Downloader
         public static void WriteRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
-            // TODO: Break this up into smaller methods
             var databaseType = database.GetType().ToString();
+            WriteRegistrantInformation(database, registrantInformation, logger, databaseType);
+
+            // Now map the registrant's Talk Interests
+            WriteTalkInterests(database, registrantInformation, logger, databaseType);
+        }
+
+        private static void WriteRegistrantInformation(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
+            string databaseType)
+        {
             const string REGISTRANTS = nameof(database.Registrants);
 
             var databaseRegistrants = database.Registrants;
@@ -56,8 +64,11 @@ namespace DubuqueCodeCamp.Downloader
             {
                 logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
             }
+        }
 
-            // Now map the registrant's Talk Interests
+        private static void WriteTalkInterests(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
+            string databaseType)
+        {
             const string TALKINTERESTS = nameof(database.TalkInterest);
             List<(string FirstName, string LastName, List<int> Interests)> interests =
                 registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
