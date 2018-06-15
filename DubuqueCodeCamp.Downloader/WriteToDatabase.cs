@@ -13,6 +13,7 @@ namespace DubuqueCodeCamp.Downloader
             ILogger logger)
         {
             var databaseType = database.GetType().ToString();
+
             WriteRegistrantInformation(database, registrantInformation, logger, databaseType);
 
             // Now map the registrant's Talk Interests
@@ -77,20 +78,9 @@ namespace DubuqueCodeCamp.Downloader
             try
             {
                 logger.Information($"Writing {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
-                var talkInterestList = (from record in interests
-                                        from interest in record.Interests
-                                        // Find any talks that match the interest ID given - if none, create a new empty list
-                                        let talkExists = database.Talks.Any(talk => talk.ID == interest)
-                                        let registrantID = database.Registrants.Single(reg =>
-                                            reg.FirstName == record.FirstName &&
-                                            reg.LastName == record.LastName).ID
-                                        select new TalkInterest
-                                        {
-                                            InterestedRegistrantID =
-                                                database.Registrants.Single(reg =>
-                                                    reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
-                                            TalkID = talkExists ? interest : 0
-                                        }).ToList();
+
+                var talkInterestList = MatchTalkInterestsToTalks(database, interests);
+
                 database.TalkInterest.InsertAllOnSubmit(talkInterestList);
 
                 database.SubmitChanges();
@@ -119,6 +109,26 @@ namespace DubuqueCodeCamp.Downloader
                               })
                               .Distinct()
                               .ToList();
+        }
+
+        private static IEnumerable<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database, IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
+        {
+            return (from record in interests
+                    from interest in record.Interests
+                    // Find any talks that match the interest ID given - if none, create a new empty list
+                    let talkExists = database.Talks.Any(talk => talk.ID == interest)
+                    let registrantID = database.Registrants.Single(reg =>
+                        reg.FirstName == record.FirstName &&
+                        reg.LastName == record.LastName).ID
+                    select new TalkInterest
+                    {
+                        InterestedRegistrantID =
+                            database.Registrants.Single(reg =>
+                                reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
+                        TalkID = talkExists ? interest : 0,
+                        UpdateTime = DateTime.Now,
+                        DiagnosticInformation = new StackTrace().ToString()
+                    }).ToList();
         }
     }
 }
