@@ -13,7 +13,7 @@ namespace DubuqueCodeCamp.Scheduler
             var cachedTalks = _database.Talks.Select(talk => talk.ID).ToList();
             var interestCount = (from talkID in _database.Talks.Select(talk => talk.ID).ToList()
                                  let count = _database.TalkInterest.Count(interest => interest.TalkID == talkID)
-                                 select (talkID, count)).ToList();
+                                 select (talkID, count)).OrderByDescending(order => order.Item2).ToList();
         }
     }
 }
