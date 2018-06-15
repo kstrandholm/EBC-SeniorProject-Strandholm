@@ -9,7 +9,6 @@ namespace DubuqueCodeCamp.Downloader
 {
     public class FileParser
     {
-        // TODO: Take the CsvReader out of here so I don't have to setup the configuration everytime
         private const string DELIMITER = "|";
 
         public static IEnumerable<RegistrantInformation> ParseFile(string filePath)

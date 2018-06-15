@@ -68,7 +68,7 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private static void WriteTalkInterests(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
+        private static void WriteTalkInterests(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
             ILogger logger,
             string databaseType)
         {
@@ -86,7 +86,7 @@ namespace DubuqueCodeCamp.Downloader
 
                 database.SubmitChanges();
 
-                logger.Information($"Finished writing {interests} to {databaseType}.{TALKINTERESTS}.", interests, databaseType,
+                logger.Information($"Finished writing {talkInterestList.Count} records to {databaseType}.{TALKINTERESTS}.", talkInterestList.Count, databaseType,
                     TALKINTERESTS);
             }
             catch (Exception ex)
@@ -112,7 +112,7 @@ namespace DubuqueCodeCamp.Downloader
                               .ToList();
         }
 
-        private static IEnumerable<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database,
+        private static List<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database,
             IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
         {
             return (from record in interests

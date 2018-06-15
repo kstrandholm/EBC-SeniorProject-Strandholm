@@ -15,7 +15,7 @@ namespace DubuqueCodeCamp.Scheduler
                                  let count = _database.TalkInterest.Count(interest => interest.TalkID == talkID)
                                  select (talkID, count)).OrderByDescending(order => order.Item2).ToList();
 
-            var rooms = _database.
+            //var rooms = _database.
         }
     }
 }
