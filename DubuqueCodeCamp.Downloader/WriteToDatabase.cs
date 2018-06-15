@@ -66,7 +66,8 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private static void WriteTalkInterests(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
+        private static void WriteTalkInterests(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
+            ILogger logger,
             string databaseType)
         {
             const string TALKINTERESTS = nameof(database.TalkInterest);
@@ -78,7 +79,8 @@ namespace DubuqueCodeCamp.Downloader
                 logger.Information($"Writing {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
                 var talkInterestList = (from record in interests
                                         from interest in record.Interests
-                                        let talkID = database.Talks.Where(talk => talk.ID == interest)
+                                        // Find any talks that match the interest ID given - if none, create a new empty list
+                                        let talkExists = database.Talks.Any(talk => talk.ID == interest)
                                         let registrantID = database.Registrants.Single(reg =>
                                             reg.FirstName == record.FirstName &&
                                             reg.LastName == record.LastName).ID
@@ -87,7 +89,7 @@ namespace DubuqueCodeCamp.Downloader
                                             InterestedRegistrantID =
                                                 database.Registrants.Single(reg =>
                                                     reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
-                                            TalkID = database.Talks.Single(talk => talk.ID == interest).ID
+                                            TalkID = talkExists ? interest : 0
                                         }).ToList();
                 database.TalkInterest.InsertAllOnSubmit(talkInterestList);
 
