@@ -15,7 +15,16 @@ namespace DubuqueCodeCamp.Scheduler
                                  let count = _database.TalkInterest.Count(interest => interest.TalkID == talkID)
                                  select (talkID, count)).OrderByDescending(order => order.Item2).ToList();
 
-            //var rooms = _database.
+            var cachedRooms = _database.Rooms.ToList();
+            var cachedSessions = _database.Sessions.ToList();
+
+            // If there are no sessions, we can't create a proposed schedule
+            if (!cachedSessions.Any())
+                return;
+
+            (from room in cachedRooms
+            from session in cachedSessions
+            select new )
         }
     }
 }

@@ -14,7 +14,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         public Table<Room> Rooms;
 
-        //public Table<Session> Sessions;
+        public Table<Session> Sessions;
 
         public Table<TalkInterest> TalkInterest;
 
