@@ -20,7 +20,8 @@ namespace DubuqueCodeCamp.Downloader
             WriteTalkInterests(database, registrantInformation, logger, databaseType);
         }
 
-        private static void WriteRegistrantInformation(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
+        private static void WriteRegistrantInformation(DCCKellyDatabase database,
+            IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
             string databaseType)
         {
             const string REGISTRANTS = nameof(database.Registrants);
@@ -111,7 +112,8 @@ namespace DubuqueCodeCamp.Downloader
                               .ToList();
         }
 
-        private static IEnumerable<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database, IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
+        private static IEnumerable<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database,
+            IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
         {
             return (from record in interests
                     from interest in record.Interests
@@ -125,10 +127,13 @@ namespace DubuqueCodeCamp.Downloader
                         InterestedRegistrantID =
                             database.Registrants.Single(reg =>
                                 reg.FirstName == record.FirstName && reg.LastName == record.LastName).ID,
-                        TalkID = talkExists ? interest : 0,
+                        TalkID = talkExists ? interest : -1,
                         UpdateTime = DateTime.Now,
                         DiagnosticInformation = new StackTrace().ToString()
-                    }).ToList();
+                    })
+                .Where(interest =>
+                    interest.TalkID != -1) // Make sure we don't try to add any talk interests that don't have an existing talk id
+                .ToList();
         }
     }
 }
