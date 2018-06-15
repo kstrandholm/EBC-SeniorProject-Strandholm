@@ -6,11 +6,14 @@ namespace DubuqueCodeCamp.Scheduler
 {
     public class DetermineSchedule
     {
-        private DCCKellyDatabase _database = new DCCKellyDatabase();
+        private readonly DCCKellyDatabase _database = new DCCKellyDatabase();
 
         public void GetProposedSchedule()
         {
-            List<(int talk, int interestAmount)> interestCount = _database.Talks.Select(talk => new (int talk, int interestAmount){(talk.ID, _database.TalkInterest.Count(interest => interest.TalkID == talk.ID))}).ToList();
+            var cachedTalks = _database.Talks.Select(talk => talk.ID).ToList();
+            var interestCount = (from talkID in _database.Talks.Select(talk => talk.ID).ToList()
+                                 let count = _database.TalkInterest.Count(interest => interest.TalkID == talkID)
+                                 select (talkID, count)).ToList();
         }
     }
 }
