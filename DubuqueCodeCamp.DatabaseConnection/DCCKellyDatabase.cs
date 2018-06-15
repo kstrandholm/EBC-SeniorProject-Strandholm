@@ -12,7 +12,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         public Table<Registrant> Registrants;
 
-        //public Table<Room> Rooms;
+        public Table<Room> Rooms;
 
         //public Table<Session> Sessions;
 

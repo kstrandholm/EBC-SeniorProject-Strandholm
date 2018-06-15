@@ -113,7 +113,7 @@ namespace DubuqueCodeCamp.Downloader
                                   State = regInfo.State,
                                   EmailAddress = regInfo.EmailAddress,
                                   UpdateTime = DateTime.Now,
-                                  DiagnosticInfo = new StackTrace().ToString()
+                                  DiagnosticInformation = new StackTrace().ToString()
                               })
                               .Distinct()
                               .ToList();

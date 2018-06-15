@@ -1,4 +1,5 @@
-﻿using System.Data.Linq.Mapping;
+﻿using System;
+using System.Data.Linq.Mapping;
 
 namespace DubuqueCodeCamp.DatabaseConnection
 {
@@ -16,5 +17,11 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         [Column]
         public int SpeakerID { get; set; }
+
+        [Column]
+        public DateTime UpdateTime { get; set; }
+
+        [Column]
+        public string DiagnosticInformation { get; set; }
     }
 }
