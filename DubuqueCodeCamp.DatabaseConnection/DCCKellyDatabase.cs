@@ -7,7 +7,6 @@ namespace DubuqueCodeCamp.DatabaseConnection
     [Database(Name = "DCC_Kelly")]
     public class DCCKellyDatabase : DataContext
     {
-
         public DCCKellyDatabase() : base(ConfigurationManager.ConnectionStrings["DCCDatabase"].ConnectionString) { }
 
         public Table<Registrant> Registrants;
@@ -19,6 +18,8 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public Table<TalkInterest> TalkInterest;
 
         public Table<Talk> Talks;
+
+        public Table<ProposedSchedule> ProposedSchedules;
 
     }
 }
