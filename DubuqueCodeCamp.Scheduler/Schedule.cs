@@ -1,28 +1,32 @@
 ﻿using DubuqueCodeCamp.DatabaseConnection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    public class DetermineSchedule
+    public class Schedule
     {
-        private readonly DCCKellyDatabase _database = new DCCKellyDatabase();
+        private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
 
-        public void GetProposedSchedule(DateTime eventDate)
+        public static void CreateProposedSchedule(DateTime eventDate)
         {
-            var cachedTalks = _database.Talks.Select(talk => talk.ID).ToList();
+            // Ensure the Event Date does not have an unnecessary time added
+            eventDate = eventDate.Date;
+
+            var cachedTalks = DATABASE.Talks.Select(talk => talk.ID).ToList();
             var interestCount = (from talkID in cachedTalks
-                                 let count = _database.TalkInterest.Count(interest => interest.TalkID == talkID)
+                                 let count = DATABASE.TalkInterest.Count(interest => interest.TalkID == talkID)
                                  orderby count descending
                                  select talkID).ToList();
 
             // If there are no sessions, we can't create a proposed schedule
-            if (!_database.Sessions.Any())
+            if (!DATABASE.Sessions.Any())
                 return;
 
             // If there are any existing schedules for this date, warn the user that creating a new one will overwrite the existing one
-            if (_database.ProposedSchedules.Any(schedule => schedule.Session.TimeStart.Date == eventDate))
+            if (DATABASE.ProposedSchedules.Any(schedule => schedule.Session.TimeStart.Date == eventDate))
             {
                 var result = MessageBox.Show("A proposed schedule already exists. Generating a new one will overwrite the old. Continue?",
                     "Existing Proposed Schedule", MessageBoxButton.OKCancel);
@@ -31,8 +35,8 @@ namespace DubuqueCodeCamp.Scheduler
             }
 
             // Combine the Rooms and Sessions to create each unique combination
-            var roomSessions = (from room in _database.Rooms
-                                from session in _database.Sessions
+            var roomSessions = (from room in DATABASE.Rooms
+                                from session in DATABASE.Sessions
                                 select new {room, session})
                 .OrderByDescending(rs => rs.room.Capacity) // Largest rooms first
                 .ToList();
@@ -48,13 +52,22 @@ namespace DubuqueCodeCamp.Scheduler
                 {
                     Room = roomSession.room,
                     Session = roomSession.session,
-                    Talk = _database.Talks.Single(talk => talk.ID == interestCount[i]),
+                    Talk = DATABASE.Talks.Single(talk => talk.ID == interestCount[i]),
                     UpdateTime = DateTime.Now,
                     DiagnosticInformation = $"Adding Proposed Schedule for event on {eventDate}"
                 };
-                _database.ProposedSchedules.InsertOnSubmit(newSchedule);
+                DATABASE.ProposedSchedules.InsertOnSubmit(newSchedule);
             }
+        }
 
+        public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
+        {
+            return DATABASE.ProposedSchedules.Where(schedule => schedule.Session.TimeStart.Date == eventDate).ToList();
+        }
+
+        public static List<Session> GetExistingSessions(DateTime eventDate)
+        {
+            return DATABASE.Sessions.Where(session => session.TimeStart.Date == eventDate).ToList();
         }
     }
 }
