@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System.Windows;
+using DubuqueCodeCamp.Scheduler.Views;
 using Prism.Modularity;
 
 namespace DubuqueCodeCamp.Scheduler
@@ -23,7 +24,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             Container.RegisterTypeForNavigation<MainWindow>("MainWindow");
             Container.RegisterTypeForNavigation<SessionsDisplayer>("SessionsDisplayer");
-            //Container.RegisterTypeForNavigation<AddSession>("AddSession");
+            Container.RegisterTypeForNavigation<AddSessionView>("AddSessionView");
         }
 
         protected override void ConfigureModuleCatalog()

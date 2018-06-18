@@ -6,11 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Prism.Events;
-using PropertyChanged;
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    [AddINotifyPropertyChangedInterface]
     public class ScheduleViewModel : BindableBase
     {
 
