@@ -27,7 +27,7 @@
 
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
 
-          <Button>
+          <Button Click="{Binding GetProposedSchedule}">
             <TextBlock TextAlignment="Center">
               Create<LineBreak />Proposed Schedule
             </TextBlock>
