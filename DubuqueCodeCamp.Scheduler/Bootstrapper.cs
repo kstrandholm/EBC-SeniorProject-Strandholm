@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
-using Microsoft.Practices.Unity;
+using System.Windows;
 
 namespace DubuqueCodeCamp.Scheduler
 {
@@ -20,6 +14,13 @@ namespace DubuqueCodeCamp.Scheduler
         protected override void InitializeShell()
         {
             Application.Current.MainWindow.Show();
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+
+            Container.RegisterTypeForNavigation<MainWindowViewModel>("MainWindowViewModel");
         }
     }
 }
