@@ -78,7 +78,7 @@ namespace DubuqueCodeCamp.Downloader
 
             try
             {
-                logger.Information($"Writing {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
+                logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
 
                 var talkInterestList = MatchTalkInterestsToTalks(database, interests);
 
@@ -86,7 +86,7 @@ namespace DubuqueCodeCamp.Downloader
 
                 database.SubmitChanges();
 
-                logger.Information($"Finished writing {talkInterestList.Count} records to {databaseType}.{TALKINTERESTS}.", talkInterestList.Count, databaseType,
+                logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.", talkInterestList.Count, databaseType,
                     TALKINTERESTS);
             }
             catch (Exception ex)
