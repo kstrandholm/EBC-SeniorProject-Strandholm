@@ -21,6 +21,8 @@ namespace DubuqueCodeCamp.Scheduler
             base.ConfigureContainer();
 
             Container.RegisterTypeForNavigation<MainWindowViewModel>("MainWindowViewModel");
+            Container.RegisterTypeForNavigation<SessionsViewModel>("SessionsViewModel");
+            Container.RegisterTypeForNavigation<AddSessionViewModel>("AddSessionViewModel");
         }
     }
 }

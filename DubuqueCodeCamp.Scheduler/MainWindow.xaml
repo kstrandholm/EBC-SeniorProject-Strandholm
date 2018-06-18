@@ -36,6 +36,10 @@
           </Button>
 
         </StackPanel>
+        
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SessionsRegion">
+          
+        </ContentControl>
 
         <Grid Grid.Column="1">
 
@@ -44,7 +48,7 @@
             <RowDefinition Height="*"></RowDefinition>
           </Grid.RowDefinitions>
 
-          <StackPanel>
+          <StackPanel Grid.Row="0">
             <Button Margin="5 25 5 5">Add Session</Button>
             <Button>Remove Session</Button>
           </StackPanel>
