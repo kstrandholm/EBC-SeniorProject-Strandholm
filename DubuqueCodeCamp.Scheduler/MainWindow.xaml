@@ -27,18 +27,16 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
-          <Button Content="Add Session" Margin="5 25 5 5" Command="{Binding NavigateCommand}" CommandParameter="SessionsDisplayer"/>
-          
-          <Button Command="{Binding UpdateCommand}">
+          <Calendar></Calendar>
+          <Button Command="{Binding UpdateCommand}" HorizontalAlignment="Center">
             <TextBlock TextAlignment="Center">
               Create<LineBreak />Proposed Schedule
             </TextBlock>
           </Button>
-
         </StackPanel>
         
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SessionsRegion" />
-        
+        <ContentControl Grid.Column="1"
+                        prism:RegionManager.RegionName="SessionsRegion" />
       </Grid>
 
     </StackPanel>
