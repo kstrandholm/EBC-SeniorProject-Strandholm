@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
@@ -27,7 +29,7 @@
 
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
 
-          <Button Click="{Binding GetProposedSchedule}">
+          <Button >
             <TextBlock TextAlignment="Center">
               Create<LineBreak />Proposed Schedule
             </TextBlock>
@@ -86,18 +88,7 @@
 
         <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
 
-        <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-          <ListBoxItem>Hello World</ListBoxItem>
-
+        <ListBox Grid.Row="1" ItemsSource="{Binding ProposedSchedules, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
         </ListBox>
 
       </Grid>
