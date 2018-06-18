@@ -4,6 +4,10 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-            
-    </Grid>
+
+
+    <StackPanel VerticalAlignment="Bottom" Margin="0 0 0 5">
+      <Button>Save Sessions</Button>
+    </StackPanel>
+  </Grid>
 </UserControl>
