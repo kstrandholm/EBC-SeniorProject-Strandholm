@@ -12,40 +12,58 @@ namespace DubuqueCodeCamp.Scheduler
     [AddINotifyPropertyChangedInterface]
     public class MainWindowViewModel : BindableBase
     {
-        private List<ProposedSchedule> _poposedSchedules = new List<ProposedSchedule>
-        {
-            new ProposedSchedule
-            {
-                ID = 5,
-                Room = new Room(),
-                Session = new Session(),
-                Talk = new Talk(),
-                DiagnosticInformation = "Testing",
-                UpdateTime = DateTime.Now
-            }
-        };
+        private List<ProposedSchedule> _proposedSchedules = Schedule.GetProposedSchedule(DateTime.Now);
 
+        /// <summary>
+        /// List of Proposed Schedules currently in the database
+        /// </summary>
         public List<ProposedSchedule> ProposedSchedules
         {
-            get { return _poposedSchedules.ToList(); }
-            set { SetProperty(ref _poposedSchedules, value); }
+            get => _proposedSchedules;
+            set => SetProperty(ref _proposedSchedules, value);
         }
 
-        public ICommand UpdateCommand { get; set; }
+        private List<Session> _sessions = Schedule.GetExistingSessions(DateTime.Today);
+
+        /// <summary>
+        /// List of Proposed Schedules currently in the database
+        /// </summary>
+        public List<Session> Sessions
+        {
+            get => _sessions;
+            set => SetProperty(ref _sessions, value);
+        }
+
+        public ICommand CreateScheduleCommand { get; set; }
+
+        public ICommand AddNewSessionCommand { get; set; }
 
         public MainWindowViewModel()
         {
-            UpdateCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => ProposedSchedules);
+            CreateScheduleCommand = new DelegateCommand(ExecuteCreateSchedule, CanExecuteCreateSchedule).ObservesProperty(() => ProposedSchedules);
+            AddNewSessionCommand = new DelegateCommand(ExecuteAddSession, CanExecuteAddSession).ObservesProperty(() => Sessions);
         }
 
-        private bool CanExecute()
+        private bool CanExecuteCreateSchedule()
         {
             return ProposedSchedules.Any();
         }
 
-        private void Execute()
+        private void ExecuteCreateSchedule()
         {
-            ProposedSchedules.First().UpdateTime = DateTime.Now;
+            Schedule.CreateProposedSchedule(DateTime.Today);
+            ProposedSchedules = Schedule.GetProposedSchedule(DateTime.Today);
+        }
+
+        private bool CanExecuteAddSession()
+        {
+            return ProposedSchedules.Any();
+        }
+
+        private void ExecuteAddSession()
+        {
+            Schedule.CreateProposedSchedule(DateTime.Today);
+            ProposedSchedules = Schedule.GetProposedSchedule(DateTime.Today);
         }
     }
 }
