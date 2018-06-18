@@ -9,7 +9,7 @@ namespace DubuqueCodeCamp.Downloader
 {
     public class WriteToDatabase
     {
-        public static void WriteRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
+        public static void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
             var databaseType = database.GetType().ToString();

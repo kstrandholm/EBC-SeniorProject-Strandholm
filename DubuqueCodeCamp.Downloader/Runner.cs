@@ -47,7 +47,7 @@ namespace DubuqueCodeCamp.Downloader
                 using (var database = new DCCKellyDatabase())
                 {
                     // Write the records to the database
-                    WriteToDatabase.WriteRecords(database, registrants, logger);
+                    WriteToDatabase.WriteDownloadRecords(database, registrants, logger);
                 }
             }
 

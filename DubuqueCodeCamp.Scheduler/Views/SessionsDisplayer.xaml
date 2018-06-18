@@ -23,7 +23,7 @@
       </StackPanel>
 
       <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 5">
-        <Button>Save SessionsDisplayer</Button>
+        <Button>Save Sessions</Button>
       </StackPanel>
 
     </Grid>
