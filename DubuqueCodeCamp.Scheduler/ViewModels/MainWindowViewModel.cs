@@ -14,7 +14,7 @@ namespace DubuqueCodeCamp.Scheduler
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            regionManager.RegisterViewWithRegion("SessionsRegion", () => .Resolve<Sessions>());
+            //regionManager.RegisterViewWithRegion("SessionsRegion", () => .Resolve<SessionsDisplayer>());
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 

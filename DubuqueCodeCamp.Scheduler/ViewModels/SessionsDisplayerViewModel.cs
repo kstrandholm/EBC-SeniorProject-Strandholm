@@ -10,7 +10,7 @@ using Prism.Events;
 namespace DubuqueCodeCamp.Scheduler
 {
     [AddINotifyPropertyChangedInterface]
-    public class SessionsViewModel : BindableBase
+    public class SessionsDisplayerViewModel : BindableBase
     {
         private IEventAggregator _eventAggregator;
 
@@ -27,7 +27,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         public ICommand AddNewSessionCommand { get; set; }
 
-        public SessionsViewModel(IEventAggregator eventAggregator)
+        public SessionsDisplayerViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             AddNewSessionCommand = new DelegateCommand(ExecuteAddSession, CanExecuteAddSession).ObservesProperty(() => Sessions);

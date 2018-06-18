@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DubuqueCodeCamp.Scheduler.Sessions"
+﻿<UserControl x:Class="DubuqueCodeCamp.Scheduler.SessionsDisplayer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
@@ -23,14 +23,14 @@
       </StackPanel>
 
       <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 5">
-        <Button>Save Sessions</Button>
+        <Button>Save SessionsDisplayer</Button>
       </StackPanel>
 
     </Grid>
 
     <StackPanel Grid.Column="1">
 
-      <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
+      <TextBlock FontWeight="Bold" Margin="0 0 0 5">SessionsDisplayer</TextBlock>
 
       <ListBox ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  />
 

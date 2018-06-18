@@ -3,11 +3,11 @@
 namespace DubuqueCodeCamp.Scheduler
 {
     /// <summary>
-    /// Interaction logic for Sessions
+    /// Interaction logic for SessionsDisplayer
     /// </summary>
-    public partial class Sessions : UserControl
+    public partial class SessionsDisplayer : UserControl
     {
-        public Sessions()
+        public SessionsDisplayer()
         {
             InitializeComponent();
         }

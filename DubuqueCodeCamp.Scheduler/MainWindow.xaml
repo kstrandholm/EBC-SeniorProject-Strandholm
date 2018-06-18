@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
-          <Button Content="Add Session" Margin="5 25 5 5" Command="{Binding NavigateCommand}" CommandParameter="Sessions"/>
+          <Button Content="Add Session" Margin="5 25 5 5" Command="{Binding NavigateCommand}" CommandParameter="SessionsDisplayer"/>
           
           <Button Command="{Binding UpdateCommand}">
             <TextBlock TextAlignment="Center">
