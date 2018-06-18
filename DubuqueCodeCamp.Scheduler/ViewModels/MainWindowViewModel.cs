@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using System.ComponentModel;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -13,13 +14,13 @@ namespace DubuqueCodeCamp.Scheduler
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-
+            regionManager.RegisterViewWithRegion("SessionsRegion", () => .Resolve<Sessions>());
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
-        private void Navigate(string uri)
+        private void Navigate(string destination)
         {
-            _regionManager.RequestNavigate("SessionsRegion", uri);
+            _regionManager.RequestNavigate("SessionsRegion", destination);
         }
     }
 }

@@ -6,7 +6,6 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
-        xmlns:views="clr-namespace:DubuqueCodeCamp.Scheduler.Views"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
         Height="486.885" Width="598.975"
@@ -28,7 +27,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
-
+          <Button Content="Add Session" Margin="5 25 5 5" Command="{Binding NavigateCommand}" CommandParameter="Sessions"/>
+          
           <Button Command="{Binding UpdateCommand}">
             <TextBlock TextAlignment="Center">
               Create<LineBreak />Proposed Schedule
@@ -37,9 +37,7 @@
 
         </StackPanel>
         
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SessionsRegion">
-          <views:Sessions />
-        </ContentControl>
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SessionsRegion" />
         
       </Grid>
 

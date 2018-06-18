@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DubuqueCodeCamp.Scheduler.Views
+namespace DubuqueCodeCamp.Scheduler
 {
     /// <summary>
     /// Interaction logic for Sessions
