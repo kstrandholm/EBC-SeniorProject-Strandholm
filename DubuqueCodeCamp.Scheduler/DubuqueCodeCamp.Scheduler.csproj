@@ -110,6 +110,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="SessionsModule.cs" />
     <Compile Include="UpdateEvent.cs" />
     <Compile Include="ViewModels\AddSessionViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
