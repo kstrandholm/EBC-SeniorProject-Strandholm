@@ -115,18 +115,16 @@ namespace DubuqueCodeCamp.Downloader
         private static List<TalkInterest> MatchTalkInterestsToTalks(DCCKellyDatabase database,
             IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
         {
-            var regs = database.Registrants.ToList();
-
             return (from record in interests
                     from interest in record.Interests
                     // Find any talks that match the interest ID given - if none, create a new empty list
                     let talkExists = database.Talks.Any(talk => talk.ID == interest)
-                    let registrant = database.Registrants.Single(reg =>
+                    let registrantID = database.Registrants.Single(reg =>
                         reg.FirstName == record.FirstName &&
                         reg.LastName == record.LastName).ID
                     select new TalkInterest
                     {
-                        InterestedRegistrantID = registrant,
+                        InterestedRegistrantID = registrantID,
                         TalkID = talkExists ? interest : -1,
                         UpdateTime = DateTime.Now,
                         DiagnosticInformation = new StackTrace().ToString()
