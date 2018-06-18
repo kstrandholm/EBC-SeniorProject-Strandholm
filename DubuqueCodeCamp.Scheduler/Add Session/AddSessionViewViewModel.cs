@@ -18,7 +18,7 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _sessionDate, value);
         }
 
-        private DateTime _timeStart;
+        private DateTime _timeStart = DateTime.Now;
         public DateTime TimeStart
         {
             get => _timeStart;

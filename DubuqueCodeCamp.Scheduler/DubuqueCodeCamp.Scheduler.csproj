@@ -112,17 +112,17 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="SessionsModule.cs" />
     <Compile Include="UpdateEvent.cs" />
-    <Compile Include="ViewModels\AddSessionViewViewModel.cs" />
+    <Compile Include="Add Session\AddSessionViewViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
-    <Compile Include="ViewModels\SessionsDisplayerViewModel.cs" />
-    <Compile Include="Views\AddSessionView.xaml.cs">
+    <Compile Include="Sessions Display\SessionsDisplayerViewModel.cs" />
+    <Compile Include="Add Session\AddSessionView.xaml.cs">
       <DependentUpon>AddSessionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SessionsDisplayer.xaml.cs">
+    <Compile Include="Sessions Display\SessionsDisplayer.xaml.cs">
       <DependentUpon>SessionsDisplayer.xaml</DependentUpon>
     </Compile>
-    <Page Include="Buttons.xaml">
+    <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,11 +139,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AddSessionView.xaml">
+    <Page Include="Add Session\AddSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SessionsDisplayer.xaml">
+    <Page Include="Sessions Display\SessionsDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,6 +175,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.0.4\build\Fody.targets" Condition="Exists('..\packages\Fody.3.0.4\build\Fody.targets')" />

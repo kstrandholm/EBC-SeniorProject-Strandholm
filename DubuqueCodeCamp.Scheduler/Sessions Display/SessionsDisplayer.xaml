@@ -12,7 +12,7 @@
     <!-- Session Buttons -->
     <Grid Grid.Column="0">
       <StackPanel>
-        <Button Margin="5 25 5 5">Add Session</Button>
+        <Button Content="Add Session" Margin="5 25 5 5" Command="{Binding NavigateCommand}" CommandParameter="AddSessionView" />
         <Button>Remove Session</Button>
       </StackPanel>
     </Grid>

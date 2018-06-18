@@ -1,7 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System.Windows;
-using DubuqueCodeCamp.Scheduler.Views;
 using Prism.Modularity;
 
 namespace DubuqueCodeCamp.Scheduler

@@ -5,9 +5,11 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
 
-
-    <StackPanel VerticalAlignment="Bottom" Margin="0 0 0 5">
-      <Button>Save Sessions</Button>
+    <StackPanel Margin="10">
+      <TextBox Text="{Binding SessionDate}"></TextBox>
+      <TextBox Text="{Binding TimeStart}"></TextBox>
+      <TextBox Text="{Binding TimeEnd}"></TextBox>
+      <Button HorizontalAlignment="Center">Save Session</Button>
     </StackPanel>
   </Grid>
 </UserControl>
