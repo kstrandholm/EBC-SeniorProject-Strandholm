@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DubuqueCodeCamp.DatabaseConnection;
 
@@ -8,7 +9,7 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private readonly DCCKellyDatabase _database = new DCCKellyDatabase();
 
-        public void GetProposedSchedule()
+        public void GetProposedSchedule(DateTime eventDate)
         {
             var cachedTalks = _database.Talks.Select(talk => talk.ID).ToList();
             var interestCount = (from talkID in cachedTalks
@@ -22,9 +23,10 @@ namespace DubuqueCodeCamp.Scheduler
             if (!cachedSessions.Any())
                 return;
 
-            (from room in cachedRooms
-            from session in cachedSessions
-            select new )
+            var existingSchedule = _database.ProposedSchedules.Where(schedule => schedule.Session.TimeStart.Date == eventDate);
+            //(from room in cachedRooms
+            //from session in cachedSessions
+            //select new )
         }
     }
 }

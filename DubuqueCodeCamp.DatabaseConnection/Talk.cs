@@ -16,6 +16,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public string Summary { get; set; }
 
         [Column]
+        // TODO: determine if want to include Speaker class to make explicit relationship here
         public int SpeakerID { get; set; }
 
         [Column]
