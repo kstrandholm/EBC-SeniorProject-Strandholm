@@ -6,6 +6,7 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
+        xmlns:views="clr-namespace:DubuqueCodeCamp.Scheduler.Views"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
         Height="486.885" Width="598.975"
@@ -23,7 +24,6 @@
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"></ColumnDefinition>
-          <ColumnDefinition Width="Auto"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -38,37 +38,9 @@
         </StackPanel>
         
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SessionsRegion">
-          
+          <views:Sessions />
         </ContentControl>
-
-        <Grid Grid.Column="1">
-
-          <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-          </Grid.RowDefinitions>
-
-          <StackPanel Grid.Row="0">
-            <Button Margin="5 25 5 5">Add Session</Button>
-            <Button>Remove Session</Button>
-          </StackPanel>
-          
-          <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 5">
-            <Button>Save Sessions</Button>
-          </StackPanel>
-
-        </Grid>
-
-        <StackPanel Grid.Column="2">
-
-          <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
-
-          <ListBox ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250" >
-          </ListBox>
-
-        </StackPanel>
-
-
+        
       </Grid>
 
     </StackPanel>
