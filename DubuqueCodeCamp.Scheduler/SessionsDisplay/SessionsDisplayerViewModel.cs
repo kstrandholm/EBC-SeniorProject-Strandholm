@@ -50,7 +50,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void ExecuteAddSession()
         {
-            _eventAggregator.GetEvent<UpdateEvent>().Publish("testing");
+            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("testing");
         }
     }
 }

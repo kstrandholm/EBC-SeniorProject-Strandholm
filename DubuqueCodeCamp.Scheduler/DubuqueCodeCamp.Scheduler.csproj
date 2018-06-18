@@ -111,15 +111,15 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="SessionsModule.cs" />
-    <Compile Include="UpdateEvent.cs" />
-    <Compile Include="Add Session\AddSessionViewViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="AddSession\SessionsUpdatedEvent.cs" />
+    <Compile Include="AddSession\AddSessionViewViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
-    <Compile Include="Sessions Display\SessionsDisplayerViewModel.cs" />
-    <Compile Include="Add Session\AddSessionView.xaml.cs">
+    <Compile Include="SessionsDisplay\SessionsDisplayerViewModel.cs" />
+    <Compile Include="AddSession\AddSessionView.xaml.cs">
       <DependentUpon>AddSessionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sessions Display\SessionsDisplayer.xaml.cs">
+    <Compile Include="SessionsDisplay\SessionsDisplayer.xaml.cs">
       <DependentUpon>SessionsDisplayer.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles.xaml">
@@ -139,11 +139,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Add Session\AddSessionView.xaml">
+    <Page Include="AddSession\AddSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sessions Display\SessionsDisplayer.xaml">
+    <Page Include="SessionsDisplay\SessionsDisplayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

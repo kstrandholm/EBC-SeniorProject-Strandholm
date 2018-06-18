@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
 
-    <StackPanel Margin="10">
-      <TextBox Text="{Binding SessionDate}"></TextBox>
-      <TextBox Text="{Binding TimeStart}"></TextBox>
-      <TextBox Text="{Binding TimeEnd}"></TextBox>
-      <Button HorizontalAlignment="Center">Save Session</Button>
-    </StackPanel>
-  </Grid>
+  <StackPanel Margin="10">
+    <DatePicker />
+    <Calendar />
+    <TextBox Text="{Binding TimeStart}"></TextBox>
+    <TextBox Text="{Binding TimeEnd}"></TextBox>
+
+    <Button HorizontalAlignment="Center" Command="{Binding UpdateSessionsCommand}">
+      Save Session
+    </Button>
+  </StackPanel>
+
 </UserControl>

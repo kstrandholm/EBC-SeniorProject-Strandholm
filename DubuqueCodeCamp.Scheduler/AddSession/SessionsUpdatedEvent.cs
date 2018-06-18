@@ -2,7 +2,7 @@
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    public class UpdateEvent : PubSubEvent<string>
+    public class SessionsUpdatedEvent : PubSubEvent<string>
     {
     }
 }
