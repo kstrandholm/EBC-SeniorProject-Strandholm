@@ -15,6 +15,9 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public int ID { get; set; }
 
         [Column]
+        public DateTime SessionDate { get; set; }
+
+        [Column]
         public DateTime TimeStart { get; set; }
 
         [Column]

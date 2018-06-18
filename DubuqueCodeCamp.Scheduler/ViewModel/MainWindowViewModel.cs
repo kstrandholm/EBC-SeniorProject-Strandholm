@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using DubuqueCodeCamp.DatabaseConnection;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using PropertyChanged;
 
@@ -13,6 +14,11 @@ namespace DubuqueCodeCamp.Scheduler
     public class MainWindowViewModel : BindableBase
     {
         private List<ProposedSchedule> _proposedSchedules = Schedule.GetProposedSchedule(DateTime.Now);
+
+        public MainWindowViewModel(IEventAggregator eventAggregator)
+        {
+            
+        }
 
         /// <summary>
         /// List of Proposed Schedules currently in the database
@@ -57,13 +63,12 @@ namespace DubuqueCodeCamp.Scheduler
 
         private bool CanExecuteAddSession()
         {
-            return ProposedSchedules.Any();
+            return true;
         }
 
         private void ExecuteAddSession()
         {
-            Schedule.CreateProposedSchedule(DateTime.Today);
-            ProposedSchedules = Schedule.GetProposedSchedule(DateTime.Today);
+            
         }
     }
 }

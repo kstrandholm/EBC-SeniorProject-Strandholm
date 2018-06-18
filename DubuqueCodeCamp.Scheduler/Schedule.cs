@@ -16,7 +16,7 @@ namespace DubuqueCodeCamp.Scheduler
             eventDate = eventDate.Date;
 
             var cachedTalks = DATABASE.Talks.Select(talk => talk.ID).ToList();
-            var interestCount = (from talkID in cachedTalks
+            var talks = (from talkID in cachedTalks
                                  let count = DATABASE.TalkInterest.Count(interest => interest.TalkID == talkID)
                                  orderby count descending
                                  select talkID).ToList();
@@ -25,8 +25,13 @@ namespace DubuqueCodeCamp.Scheduler
             if (!DATABASE.Sessions.Any())
                 return;
 
+            var schedulesForDate = (from sched in DATABASE.ProposedSchedules
+                                    join session in DATABASE.Sessions on sched.SessionID equals session.ID
+                                    where session.SessionDate == eventDate
+                                    select sched).ToList();
+
             // If there are any existing schedules for this date, warn the user that creating a new one will overwrite the existing one
-            if (DATABASE.ProposedSchedules.Any(schedule => schedule.Session.TimeStart.Date == eventDate))
+            if (schedulesForDate.Any())
             {
                 var result = MessageBox.Show("A proposed schedule already exists. Generating a new one will overwrite the old. Continue?",
                     "Existing Proposed Schedule", MessageBoxButton.OKCancel);
@@ -42,7 +47,7 @@ namespace DubuqueCodeCamp.Scheduler
                 .ToList();
 
             // If the number of roomSessions is not equal to the number of talks in interestCount we can't create an accurate schedule
-            if (roomSessions.Count != interestCount.Count)
+            if (roomSessions.Count != talks.Count)
                 return;
 
             for (var i = 0; i < roomSessions.Count; i++)
@@ -50,9 +55,9 @@ namespace DubuqueCodeCamp.Scheduler
                 var roomSession = roomSessions[i];
                 var newSchedule = new ProposedSchedule
                 {
-                    Room = roomSession.room,
-                    Session = roomSession.session,
-                    Talk = DATABASE.Talks.Single(talk => talk.ID == interestCount[i]),
+                    RoomID = roomSession.room.ID,
+                    SessionID = roomSession.session.ID,
+                    TalkID = talks[i],
                     UpdateTime = DateTime.Now,
                     DiagnosticInformation = $"Adding Proposed Schedule for event on {eventDate}"
                 };
@@ -62,12 +67,23 @@ namespace DubuqueCodeCamp.Scheduler
 
         public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
         {
-            return DATABASE.ProposedSchedules.Where(schedule => schedule.Session.TimeStart.Date == eventDate).ToList();
+            // Ensure the Event Date does not have an unnecessary time added
+            eventDate = eventDate.Date;
+
+            return (from sched in DATABASE.ProposedSchedules
+                            join session in DATABASE.Sessions on sched.SessionID equals session.ID
+                            where session.SessionDate == eventDate
+                            select  sched).ToList();
         }
 
         public static List<Session> GetExistingSessions(DateTime eventDate)
         {
-            return DATABASE.Sessions.Where(session => session.TimeStart.Date == eventDate).ToList();
+            // Ensure the Event Date does not have an unnecessary time added
+            eventDate = eventDate.Date;
+
+            return (from session in DATABASE.Sessions
+                    where session.SessionDate == eventDate
+                    select session).ToList();
         }
     }
 }

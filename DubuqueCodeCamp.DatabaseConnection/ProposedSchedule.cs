@@ -10,13 +10,13 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public int ID { get; set; }
 
         [Column]
-        public Session Session { get; set; }
+        public int SessionID { get; set; }
 
         [Column]
-        public Room Room { get; set; }
+        public int RoomID { get; set; }
 
         [Column]
-        public Talk Talk { get; set; }
+        public int TalkID { get; set; }
 
         [Column]
         public DateTime UpdateTime { get; set; }
