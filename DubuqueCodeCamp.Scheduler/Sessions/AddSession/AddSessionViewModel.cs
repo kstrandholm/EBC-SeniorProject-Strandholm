@@ -4,6 +4,8 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using PropertyChanged;
 
@@ -81,10 +83,25 @@ namespace DubuqueCodeCamp.Scheduler
                 DiagnosticInformation = "User added session"
             };
 
-            database.Sessions.InsertOnSubmit(newSession);
+            // TODO: consider overriding the equality check on Session?
+            // If the database doesn't have any existing sessions matching the new one, save to the database
+            if (!database.Sessions.Any(session =>
+                session.SessionDate == newSession.SessionDate &&
+                session.TimeStart == newSession.TimeStart &&
+                session.TimeEnd == newSession.TimeEnd))
+            {
+                database.Sessions.InsertOnSubmit(newSession);
+                database.SubmitChanges();
 
-            // Publish the event for listeners
-            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish(newSession);
+                // Publish the event for listeners
+                _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish(newSession);
+            }
+            else
+            {
+                // Otherwise, tell the user one exists and navigate away as usual
+                MessageBox.Show("A session with the same date and start and end times already exists in the database.", "Canceling Save",
+                    MessageBoxButton.OK);
+            }
 
             // Navigate to the main Sessions View
             _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
