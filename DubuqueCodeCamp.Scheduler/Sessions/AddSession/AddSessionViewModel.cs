@@ -47,6 +47,11 @@ namespace DubuqueCodeCamp.Scheduler
 
         public ICommand CancelCommand { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
+        /// <param name="eventAggregator"></param>
         public AddSessionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;

@@ -28,7 +28,12 @@ namespace DubuqueCodeCamp.Scheduler
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
-        public MainSessionsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
+        /// <param name="eventAggregator"></param>
+        public MainSessionsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
@@ -42,7 +47,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Publish Events
             // TODO: publish necessary events
-            // TODO: remove session
+            // TODO: implement remove session button
         }
 
         private void GetEventDate(DateTime eventDate)

@@ -16,6 +16,10 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _schedule, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventAggregator"></param>
         public ScheduleViewModel(IEventAggregator eventAggregator)
         {
             // Subscribe to Events

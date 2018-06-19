@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Input;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
+using System;
+using System.Linq;
+using System.Windows.Input;
 
 namespace DubuqueCodeCamp.Scheduler
 {
@@ -13,18 +13,20 @@ namespace DubuqueCodeCamp.Scheduler
     /// </summary>
     public class MainWindowViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
         private bool _canExecuteCreateSchedule;
+        private DateTime _eventDate = DateTime.Today;
 
+        /// <summary>
+        /// Using a variable backed property here prevents redundant assignments to CanExecuteCreateSchedule
+        /// </summary>
         public bool CanExecuteCreateSchedule
         {
             get => _canExecuteCreateSchedule;
             set => SetProperty(ref _canExecuteCreateSchedule, value);
         }
 
-        private DateTime _eventDate = DateTime.Today;
         public DateTime EventDate
         {
             get => _eventDate;
@@ -32,11 +34,12 @@ namespace DubuqueCodeCamp.Scheduler
             {
                 SetProperty(ref _eventDate, value);
                 _eventAggregator.GetEvent<DateUpdatedEvent>().Publish(EventDate);
+                UpdatePropertyCanExecute();
             }
         }
 
         /// <summary>
-        /// If CanExecute returns true creates the Proposed Schedule and raises the ScheduleCreatedEvent
+        /// If CanExecute returns true creates the Proposed Schedule and publishes the ScheduleCreatedEvent
         /// Otherwise nothing happens
         /// </summary>
         public ICommand CreateScheduleCommand { get; set; }
@@ -44,11 +47,9 @@ namespace DubuqueCodeCamp.Scheduler
         /// <summary>
         /// Constructor for the MainWindow view model
         /// </summary>
-        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         /// <param name="eventAggregator">Event Aggregator created and passed in by Prism/Unity</param>
-        public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+        public MainWindowViewModel(IEventAggregator eventAggregator)
         {
-            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
 
             // Define Commands
@@ -59,8 +60,7 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         /// <summary>
-        /// Update the CanExecuteCreateSchedule to true if it is not already
-        /// Prevents redundant assignments
+        /// Update the CanExecuteCreateSchedule to true if there are existing sessions for the EventDate
         /// </summary>
         private void UpdatePropertyCanExecute()
         {
