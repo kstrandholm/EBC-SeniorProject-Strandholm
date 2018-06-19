@@ -1,18 +1,52 @@
 ﻿<UserControl x:Class="DubuqueCodeCamp.Scheduler.AddSessionView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-  <StackPanel Margin="10">
-    <DatePicker />
-    <Calendar />
-    <TextBox Text="{Binding TimeStart}"></TextBox>
-    <TextBox Text="{Binding TimeEnd}"></TextBox>
+  <Grid Margin="10">
+    
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
 
-    <Button HorizontalAlignment="Center" Command="{Binding UpdateSessionsCommand}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    
+    <Calendar Grid.Column="1" Grid.Row="0"
+              SelectionMode="SingleDate"
+              SelectedDate="{Binding SessionDate,
+                              Mode=TwoWay,
+                              UpdateSourceTrigger=PropertyChanged,
+                              BindsDirectlyToSource=True}" />
+
+    <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="1"
+                         Value="{Binding TimeStart,
+                                  UpdateSourceTrigger=PropertyChanged}"
+                         Margin="5"
+                         Kind="Utc" CurrentDateTimePart="Hour12"
+                         Format="ShortTime" />
+
+    <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="2"
+                         Value="{Binding TimeEnd,
+                                  UpdateSourceTrigger=PropertyChanged}"
+                         Margin="5"
+                         Kind="Utc" CurrentDateTimePart="Hour12"
+                         Format="ShortTime" />
+
+
+    <Button Grid.Column="1" Grid.Row="3"
+            HorizontalAlignment="Center"
+            Command="{Binding SaveSesssionCommand}">
       Save Session
     </Button>
-  </StackPanel>
+  </Grid>
 
 </UserControl>

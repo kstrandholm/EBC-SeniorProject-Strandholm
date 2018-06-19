@@ -9,26 +9,31 @@ using PropertyChanged;
 namespace DubuqueCodeCamp.Scheduler
 {
     [AddINotifyPropertyChangedInterface]
-    public class AddSessionViewViewModel : BindableBase
+    public class AddSessionViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        private DateTime _sessionDate = DateTime.Today.AddDays(-5);
+        private DateTime _sessionDate = DateTime.Today;
         public DateTime SessionDate
         {
             get => _sessionDate;
-            set => SetProperty(ref _sessionDate, value);
+            set
+            {
+                SetProperty(ref _sessionDate, value);
+                TimeStart = _sessionDate;
+                TimeEnd = _sessionDate;
+            }
         }
 
-        private DateTime _timeStart;
+        private DateTime _timeStart = DateTime.Today;
         public DateTime TimeStart
         {
             get => _timeStart;
             set => SetProperty(ref _timeStart, value);
         }
 
-        private DateTime _timeEnd;
+        private DateTime _timeEnd = DateTime.Today;
         public DateTime TimeEnd
         {
             get => _timeEnd;
@@ -36,14 +41,17 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         public DelegateCommand<string> NavigateCommand { get; set; }
-        public DelegateCommand UpdateSessionsCommand { get; set; }
+        public DelegateCommand SaveSesssionCommand { get; set; }
 
-        public AddSessionViewViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+        public AddSessionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
+
+            // Define our commands
             NavigateCommand = new DelegateCommand<string>(Navigate);
-            UpdateSessionsCommand = new DelegateCommand(Execute, CanExecute);
+            SaveSesssionCommand = new DelegateCommand(Execute, CanExecute)
+                .ObservesProperty(() => SessionDate).ObservesProperty(() => TimeStart).ObservesProperty(() => TimeEnd);
         }
 
         private void Navigate(string destination)
@@ -53,17 +61,11 @@ namespace DubuqueCodeCamp.Scheduler
 
         private bool CanExecute()
         {
-            return SessionDate != DateTime.MinValue && SessionDate != DateTime.Today;
+            return SessionDate != DateTime.MinValue && SessionDate != DateTime.Today && TimeStart.Date == SessionDate &&
+                   TimeEnd.Date == SessionDate && TimeEnd > TimeStart;
         }
 
         private void Execute()
-        {
-            SaveChanges();
-            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("Updated");
-            //NavigateCommand;
-        }
-
-        private void SaveChanges()
         {
             var database = new DCCKellyDatabase();
 
@@ -78,6 +80,12 @@ namespace DubuqueCodeCamp.Scheduler
             };
 
             database.Sessions.InsertOnSubmit(newSession);
+
+            // Publish the event for listeners
+            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("Updated");
+
+            // Navigate to the main Sessions View
+            //NavigateCommand;
         }
     }
 }
