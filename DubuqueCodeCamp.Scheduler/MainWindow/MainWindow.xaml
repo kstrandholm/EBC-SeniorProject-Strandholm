@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
-        Height="486.885" Width="598.975"
+        Height="486.885" Width="655.635"
         MinHeight="486" MinWidth="598"
         Padding="15 20">
 
