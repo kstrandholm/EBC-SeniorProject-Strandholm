@@ -84,7 +84,7 @@ namespace DubuqueCodeCamp.Scheduler
             database.Sessions.InsertOnSubmit(newSession);
 
             // Publish the event for listeners
-            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("Updated");
+            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish(newSession);
 
             // Navigate to the main Sessions View
             _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
