@@ -6,21 +6,25 @@
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
 
-    <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
-
-    <ListView Grid.Row="1" ItemsSource="{Binding Scheudles, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+    <TextBlock Grid.Row="0" FontWeight="Bold" >Proposed Schedule</TextBlock>
+    <ListView Grid.Row="2" ItemsSource="{Binding Schedule, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
       <ListView.View>
         <GridView>
-          <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-          <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-          <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-          <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding SessionDate}" Header="Date" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding SessionStartTime}" Header="Start Time" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding SessionEndTime}" Header="End Time" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding RoomName}" Header="Room Name" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding RoomCapacity}" Header="Room Capacity" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding TalkTitle}" Header="Talk Title" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding SpeakerFirstName}" Header="Speaker's First Name" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding SpeakerLastName}" Header="Speaker's Last Name" Width="Auto" />
         </GridView>
       </ListView.View>
     </ListView>
-
+    
   </Grid>
 </UserControl>

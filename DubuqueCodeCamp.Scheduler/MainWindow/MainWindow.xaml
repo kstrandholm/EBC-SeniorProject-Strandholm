@@ -22,11 +22,13 @@
     <StackPanel Grid.Row="0">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
+        <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
 
           <Calendar SelectedDate="{Binding EventDate}" />
 
@@ -39,7 +41,7 @@
           
         </StackPanel>
         
-        <ContentControl Grid.Column="1"
+        <ContentControl Grid.Column="2"
                         prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" />
       </Grid>
 
