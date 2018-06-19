@@ -16,10 +16,6 @@ namespace DubuqueCodeCamp.Scheduler
         /// <param name="eventDate">Date of the event that the schedule will be created for</param>
         public static bool CreateProposedSchedule(DateTime eventDate)
         {
-            // If there are no sessions or talks, we can't create a proposed schedule
-            if (!DATABASE.Talks.Any())
-                return false;
-
             // Ensure the Event Date does not have an unnecessary time added
             eventDate = eventDate.Date;
 
@@ -79,9 +75,6 @@ namespace DubuqueCodeCamp.Scheduler
 
         public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
         {
-            // Ensure the Event Date does not have an unnecessary time added
-            eventDate = eventDate.Date;
-
             return (from sched in DATABASE.ProposedSchedules
                     join session in DATABASE.Sessions on sched.SessionID equals session.ID
                     where session.SessionDate == eventDate
@@ -90,9 +83,6 @@ namespace DubuqueCodeCamp.Scheduler
 
         public static List<Session> GetExistingSessions(DateTime eventDate)
         {
-            // Ensure the Event Date does not have an unnecessary time added
-            eventDate = eventDate.Date;
-
             return (from session in DATABASE.Sessions
                     where session.SessionDate == eventDate
                     select session).ToList();

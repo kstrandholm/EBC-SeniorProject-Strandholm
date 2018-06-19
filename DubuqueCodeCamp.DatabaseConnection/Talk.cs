@@ -19,6 +19,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         // TODO: determine if want to include Speaker class to make explicit relationship here
         public int SpeakerID { get; set; }
 
+        [Column(CanBeNull = true)]
+        // TODO: make non-nullable after dealing with database null nonsense
+        public DateTime? DateGiven { get; set; }
+
         [Column]
         public DateTime UpdateTime { get; set; }
 

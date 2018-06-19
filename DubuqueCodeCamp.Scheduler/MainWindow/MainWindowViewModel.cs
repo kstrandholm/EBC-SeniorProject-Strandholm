@@ -19,15 +19,18 @@ namespace DubuqueCodeCamp.Scheduler
         private DateTime _eventDate = DateTime.Today;
 
         /// <summary>
-        /// Using a variable backed property here prevents redundant assignments to CanExecuteCreateSchedule
+        /// Only create a schedule if there are existing sessions and talks, determined in <see cref="UpdatePropertyCanExecute()"/>
         /// </summary>
-        public bool CanExecuteCreateSchedule
+        /// <remarks>
+        /// Using a variable backed property here prevents redundant assignments to CanExecuteCreateSchedule
+        /// </remarks>
+        private bool CanExecuteCreateSchedule
         {
             get => _canExecuteCreateSchedule;
             set => SetProperty(ref _canExecuteCreateSchedule, value);
         }
 
-        public DateTime EventDate
+        private DateTime EventDate
         {
             get => _eventDate;
             set
@@ -60,11 +63,13 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         /// <summary>
-        /// Update the CanExecuteCreateSchedule to true if there are existing sessions for the EventDate
+        /// Update the CanExecuteCreateSchedule to true if there are existing sessions and talks for the EventDate
         /// </summary>
+        /// <remarks>
+        /// Triggers when the eventDate is changed or when the SessionsUpdatedEvent is published
+        /// </remarks>
         private void UpdatePropertyCanExecute()
         {
-            CanExecuteCreateSchedule = DatabaseOperations.GetExistingSessions(_eventDate).Any();
             CanExecuteCreateSchedule = DatabaseOperations.GetExistingSessions(_eventDate).Any() && DatabaseOperations.GetExistingTalks(_eventDate).Any();
         }
 
