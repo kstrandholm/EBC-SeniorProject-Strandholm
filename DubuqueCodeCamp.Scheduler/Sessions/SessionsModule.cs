@@ -6,8 +6,8 @@ namespace DubuqueCodeCamp.Scheduler
 {
     public class SessionsModule : IModule
     {
-        private IUnityContainer _container;
-        private IRegionManager _regionManager;
+        private readonly IUnityContainer _container;
+        private readonly IRegionManager _regionManager;
         
         public SessionsModule(IUnityContainer container, IRegionManager regionManager)
         {
@@ -19,11 +19,10 @@ namespace DubuqueCodeCamp.Scheduler
         public void Initialize()
         {
             _container.RegisterType<MainSessionsView>();
-            //_regionManager.RegisterViewWithRegion("SessionsRegion", typeof(MainSessionsView));
 
-            var region = _regionManager.Regions["SessionsRegion"];
+            var region = _regionManager.Regions[RegionNames.SessionsRegion];
             var mainSessionsView = _container.Resolve<MainSessionsView>();
-            region.Add(mainSessionsView, "MainSessionsView");
+            region.Add(mainSessionsView, RegionNames.MainSessions);
             region.Activate(mainSessionsView);
         }
     }
