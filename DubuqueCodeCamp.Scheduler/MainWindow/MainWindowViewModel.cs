@@ -69,13 +69,11 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void Execute()
         {
-            DatabaseOperations.CreateProposedSchedule(EventDate);
-            _eventAggregator.GetEvent<ScheduleCreatedEvent>().Publish();
-        }
+            var scheduleSaved = DatabaseOperations.CreateProposedSchedule(EventDate);
 
-        private void Navigate(string destination)
-        {
-            _regionManager.RequestNavigate(RegionNames.SessionsRegion, destination);
+            // Only publish the event if the schedule was created and saved
+            if (scheduleSaved)
+                _eventAggregator.GetEvent<ScheduleCreatedEvent>().Publish();
         }
     }
 }

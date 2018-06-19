@@ -14,11 +14,11 @@ namespace DubuqueCodeCamp.Scheduler
         /// Create a proposed Schedule and save it to the database based on elements already in the database
         /// </summary>
         /// <param name="eventDate">Date of the event that the schedule will be created for</param>
-        public static void CreateProposedSchedule(DateTime eventDate)
+        public static bool CreateProposedSchedule(DateTime eventDate)
         {
             // If there are no sessions or talks, we can't create a proposed schedule
-            if (!DATABASE.Sessions.Any() || !DATABASE.Talks.Any())
-                return;
+            if (!DATABASE.Talks.Any())
+                return false;
 
             // Ensure the Event Date does not have an unnecessary time added
             eventDate = eventDate.Date;
@@ -34,16 +34,16 @@ namespace DubuqueCodeCamp.Scheduler
             var schedulesForDate = (from sched in DATABASE.ProposedSchedules
                                     join session in DATABASE.Sessions on sched.SessionID equals session.ID
                                     where session.SessionDate == eventDate
-                                    select sched).ToList();
+                                    select sched).Any();
 
             // If there are any existing schedules for this date, warn the user that creating a new one will overwrite the existing one
-            if (schedulesForDate.Any())
+            if (schedulesForDate)
             {
                 var result = MessageBox.Show("A proposed schedule already exists. Generating a new one will overwrite the old. Continue?",
                     "Existing Proposed Schedule", MessageBoxButton.OKCancel);
 
                 if (result == MessageBoxResult.Cancel)
-                    return;
+                    return false;
             }
 
             // Combine the Rooms and Sessions to create each unique combination
@@ -55,7 +55,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // If the number of roomSessions is not equal to the number of talks in interestCount we can't create an accurate schedule
             if (roomSessions.Count != talks.Count)
-                return;
+                return false;
 
             // Add the talks by decreasing interest into the rooms/sessions by decreasing capacity to create the Proposed Schedule
             for (var i = 0; i < roomSessions.Count; i++)
@@ -72,7 +72,9 @@ namespace DubuqueCodeCamp.Scheduler
                 DATABASE.ProposedSchedules.InsertOnSubmit(newSchedule);
             }
 
+            //TODO: implement a try catch to verify actually saved
             DATABASE.SubmitChanges();
+            return true;
         }
 
         public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
