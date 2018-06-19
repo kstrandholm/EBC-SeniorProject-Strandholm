@@ -130,6 +130,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="MainWindow\DateUpdatedEvent.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Schedule\ScheduleOperations.cs" />
     <Compile Include="Schedule\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
