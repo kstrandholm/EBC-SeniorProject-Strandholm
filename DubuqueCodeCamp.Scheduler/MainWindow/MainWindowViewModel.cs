@@ -30,7 +30,10 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _canExecuteCreateSchedule, value);
         }
 
-        private DateTime EventDate
+        /// <summary>
+        /// Date of the event to edit
+        /// </summary>
+        public DateTime EventDate
         {
             get => _eventDate;
             set
