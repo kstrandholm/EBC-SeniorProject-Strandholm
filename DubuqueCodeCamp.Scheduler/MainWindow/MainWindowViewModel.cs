@@ -24,7 +24,6 @@ namespace DubuqueCodeCamp.Scheduler
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
-
         public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;

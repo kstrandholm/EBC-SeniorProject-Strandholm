@@ -42,6 +42,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Publish Events
             // TODO: publish necessary events
+            // TODO: remove session
         }
 
         private void GetEventDate(DateTime eventDate)
