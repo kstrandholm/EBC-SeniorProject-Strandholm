@@ -36,7 +36,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void Navigate(string destination)
         {
-            _regionManager.RequestNavigate("SessionsRegion", destination);
+            _regionManager.RequestNavigate(RegionNames.SessionsRegion, destination);
         }
     }
 }

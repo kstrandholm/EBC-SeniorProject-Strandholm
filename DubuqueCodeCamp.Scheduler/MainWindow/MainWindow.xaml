@@ -39,7 +39,7 @@
         </StackPanel>
         
         <ContentControl Grid.Column="1"
-                        prism:RegionManager.RegionName="SessionsRegion" />
+                        prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" />
       </Grid>
 
     </StackPanel>

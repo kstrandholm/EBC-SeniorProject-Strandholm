@@ -41,8 +41,6 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _timeEnd, value);
         }
 
-        public DelegateCommand<string> NavigateCommand { get; set; }
-
         public ICommand SaveSesssionCommand { get; set; }
 
         public AddSessionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
@@ -51,7 +49,6 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator = eventAggregator;
 
             // Define our commands
-            NavigateCommand = new DelegateCommand<string>(Navigate);
             SaveSesssionCommand = new DelegateCommand(Execute, CanExecute)
                 .ObservesProperty(() => SessionDate).ObservesProperty(() => TimeStart).ObservesProperty(() => TimeEnd);
 
@@ -62,11 +59,6 @@ namespace DubuqueCodeCamp.Scheduler
         private void SetDefaultSessionDate(DateTime defaultDate)
         {
             SessionDate = defaultDate;
-        }
-
-        private void Navigate(string destination)
-        {
-            _regionManager.RequestNavigate("SessionsRegion", destination);
         }
 
         private bool CanExecute()
@@ -95,7 +87,7 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("Updated");
 
             // Navigate to the main Sessions View
-            //NavigateCommand;
+            _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
         }
     }
 }

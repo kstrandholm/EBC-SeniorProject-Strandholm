@@ -7,6 +7,8 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="MainWindow/Styles.xaml" />
       </ResourceDictionary.MergedDictionaries>
+      
+      <local:RegionNames x:Key="RegionNames" />
     </ResourceDictionary>
 
   </Application.Resources>
