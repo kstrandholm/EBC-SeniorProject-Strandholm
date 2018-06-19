@@ -22,7 +22,7 @@ namespace DubuqueCodeCamp.Scheduler
             base.ConfigureContainer();
 
             Container.RegisterTypeForNavigation<MainWindow>("MainWindow");
-            Container.RegisterTypeForNavigation<SessionsDisplayer>("SessionsDisplayer");
+            Container.RegisterTypeForNavigation<MainSessionsView>("MainSessionsView");
             Container.RegisterTypeForNavigation<AddSessionView>("AddSessionView");
         }
 

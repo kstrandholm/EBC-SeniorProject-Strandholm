@@ -18,13 +18,13 @@ namespace DubuqueCodeCamp.Scheduler
         /// <inheritdoc />
         public void Initialize()
         {
-            _container.RegisterType<SessionsDisplayer>();
-            //_regionManager.RegisterViewWithRegion("SessionsRegion", typeof(SessionsDisplayer));
+            _container.RegisterType<MainSessionsView>();
+            //_regionManager.RegisterViewWithRegion("SessionsRegion", typeof(MainSessionsView));
 
             var region = _regionManager.Regions["SessionsRegion"];
-            var sessionsDisplayer = _container.Resolve<SessionsDisplayer>();
-            region.Add(sessionsDisplayer, "SessionsDisplayer");
-            region.Activate(sessionsDisplayer);
+            var mainSessionsView = _container.Resolve<MainSessionsView>();
+            region.Add(mainSessionsView, "MainSessionsView");
+            region.Activate(mainSessionsView);
         }
     }
 }

@@ -9,7 +9,7 @@ using Prism.Regions;
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    public class SessionsDisplayerViewModel : BindableBase
+    public class MainSessionsViewModel : BindableBase
     {
         private IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
@@ -29,7 +29,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
-        public SessionsDisplayerViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
+        public MainSessionsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
@@ -48,6 +48,7 @@ namespace DubuqueCodeCamp.Scheduler
             return true;
         }
 
+        // TODO: Get rid of this probably?
         private void ExecuteAddSession()
         {
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("testing");
