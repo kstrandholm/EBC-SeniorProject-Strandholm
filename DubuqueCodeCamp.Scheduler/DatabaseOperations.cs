@@ -98,6 +98,14 @@ namespace DubuqueCodeCamp.Scheduler
                     select session).ToList();
         }
 
+        public static List<Talk> GetExistingTalks(DateTime eventDate)
+        {
+            // TODO: remove null check once database null nonsense is taken care of
+            return (from talk in DATABASE.Talks
+                    where talk.DateGiven == eventDate || talk.DateGiven == null
+                    select talk).ToList();
+        }
+
         public static List<TalkSession> GetMappedTalkSessions(DateTime eventDate)
         {
             var proposedSchedule = GetProposedSchedule(eventDate);
