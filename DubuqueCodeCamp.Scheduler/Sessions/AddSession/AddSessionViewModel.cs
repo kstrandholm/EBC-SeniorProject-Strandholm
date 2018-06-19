@@ -52,6 +52,14 @@ namespace DubuqueCodeCamp.Scheduler
             NavigateCommand = new DelegateCommand<string>(Navigate);
             SaveSesssionCommand = new DelegateCommand(Execute, CanExecute)
                 .ObservesProperty(() => SessionDate).ObservesProperty(() => TimeStart).ObservesProperty(() => TimeEnd);
+
+            // Subscribe to events
+            _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(SetDefaultSessionDate);
+        }
+
+        private void SetDefaultSessionDate(DateTime defaultDate)
+        {
+            SessionDate = defaultDate;
         }
 
         private void Navigate(string destination)
