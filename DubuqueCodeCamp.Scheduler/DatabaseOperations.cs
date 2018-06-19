@@ -19,6 +19,7 @@ namespace DubuqueCodeCamp.Scheduler
             // Ensure the Event Date does not have an unnecessary time added
             eventDate = eventDate.Date;
 
+            // TODO: filter on dategiven once database null nonsense taken care of
             // Get the talkIDs and order them by decreasing count
             var cachedTalks = DATABASE.Talks.Select(talk => talk.ID).ToList();
             var talks = (from talkID in cachedTalks
@@ -30,31 +31,34 @@ namespace DubuqueCodeCamp.Scheduler
             var schedulesForDate = (from sched in DATABASE.ProposedSchedules
                                     join session in DATABASE.Sessions on sched.SessionID equals session.ID
                                     where session.SessionDate == eventDate
-                                    select sched).Any();
+                                    select sched).ToList();
 
             // If there are any existing schedules for this date, warn the user that creating a new one will overwrite the existing one
-            if (schedulesForDate)
+            if (schedulesForDate.Any())
             {
                 var result = MessageBox.Show("A proposed schedule already exists. Generating a new one will overwrite the old. Continue?",
                     "Existing Proposed Schedule", MessageBoxButton.OKCancel);
 
                 if (result == MessageBoxResult.Cancel)
                     return false;
+
+                // Delete the existing schedule for the eventDate to overwrite them
+                DATABASE.ProposedSchedules.DeleteAllOnSubmit(schedulesForDate);
             }
 
             // Combine the Rooms and Sessions to create each unique combination
             var roomSessions = (from room in DATABASE.Rooms
-                                from session in DATABASE.Sessions
+                                from session in DATABASE.Sessions.Where(session => session.SessionDate == eventDate)
                                 select new { room, session })
                 .OrderByDescending(rs => rs.room.Capacity) // Largest rooms first
                 .ToList();
 
-            // If the number of roomSessions is not equal to the number of talks in interestCount we can't create an accurate schedule
-            if (roomSessions.Count != talks.Count)
+            // We need at least as many roomSessions as there are talks to create a schedule
+            if (roomSessions.Count < talks.Count)
                 return false;
 
             // Add the talks by decreasing interest into the rooms/sessions by decreasing capacity to create the Proposed Schedule
-            for (var i = 0; i < roomSessions.Count; i++)
+            for (var i = 0; i < roomSessions.Count && i < talks.Count; i++)
             {
                 var roomSession = roomSessions[i];
                 var newSchedule = new ProposedSchedule
@@ -68,7 +72,8 @@ namespace DubuqueCodeCamp.Scheduler
                 DATABASE.ProposedSchedules.InsertOnSubmit(newSchedule);
             }
 
-            //TODO: implement a try catch to verify actually saved
+            // TODO: implement a try catch to verify actually saved
+            // TODO: give user feedback if not saved/created
             DATABASE.SubmitChanges();
             return true;
         }
