@@ -1,11 +1,10 @@
 ﻿using DubuqueCodeCamp.DatabaseConnection;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Collections.Generic;
 
 namespace DubuqueCodeCamp.Scheduler
 {
@@ -13,6 +12,8 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
+
+        private DateTime _eventDate = DateTime.Today;
 
         private List<Session> _sessions = Schedule.GetExistingSessions(DateTime.Today);
 
@@ -34,11 +35,29 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Define Commands
             NavigateCommand = new DelegateCommand<string>(Navigate);
+
+            // Subscribe to Events
+            _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
+            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(RefreshSessions);
+
+            // Publish Events
+            // TODO: publish necessary events
+        }
+
+        private void GetEventDate(DateTime eventDate)
+        {
+            _eventDate = eventDate;
+            RefreshSessions();
+        }
+
+        private void RefreshSessions()
+        {
+            Sessions = Schedule.GetExistingSessions(_eventDate);
         }
 
         private void Navigate(string destination)
         {
-            _regionManager.RequestNavigate("SessionsRegion", destination);
+            _regionManager.RequestNavigate(RegionNames.SessionsRegion, destination);
         }
     }
 }
