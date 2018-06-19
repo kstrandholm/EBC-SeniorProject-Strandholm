@@ -25,8 +25,6 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _sessions, value);
         }
 
-        public ICommand AddNewSessionCommand { get; set; }
-
         public DelegateCommand<string> NavigateCommand { get; set; }
 
         public MainSessionsViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
@@ -34,24 +32,13 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
 
-            AddNewSessionCommand = new DelegateCommand(ExecuteAddSession, CanExecuteAddSession).ObservesProperty(() => Sessions);
+            // Define Commands
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
         private void Navigate(string destination)
         {
             _regionManager.RequestNavigate("SessionsRegion", destination);
-        }
-
-        private bool CanExecuteAddSession()
-        {
-            return true;
-        }
-
-        // TODO: Get rid of this probably?
-        private void ExecuteAddSession()
-        {
-            _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish("testing");
         }
     }
 }
