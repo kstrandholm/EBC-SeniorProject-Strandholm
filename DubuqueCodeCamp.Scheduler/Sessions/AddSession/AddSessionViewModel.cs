@@ -94,7 +94,7 @@ namespace DubuqueCodeCamp.Scheduler
                 database.SubmitChanges();
 
                 // Publish the event for listeners
-                _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish(newSession);
+                _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish();
             }
             else
             {
@@ -105,6 +105,8 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Navigate to the main Sessions View
             _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
+
+            // TODO: reset the controls?
         }
     }
 }
