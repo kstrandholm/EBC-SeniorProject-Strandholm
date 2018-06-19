@@ -33,6 +33,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(SessionsModule));
+            moduleCatalog.AddModule(typeof(ScheduleModule));
         }
     }
 }
