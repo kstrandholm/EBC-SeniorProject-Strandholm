@@ -10,21 +10,27 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
 
+        /// <summary>
+        /// Create a proposed Schedule and save it to the database based on elements already in the database
+        /// </summary>
+        /// <param name="eventDate">Date of the event that the schedule will be created for</param>
         public static void CreateProposedSchedule(DateTime eventDate)
         {
+            // If there are no sessions or talks, we can't create a proposed schedule
+            if (!DATABASE.Sessions.Any() || !DATABASE.Talks.Any())
+                return;
+
             // Ensure the Event Date does not have an unnecessary time added
             eventDate = eventDate.Date;
 
+            // Get the talkIDs and order them by decreasing count
             var cachedTalks = DATABASE.Talks.Select(talk => talk.ID).ToList();
             var talks = (from talkID in cachedTalks
                          let count = DATABASE.TalkInterest.Count(interest => interest.TalkID == talkID)
                          orderby count descending
                          select talkID).ToList();
 
-            // If there are no sessions, we can't create a proposed schedule
-            if (!DATABASE.Sessions.Any())
-                return;
-
+            // Get the existing ProposedSchedule entries
             var schedulesForDate = (from sched in DATABASE.ProposedSchedules
                                     join session in DATABASE.Sessions on sched.SessionID equals session.ID
                                     where session.SessionDate == eventDate
@@ -35,6 +41,7 @@ namespace DubuqueCodeCamp.Scheduler
             {
                 var result = MessageBox.Show("A proposed schedule already exists. Generating a new one will overwrite the old. Continue?",
                     "Existing Proposed Schedule", MessageBoxButton.OKCancel);
+
                 if (result == MessageBoxResult.Cancel)
                     return;
             }
@@ -50,6 +57,7 @@ namespace DubuqueCodeCamp.Scheduler
             if (roomSessions.Count != talks.Count)
                 return;
 
+            // Add the talks by decreasing interest into the rooms/sessions by decreasing capacity to create the Proposed Schedule
             for (var i = 0; i < roomSessions.Count; i++)
             {
                 var roomSession = roomSessions[i];
@@ -63,6 +71,8 @@ namespace DubuqueCodeCamp.Scheduler
                 };
                 DATABASE.ProposedSchedules.InsertOnSubmit(newSchedule);
             }
+
+            DATABASE.SubmitChanges();
         }
 
         public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
