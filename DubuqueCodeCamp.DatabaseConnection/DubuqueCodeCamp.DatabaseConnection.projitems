@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Registrant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Room.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Speaker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Talk.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TalkInterest.cs" />
   </ItemGroup>
