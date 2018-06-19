@@ -12,13 +12,15 @@ namespace DubuqueCodeCamp.Scheduler
         private List<TalkSession> _schedule = DatabaseOperations.GetMappedTalkSessions(DateTime.Today);
         public List<TalkSession> Schedule
         {
-            get { return _schedule; }
-            set { SetProperty(ref _schedule, value); }
+            get => _schedule;
+            set => SetProperty(ref _schedule, value);
         }
 
         public ScheduleViewModel(IEventAggregator eventAggregator)
         {
+            // Subscribe to Events
             eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
+            eventAggregator.GetEvent<ScheduleCreatedEvent>().Subscribe(RefreshSchedule);
         }
 
         private void GetEventDate(DateTime eventDate)

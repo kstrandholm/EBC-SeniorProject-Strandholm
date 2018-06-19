@@ -130,6 +130,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="MainWindow\DateUpdatedEvent.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Schedule\ScheduleCreatedEvent.cs" />
     <Compile Include="Schedule\TalkSession.cs" />
     <Compile Include="Schedule\ScheduleModule.cs" />
     <Compile Include="DatabaseOperations.cs" />

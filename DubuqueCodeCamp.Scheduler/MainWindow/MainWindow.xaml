@@ -30,7 +30,8 @@
 
           <Calendar SelectedDate="{Binding EventDate}" />
 
-          <Button HorizontalAlignment="Center">
+          <Button HorizontalAlignment="Center"
+                  Command="{Binding CreateScheduleCommand}">
             <TextBlock TextAlignment="Center">
               Create<LineBreak />Proposed Schedule
             </TextBlock>
