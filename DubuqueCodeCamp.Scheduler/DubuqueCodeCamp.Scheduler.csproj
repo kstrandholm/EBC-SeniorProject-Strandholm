@@ -128,16 +128,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="SessionsModule.cs" />
-    <Compile Include="AddSession\SessionsUpdatedEvent.cs" />
-    <Compile Include="AddSession\AddSessionViewModel.cs" />
+    <Compile Include="Sessions\SessionsModule.cs" />
+    <Compile Include="Sessions\AddSession\SessionsUpdatedEvent.cs" />
+    <Compile Include="Sessions\AddSession\AddSessionViewModel.cs" />
     <Compile Include="MainWindow\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ScheduleViewModel.cs" />
-    <Compile Include="SessionsDisplay\MainSessionsViewModel.cs" />
-    <Compile Include="AddSession\AddSessionView.xaml.cs">
+    <Compile Include="Schedule\ScheduleViewModel.cs" />
+    <Compile Include="Sessions\SessionsDisplay\MainSessionsViewModel.cs" />
+    <Compile Include="Sessions\AddSession\AddSessionView.xaml.cs">
       <DependentUpon>AddSessionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SessionsDisplay\MainSessionsView.xaml.cs">
+    <Compile Include="Sessions\SessionsDisplay\MainSessionsView.xaml.cs">
       <DependentUpon>MainSessionsView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow\Styles.xaml">
@@ -152,16 +152,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Schedule.cs" />
+    <Compile Include="Schedule\Schedule.cs" />
     <Compile Include="MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddSession\AddSessionView.xaml">
+    <Page Include="Sessions\AddSession\AddSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SessionsDisplay\MainSessionsView.xaml">
+    <Page Include="Sessions\SessionsDisplay\MainSessionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
