@@ -42,11 +42,24 @@
                          Format="ShortTime" />
 
 
-    <Button Grid.Column="1" Grid.Row="3"
+    <Grid Grid.Column="1" Grid.Row="3">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      
+      <Button Grid.Column="1"
+              Content="Save Session"
             HorizontalAlignment="Center"
-            Command="{Binding SaveSesssionCommand}">
-      Save Session
-    </Button>
+            Command="{Binding SaveSesssionCommand}" />
+
+      <Button Grid.Column="2"
+              Content="Cancel"
+              HorizontalAlignment="Center"
+              Command="{Binding CancelCommand}" />
+    </Grid>
   </Grid>
 
 </UserControl>

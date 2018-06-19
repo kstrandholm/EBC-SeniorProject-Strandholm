@@ -45,6 +45,8 @@ namespace DubuqueCodeCamp.Scheduler
 
         public ICommand SaveSesssionCommand { get; set; }
 
+        public ICommand CancelCommand { get; set; }
+
         public AddSessionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
@@ -53,6 +55,7 @@ namespace DubuqueCodeCamp.Scheduler
             // Define our commands
             SaveSesssionCommand = new DelegateCommand(Execute, CanExecute)
                 .ObservesProperty(() => SessionDate).ObservesProperty(() => TimeStart).ObservesProperty(() => TimeEnd);
+            CancelCommand = new DelegateCommand(ReturnToMainSessions);
 
             // Subscribe to events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(SetDefaultSessionDate);
@@ -104,9 +107,14 @@ namespace DubuqueCodeCamp.Scheduler
             }
 
             // Navigate to the main Sessions View
-            _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
+            ReturnToMainSessions();
 
             // TODO: reset the controls?
+        }
+
+        private void ReturnToMainSessions()
+        {
+            _regionManager.RequestNavigate(RegionNames.SessionsRegion, RegionNames.MainSessions);
         }
     }
 }
