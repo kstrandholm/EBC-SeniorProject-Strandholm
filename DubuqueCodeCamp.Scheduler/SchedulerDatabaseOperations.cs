@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    public class ScheduleOperations
+    public class SchedulerDatabaseOperations
     {
         private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
 

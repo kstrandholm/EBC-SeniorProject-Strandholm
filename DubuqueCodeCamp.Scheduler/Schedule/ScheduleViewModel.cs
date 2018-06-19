@@ -10,7 +10,7 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private DateTime _eventDate = DateTime.Today;
 
-        private List<ProposedSchedule> _schedules = ScheduleOperations.GetProposedSchedule(DateTime.Today);
+        private List<ProposedSchedule> _schedules = SchedulerDatabaseOperations.GetProposedSchedule(DateTime.Today);
         public List<ProposedSchedule> Schedules
         {
             get { return _schedules; }
@@ -30,7 +30,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void RefreshSchedule()
         {
-            Schedules = ScheduleOperations.GetProposedSchedule(_eventDate);
+            Schedules = SchedulerDatabaseOperations.GetProposedSchedule(_eventDate);
         }
 
         private void GetScheduleFullDetail()
