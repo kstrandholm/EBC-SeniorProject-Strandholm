@@ -24,6 +24,7 @@ namespace DubuqueCodeCamp.Scheduler
             Container.RegisterTypeForNavigation<MainWindow>(RegionNames.MainWindow);
             Container.RegisterTypeForNavigation<MainSessionsView>(RegionNames.MainSessions);
             Container.RegisterTypeForNavigation<AddSessionView>(RegionNames.AddSession);
+            Container.RegisterTypeForNavigation<ScheduleView>(RegionNames.ScheduleView);
         }
 
         protected override void ConfigureModuleCatalog()

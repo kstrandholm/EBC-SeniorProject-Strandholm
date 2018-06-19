@@ -8,6 +8,10 @@
 
         public static string AddSession => "AddSessionView";
 
+        public static string ScheduleView => "ScheduleView";
+
         public static string SessionsRegion => "SessionsRegion";
+
+        public static string ScheduleRegion => "ScheduleRegion";
     }
 }

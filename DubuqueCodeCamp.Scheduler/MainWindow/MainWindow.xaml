@@ -44,28 +44,8 @@
 
     </StackPanel>
 
-    <Grid Grid.Row="1" Margin="0 15 0 0">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
-
-        <ListView Grid.Row="1" ItemsSource="{Binding ProposedSchedules, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-          <ListView.View>
-            <GridView>
-              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
-            </GridView>
-          </ListView.View>
-        </ListView>
-
-      </Grid>
-    </Grid>
+    <ContentControl Grid.Row="1" Margin="0 15 0 0"
+                    prism:RegionManager.RegionName="{Binding ScheduleRegion, Source={StaticResource RegionNames}}" />
 
   </Grid>
 </Window>
