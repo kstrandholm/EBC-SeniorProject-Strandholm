@@ -90,13 +90,25 @@ namespace DubuqueCodeCamp.Scheduler
         {
             var proposedSchedule = GetProposedSchedule(eventDate);
 
-            return proposedSchedule.Select(sched => new TalkSession
-                                   {
-                                       Session = DATABASE.Sessions.Single(session => session.ID == sched.SessionID),
-                                       Room = DATABASE.Rooms.Single(room => room.ID == sched.RoomID),
-                                       Talk = DATABASE.Talks.Single(talk => talk.ID == sched.TalkID)
-                                   })
-                                   .ToList();
+            return (from schedule in proposedSchedule
+                    let session = DATABASE.Sessions.Single(s => s.ID == schedule.SessionID)
+                    let room = DATABASE.Rooms.Single(r => r.ID == schedule.RoomID)
+                    let talk = DATABASE.Talks.Single(t => t.ID == schedule.TalkID)
+                    let speaker = DATABASE.Speakers.Single(s => s.ID == talk.SpeakerID)
+                    select new TalkSession
+                    {
+                        SessionDate = session.SessionDate,
+                        SessionStartTime = session.TimeStart,
+                        SessionEndTime = session.TimeEnd,
+                        SessionLengthMinutes = session.CalcLengthMinutes,
+                        RoomName = room.RoomName,
+                        RoomCapacity = room.Capacity,
+                        Venue = room.Venue,
+                        TalkTitle = talk.Title,
+                        TalkSummary = talk.Summary,
+                        SpeakerFirstName = speaker.FirstName,
+                        SpeakerLastName = speaker.LastName
+                    }).ToList();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
     public class Speaker : IRegistrant
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Column]
         public string FirstName { get; set; }
