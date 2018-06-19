@@ -7,11 +7,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using PropertyChanged;
 
 namespace DubuqueCodeCamp.Scheduler
 {
-    [AddINotifyPropertyChangedInterface]
     public class AddSessionViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
