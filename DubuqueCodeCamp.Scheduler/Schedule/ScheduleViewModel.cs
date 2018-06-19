@@ -2,7 +2,6 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using DubuqueCodeCamp.DatabaseConnection;
 
 namespace DubuqueCodeCamp.Scheduler
 {
@@ -10,11 +9,11 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private DateTime _eventDate = DateTime.Today;
 
-        private List<ProposedSchedule> _schedules = SchedulerDatabaseOperations.GetProposedSchedule(DateTime.Today);
-        public List<ProposedSchedule> Schedules
+        private List<TalkSession> _schedule = DatabaseOperations.GetMappedTalkSessions(DateTime.Today);
+        public List<TalkSession> Schedule
         {
-            get { return _schedules; }
-            set { SetProperty(ref _schedules, value); }
+            get { return _schedule; }
+            set { SetProperty(ref _schedule, value); }
         }
 
         public ScheduleViewModel(IEventAggregator eventAggregator)
@@ -30,12 +29,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void RefreshSchedule()
         {
-            Schedules = SchedulerDatabaseOperations.GetProposedSchedule(_eventDate);
-        }
-
-        private void GetScheduleFullDetail()
-        {
-            // TODO: map the schedule from the database to a new class in here that has the info I need
+            Schedule = DatabaseOperations.GetMappedTalkSessions(_eventDate);
         }
     }
 }

@@ -85,5 +85,18 @@ namespace DubuqueCodeCamp.Scheduler
                     where session.SessionDate == eventDate
                     select session).ToList();
         }
+
+        public static List<TalkSession> GetMappedTalkSessions(DateTime eventDate)
+        {
+            var proposedSchedule = GetProposedSchedule(eventDate);
+
+            return proposedSchedule.Select(sched => new TalkSession
+                                   {
+                                       Session = DATABASE.Sessions.Single(session => session.ID == sched.SessionID),
+                                       Room = DATABASE.Rooms.Single(room => room.ID == sched.RoomID),
+                                       Talk = DATABASE.Talks.Single(talk => talk.ID == sched.TalkID)
+                                   })
+                                   .ToList();
+        }
     }
 }
