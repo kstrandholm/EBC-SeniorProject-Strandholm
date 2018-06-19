@@ -53,8 +53,16 @@
 
         <TextBlock Grid.Row="0" FontWeight="Bold" Margin="0 0 0 5">Proposed Schedule</TextBlock>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding ProposedSchedules, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-        </ListBox>
+        <ListView Grid.Row="1" ItemsSource="{Binding ProposedSchedules, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+          <ListView.View>
+            <GridView>
+              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
+              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
+              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
+              <GridViewColumn DisplayMemberBinding="{Binding }" Header="" Width="Auto" />
+            </GridView>
+          </ListView.View>
+        </ListView>
 
       </Grid>
     </Grid>
