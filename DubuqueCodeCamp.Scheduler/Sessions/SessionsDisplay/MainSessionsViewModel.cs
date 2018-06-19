@@ -15,7 +15,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private DateTime _eventDate = DateTime.Today;
 
-        private List<Session> _sessions = SchedulerDatabaseOperations.GetExistingSessions(DateTime.Today);
+        private List<Session> _sessions = DatabaseOperations.GetExistingSessions(DateTime.Today);
 
         /// <summary>
         /// List of Proposed Schedules currently in the database
@@ -52,7 +52,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void RefreshSessions()
         {
-            Sessions = SchedulerDatabaseOperations.GetExistingSessions(_eventDate);
+            Sessions = DatabaseOperations.GetExistingSessions(_eventDate);
         }
 
         private void Navigate(string destination)
