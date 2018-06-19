@@ -18,13 +18,12 @@ namespace DubuqueCodeCamp.Scheduler
             set
             {
                 SetProperty(ref _eventDate, value);
-                UpdateEventDateCommand;
+                _eventAggregator.GetEvent<DateUpdatedEvent>().Publish(EventDate);
             }
         }
 
         public DelegateCommand<string> NavigateCommand { get; set; }
 
-        public DelegateCommand UpdateEventDateCommand { get; set; }
 
         public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
@@ -33,17 +32,11 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Define Commands
             NavigateCommand = new DelegateCommand<string>(Navigate);
-            UpdateEventDateCommand = new DelegateCommand(UpdateEventDate);
         }
 
         private void Navigate(string destination)
         {
             _regionManager.RequestNavigate("SessionsRegion", destination);
-        }
-
-        private void UpdateEventDate()
-        {
-            _eventAggregator.GetEvent<DateUpdatedEvent>().Publish(EventDate);
         }
     }
 }

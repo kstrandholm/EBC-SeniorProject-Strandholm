@@ -4,6 +4,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Windows.Input;
 using PropertyChanged;
 
 namespace DubuqueCodeCamp.Scheduler
@@ -14,7 +15,7 @@ namespace DubuqueCodeCamp.Scheduler
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        private DateTime _sessionDate = DateTime.Today;
+        private DateTime _sessionDate;
         public DateTime SessionDate
         {
             get => _sessionDate;
@@ -41,7 +42,8 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         public DelegateCommand<string> NavigateCommand { get; set; }
-        public DelegateCommand SaveSesssionCommand { get; set; }
+
+        public ICommand SaveSesssionCommand { get; set; }
 
         public AddSessionViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
