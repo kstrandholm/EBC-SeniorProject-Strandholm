@@ -30,7 +30,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         // TODO: hook these into the database
         public string Occupation { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [Column]
         public DateTime UpdateTime { get; set; }

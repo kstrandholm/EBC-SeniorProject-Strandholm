@@ -6,6 +6,6 @@ namespace DubuqueCodeCamp.DatabaseConnection
     {
         string Occupation { get; set; }
 
-        DateTime BirthDate { get; set; }
+        DateTime? BirthDate { get; set; }
     }
 }

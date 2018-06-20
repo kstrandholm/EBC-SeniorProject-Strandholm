@@ -22,7 +22,7 @@ namespace DubuqueCodeCamp.Downloader
 
         public string Occupation { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public bool Equals(RegistrantInformation other)
         {
