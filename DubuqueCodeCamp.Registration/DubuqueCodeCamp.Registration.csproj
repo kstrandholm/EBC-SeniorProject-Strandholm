@@ -79,9 +79,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="Main\DatabaseOperations.cs" />
     <Compile Include="Main\MainContentModule.cs" />
-    <Compile Include="RegionNames.cs" />
+    <Compile Include="Main\RegionNames.cs" />
     <Compile Include="Register\PersonalInformation\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>

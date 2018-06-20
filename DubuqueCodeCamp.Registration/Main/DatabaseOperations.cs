@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DubuqueCodeCamp.DatabaseConnection;
+using System.Linq;
 
 namespace DubuqueCodeCamp.Registration
 {
@@ -13,7 +10,8 @@ namespace DubuqueCodeCamp.Registration
 
         public static void GetTalks()
         {
-            var talks = _database.Talks.Where(talk => talk.ID == 7);
+            // TODO: remove null check once database nullability stuff is taken care of
+            var talks = _database.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null);
         }
 
         public static void SaveRegistration()
