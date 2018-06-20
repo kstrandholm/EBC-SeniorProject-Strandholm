@@ -21,10 +21,7 @@
 
       <!-- Personal Information Entry -->
       <ListView Grid.Row="1"
-                Height="238" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="503"
+                MinHeight="250" 
                 ItemsSource="{Binding SomethingToChangeLater}">
         <ListView.View>
           <GridView>
@@ -53,7 +50,7 @@
         <Button Grid.Column="0" HorizontalAlignment="Right"
                 Content="Cancel" Command="{Binding CancelCommand}" />
         <Button Grid.Column="1" HorizontalAlignment="Left"
-                Content="Next -->" Command="{Binding NextCommand}" />
+                Content="Submit" Command="{Binding SubmitCommand}" />
       </Grid>
     </Grid>
 
