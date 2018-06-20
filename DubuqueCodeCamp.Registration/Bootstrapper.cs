@@ -24,6 +24,7 @@ namespace DubuqueCodeCamp.Registration
 
             Container.RegisterTypeForNavigation<MainWindow>(RegionNames.MainWindow);
             Container.RegisterTypeForNavigation<SplashScreenView>(RegionNames.SplashScreen);
+            Container.RegisterTypeForNavigation<RegisterView>(RegionNames.RegisterView);
         }
 
         /// <inheritdoc />
