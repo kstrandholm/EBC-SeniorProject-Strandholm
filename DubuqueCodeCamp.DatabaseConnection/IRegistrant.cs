@@ -2,14 +2,10 @@
 
 namespace DubuqueCodeCamp.DatabaseConnection
 {
-    public interface IRegistrant
+    public interface IRegistrant : IPerson
     {
-        string FirstName { get; set; }
+        string Occupation { get; set; }
 
-        string LastName { get; set; }
-
-        string City { get; set; }
-
-        string State { get; set; }
+        DateTime BirthDate { get; set; }
     }
 }

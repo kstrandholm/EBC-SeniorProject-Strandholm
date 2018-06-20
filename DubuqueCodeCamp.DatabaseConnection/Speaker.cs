@@ -4,7 +4,7 @@ using System.Data.Linq.Mapping;
 namespace DubuqueCodeCamp.DatabaseConnection
 {
     [Table(Name = "Speakers")]
-    public class Speaker : IRegistrant
+    public class Speaker : IPerson
     {
         [Column(IsPrimaryKey = true, IsDbGenerated = true)]
         public int ID { get; set; }
