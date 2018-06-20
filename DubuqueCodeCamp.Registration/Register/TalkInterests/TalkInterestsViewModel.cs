@@ -20,7 +20,7 @@ namespace DubuqueCodeCamp.Registration
 
         private RegistrationInformation _registration;
 
-        private List<ChosenTalk> _chosenTalks;
+        private List<ChosenTalk> _chosenTalks = DatabaseOperations.GetChosenTalks();
         public List<ChosenTalk> ChosenTalks
         {
             get => _chosenTalks;
@@ -85,9 +85,10 @@ namespace DubuqueCodeCamp.Registration
 
         private void Cancel()
         {
-            // TODO: warn user this will cancel all registration
+            var result = MessageBox.Show("This will discard all your changes.", "Are you sure?", MessageBoxButton.OKCancel);
 
-            NavigateToSplashScreen();
+            if (result == MessageBoxResult.OK)
+                NavigateToSplashScreen();
         }
 
         private void NavigateToSplashScreen()
