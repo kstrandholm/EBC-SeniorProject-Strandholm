@@ -26,7 +26,7 @@ namespace DubuqueCodeCamp.Registration
         {
             base.ConfigureContainer();
 
-            Container.RegisterTypeForNavigation<MainWindow>("MainWindow");
+            Container.RegisterTypeForNavigation<MainWindow>(RegionNames.MainWindow);
         }
 
         /// <inheritdoc />
