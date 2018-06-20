@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="DubuqueCodeCamp.Registration.SplashScreen.SplashScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+  <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Button Content="Register" FontSize="50" />
+  </Grid>
+</UserControl>
