@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System.Windows;
+using Prism.Modularity;
 
 namespace DubuqueCodeCamp.Registration
 {
@@ -29,6 +30,9 @@ namespace DubuqueCodeCamp.Registration
         protected override void ConfigureModuleCatalog()
         {
             base.ConfigureModuleCatalog();
+
+            var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            moduleCatalog.AddModule(typeof(MainContentModule));
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using Prism.Modularity;
-using System;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
+using Prism.Modularity;
 using Prism.Regions;
 
 namespace DubuqueCodeCamp.Registration
