@@ -4,12 +4,13 @@
              xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler">
   <Application.Resources>
     <ResourceDictionary>
+
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="MainWindow/Styles.xaml" />
       </ResourceDictionary.MergedDictionaries>
-      
-      <local:RegionNames x:Key="RegionNames" />
-    </ResourceDictionary>
 
+      <local:RegionNames x:Key="RegionNames" />
+
+    </ResourceDictionary>
   </Application.Resources>
 </Application>

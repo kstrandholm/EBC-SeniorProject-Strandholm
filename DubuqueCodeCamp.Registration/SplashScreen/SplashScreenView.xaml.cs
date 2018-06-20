@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DubuqueCodeCamp.Registration.SplashScreen
+namespace DubuqueCodeCamp.Registration
 {
     /// <summary>
     /// Interaction logic for SplashScreenView
