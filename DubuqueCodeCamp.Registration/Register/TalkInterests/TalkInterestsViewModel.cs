@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -17,14 +19,12 @@ namespace DubuqueCodeCamp.Registration
         private readonly IEventAggregator _eventAggregator;
 
         private RegistrationInformation _registration;
-        public  RegistrationInformation Registration
+
+        private List<ChosenTalk> _chosenTalks;
+        public List<ChosenTalk> ChosenTalks
         {
-            get => _registration;
-            set
-            {
-                if (SetProperty(ref _registration, value))
-                    _eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Publish(Registration.ChosenTalks);
-            }
+            get => _chosenTalks;
+            set => SetProperty(ref _chosenTalks, value);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace DubuqueCodeCamp.Registration
 
         private void UpdateRegistration(RegistrationInformation registration)
         {
-            Registration = registration;
+            _registration = registration;
         }
 
         private bool CanExecute()
@@ -74,7 +74,9 @@ namespace DubuqueCodeCamp.Registration
 
         private void Execute()
         {
-            // TODO: Submit the information to the database
+            // TODO: Submit all the information to the database
+            _registration.ChosenTalks = ChosenTalks;
+            DatabaseOperations.SaveRegistration(_registration);
 
             NavigateToSplashScreen();
 

@@ -29,10 +29,31 @@ namespace DubuqueCodeCamp.Registration
                             }).ToList();
         }
 
-        public static void SaveRegistration()
+        public static void SaveRegistration(RegistrationInformation registration)
         {
             //TODO: implement the other items to save
-            _database.SubmitChanges();
+
+            var registrant = new Registrant
+            {
+                FirstName = registration.FirstName,
+            };
+            _database.Registrants.InsertOnSubmit(registrant);
+
+            foreach (var talk in registration.ChosenTalks)
+            {
+                if (talk.Chosen)
+                {
+                    var talkInterest = new TalkInterest
+                    {
+                        InterestedRegistrantID = 7,
+                        TalkID = 8,
+
+                    };
+                    _database.TalkInterest.InsertOnSubmit(talkInterest);
+                }
+            }
+
+            //_database.SubmitChanges();
         }
     }
 }

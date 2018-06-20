@@ -22,7 +22,7 @@
       <!-- Personal Information Entry -->
       <StackPanel Grid.Row="1">
         <TextBlock Text="First Name *" Style="{StaticResource Label}" />
-        <TextBox Text="{Binding FirstName}" />
+        <TextBox Name="ViewFirstName" />
         <TextBlock Text="Last Name *" Style="{StaticResource Label}" />
         <TextBox Text="{Binding LastName}" />
         <TextBlock Text="Email *" Style="{StaticResource Label}" />
