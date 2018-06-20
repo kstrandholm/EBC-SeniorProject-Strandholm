@@ -9,10 +9,20 @@ namespace DubuqueCodeCamp.Registration
     {
         private readonly IRegionManager _regionManager;
 
+        /// <summary>
+        /// Command to finish registering and return to the Splash Screen
+        /// </summary>
         public ICommand SubmitCommand { get; set; }
 
+        /// <summary>
+        /// Command to cancel registration and return to the Splash Screen
+        /// </summary>
         public ICommand CancelCommand { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         public TalkInterestsViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
@@ -24,7 +34,7 @@ namespace DubuqueCodeCamp.Registration
 
         private bool CanExecute()
         {
-            // TODO: implement real logic
+            // TODO: implement real logic?
             return true;
         }
 

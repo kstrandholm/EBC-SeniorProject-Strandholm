@@ -9,10 +9,20 @@ namespace DubuqueCodeCamp.Registration
     {
         private readonly IRegionManager _regionManager;
 
+        /// <summary>
+        /// Command to continue with registration and go to the Talk Interests view
+        /// </summary>
         public ICommand NextCommand { get; set; }
 
+        /// <summary>
+        /// Command to cancel registration and return to the Splash Screen
+        /// </summary>
         public ICommand CancelCommand { get; set; }
-        
+
+        /// <summary>
+        /// Constructor for the view model of the Register view
+        /// </summary>
+        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         public RegisterViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
@@ -30,8 +40,7 @@ namespace DubuqueCodeCamp.Registration
 
         private void Execute()
         {
-            // TODO: Submit the information to the database
-
+            // TODO: Pass this information to the next screen to enable 
             // Navigate to the Talk Interest screen to continue registration
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.TalkInterests);
 

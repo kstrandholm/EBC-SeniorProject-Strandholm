@@ -8,8 +8,15 @@ namespace DubuqueCodeCamp.Registration
     {
         private readonly IRegionManager _regionManager;
 
+        /// <summary>
+        /// Command to begin registration and navigate to the Register view
+        /// </summary>
         public DelegateCommand<string> NavigateCommand { get; set; }
 
+        /// <summary>
+        /// Constructor for the view model of the Splash Screen view
+        /// </summary>
+        /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         public SplashScreenViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;

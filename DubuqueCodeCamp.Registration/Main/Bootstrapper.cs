@@ -5,6 +5,10 @@ using Prism.Modularity;
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Bootstrapper for the Registration project. Manages the screens.
+    /// </summary>
     public class Bootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
