@@ -12,7 +12,7 @@
     </Grid.ColumnDefinitions>
 
     <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" />
-    <Button Grid.Column="2" Content="Next -->" Command="{Binding SubmitCommand}" />
+    <Button Grid.Column="2" Content="Next -->" Command="{Binding NextCommand}" />
     
   </Grid>
 </UserControl>

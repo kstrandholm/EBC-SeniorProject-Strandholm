@@ -10,8 +10,9 @@
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
-
-    <Button Grid.Column="1" Content="Submit" Command="{Binding SubmitCommand}" />
-    <Button Grid.Column="2" Content="Cancel" Command="{Binding CancelCommand}" />
+    
+    <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" />
+    <Button Grid.Column="2" Content="Submit" Command="{Binding SubmitCommand}" />
+    
   </Grid>
 </UserControl>
