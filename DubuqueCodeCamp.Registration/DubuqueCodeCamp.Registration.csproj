@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.6.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -78,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DatabaseOperations.cs" />
     <Compile Include="Main\MainContentModule.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Register\PersonalInformation\RegisterView.xaml.cs">
@@ -150,5 +152,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
