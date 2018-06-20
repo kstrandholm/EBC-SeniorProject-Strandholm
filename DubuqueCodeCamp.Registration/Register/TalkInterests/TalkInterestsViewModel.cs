@@ -16,7 +16,6 @@ namespace DubuqueCodeCamp.Registration
     public class TalkInterestsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
 
         private RegistrationInformation _registration;
 
@@ -50,26 +49,19 @@ namespace DubuqueCodeCamp.Registration
         public TalkInterestsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
 
             // Define Commands
-            SubmitCommand = new DelegateCommand(Execute, CanExecute);
+            SubmitCommand = new DelegateCommand(Execute);
             CancelCommand = new DelegateCommand(Cancel);
             BackCommand = new DelegateCommand(Back);
 
             // Subscribe to Events
-            _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Subscribe(UpdateRegistration);
+            eventAggregator.GetEvent<UpdatedRegistrationEvent>().Subscribe(UpdateRegistration);
         }
 
         private void UpdateRegistration(RegistrationInformation registration)
         {
             _registration = registration;
-        }
-
-        private bool CanExecute()
-        {
-            // TODO: implement real logic?
-            return true;
         }
 
         private void Execute()

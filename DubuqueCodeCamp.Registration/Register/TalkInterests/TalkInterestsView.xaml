@@ -22,7 +22,7 @@
       <!-- Personal Information Entry -->
       <ListView Grid.Row="1"
                 MinHeight="250" 
-                ItemsSource="{Binding SomethingToChangeLater}"
+                ItemsSource="{Binding ChosenTalks}"
                 FontSize="14">
         <ListView.View>
           <GridView>
@@ -30,12 +30,11 @@
               <GridViewColumn>
                 <GridViewColumn.CellTemplate>
                   <DataTemplate>
-                    <CheckBox Tag="{Binding ID}" IsChecked="{Binding Selected}" />
+                    <CheckBox IsChecked="{Binding Chosen}" />
                   </DataTemplate>
                 </GridViewColumn.CellTemplate>
               </GridViewColumn>
-              <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
-              <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+              <GridViewColumn DisplayMemberBinding="{Binding Talk}" Header="Talk" />
             </GridView.Columns>
           </GridView>
         </ListView.View>

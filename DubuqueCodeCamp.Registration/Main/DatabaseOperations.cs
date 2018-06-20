@@ -7,13 +7,13 @@ namespace DubuqueCodeCamp.Registration
 {
     public class DatabaseOperations
     {
-        private static DCCKellyDatabase _database = new DCCKellyDatabase();
+        private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
 
         // TODO: potentially get rid of this method
         public static List<Talk> GetTalks()
         {
             // TODO: remove null check once database nullability stuff is taken care of
-            return _database.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null).ToList();
+            return DATABASE.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null).ToList();
         }
 
         public static List<ChosenTalk> GetChosenTalks()
@@ -21,7 +21,7 @@ namespace DubuqueCodeCamp.Registration
             const bool NOT_CHOSEN = false;
 
             // TODO: remove null check once database nullability stuff is taken care of
-            return _database.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null)
+            return DATABASE.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null)
                             .Select(talk => new ChosenTalk
                             {
                                 Talk = talk,
@@ -37,7 +37,7 @@ namespace DubuqueCodeCamp.Registration
             {
                 FirstName = registration.FirstName,
             };
-            _database.Registrants.InsertOnSubmit(registrant);
+            DATABASE.Registrants.InsertOnSubmit(registrant);
 
             foreach (var talk in registration.ChosenTalks)
             {
@@ -49,7 +49,7 @@ namespace DubuqueCodeCamp.Registration
                         TalkID = 8,
 
                     };
-                    _database.TalkInterest.InsertOnSubmit(talkInterest);
+                    DATABASE.TalkInterest.InsertOnSubmit(talkInterest);
                 }
             }
 

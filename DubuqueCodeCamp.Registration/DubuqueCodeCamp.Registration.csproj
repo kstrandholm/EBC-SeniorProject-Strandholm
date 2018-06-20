@@ -93,7 +93,7 @@
       <DependentUpon>TalkInterestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Register\TalkInterests\TalkInterestsViewModel.cs" />
-    <Compile Include="Register\UpdatedRegistrationEvents.cs" />
+    <Compile Include="Register\UpdatedRegistrationEvent.cs" />
     <Compile Include="SplashScreen\SplashScreenView.xaml.cs">
       <DependentUpon>SplashScreenView.xaml</DependentUpon>
     </Compile>
