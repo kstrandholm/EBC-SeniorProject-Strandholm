@@ -20,6 +20,10 @@ namespace DubuqueCodeCamp.Downloader
 
         public List<int> TalkInterests { get; set; }
 
+        public string Occupation { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
         public bool Equals(RegistrantInformation other)
         {
             if (ReferenceEquals(null, other))

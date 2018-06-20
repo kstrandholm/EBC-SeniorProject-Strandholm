@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Registation"
         Height="450" Width="400"
-        MinHeight="350" MinWidth="350">
+        MinHeight="370" MinWidth="350">
   
   <ContentControl prism:RegionManager.RegionName="{Binding MainContentRegion, Source={StaticResource RegionNames}}" />
 </Window>

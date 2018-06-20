@@ -57,7 +57,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
             if (ReferenceEquals(this, other))
                 return true;
 
-            return string.Equals(FirstName, other.FirstName) && string.Equals(LastName, other.LastName) && string.Equals(City, other.City) && string.Equals(State, other.State);
+            return string.Equals(FirstName, other.FirstName) && string.Equals(LastName, other.LastName);
         }
 
         /// <summary>Determines whether the specified object is equal to the current object.</summary>

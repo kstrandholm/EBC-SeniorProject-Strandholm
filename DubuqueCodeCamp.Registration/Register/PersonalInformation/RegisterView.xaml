@@ -43,7 +43,7 @@
         <Button Grid.Column="0" HorizontalAlignment="Right"
                 Content="Cancel" Command="{Binding CancelCommand}" />
         <Button Grid.Column="1" HorizontalAlignment="Left"
-                Content="Next -->" Command="{Binding NextCommand}" />
+                Content="Next --&gt;" Command="{Binding NextCommand}" />
       </Grid>
     </Grid>
 

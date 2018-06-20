@@ -20,4 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Talk.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TalkInterest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)App.config" />
+  </ItemGroup>
 </Project>
