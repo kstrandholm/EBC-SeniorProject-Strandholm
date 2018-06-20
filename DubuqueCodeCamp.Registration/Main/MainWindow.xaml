@@ -7,8 +7,9 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Registration"
         mc:Ignorable="d"
-        Title="Registation" Height="450" Width="800">
-  <ContentControl prism:RegionManager.RegionName="{Binding MainContentRegion, Source={StaticResource RegionNames}}" >
-        
-    </ContentControl>
+        Title="Registation"
+        Height="450" Width="400"
+        MinHeight="350" MinWidth="350">
+  
+  <ContentControl prism:RegionManager.RegionName="{Binding MainContentRegion, Source={StaticResource RegionNames}}" />
 </Window>

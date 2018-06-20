@@ -30,7 +30,9 @@
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Padding" Value="6"/>
-    <Setter Property="Margin" Value="5"></Setter>
+    <Setter Property="Margin" Value="5" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="MinWidth" Value="75" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -72,11 +74,14 @@
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
     <Setter Property="AllowDrop" Value="true"/>
     <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
     <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
     <Setter Property="Margin" Value="10 5 10 0" />
+    <Setter Property="MinWidth" Value="250" />
+    <Setter Property="MinHeight" Value="24" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TextBox}">
@@ -107,7 +112,12 @@
       </MultiTrigger>
     </Style.Triggers>
   </Style>
-
-
+  
+  <!-- Text Box Lable Style Template -->
+    <Style x:Key="Label" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+      <Setter Property="FontSize" Value="16" />
+    </Style>
 
 </ResourceDictionary>
