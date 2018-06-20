@@ -3,52 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-  <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-
+  <Grid Margin="10">
+    
     <!-- Main Content -->
-    <Grid Grid.Column="1">
+    <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
 
-      <!-- Personal Information Entry -->
+      <!-- Talk Interest Selection -->
       <ListView Grid.Row="1"
-                MinHeight="250" 
-                ItemsSource="{Binding ChosenTalks}"
-                FontSize="14">
+                ItemsSource="{Binding ChosenTalks, UpdateSourceTrigger=PropertyChanged}"
+                FontSize="14" MaxHeight="750"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                AlternationCount="2" >
         <ListView.View>
           <GridView>
-            <GridView.Columns>
               <GridViewColumn>
                 <GridViewColumn.CellTemplate>
                   <DataTemplate>
                     <CheckBox IsChecked="{Binding Chosen}" />
                   </DataTemplate>
                 </GridViewColumn.CellTemplate>
-              </GridViewColumn>
-              <GridViewColumn DisplayMemberBinding="{Binding Talk}" Header="Talk" />
-            </GridView.Columns>
+            </GridViewColumn>
+            <GridViewColumn DisplayMemberBinding="{Binding SpeakerFirstName}" Header="First" Width="75" />
+            <GridViewColumn DisplayMemberBinding="{Binding SpeakerLastName}" Header="Last" Width="75" />
+            <GridViewColumn Header="Talk">
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding TalkTitle}" MaxWidth="300" />
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn Header="Summary">
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding TalkSummary}" MaxWidth="1400" />
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
           </GridView>
         </ListView.View>
       </ListView>
 
       <!-- Buttons -->
-      <Grid Grid.Row="2" Margin="0 10 0 0" >
+      <Grid Grid.Row="3" Margin="0 10 0 0" >
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="Auto" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" HorizontalAlignment="Left"
+        <Button Grid.Column="0" HorizontalAlignment="Right"
                 Content="&lt;-- Back" Command="{Binding BackCommand}" />
         <Button Grid.Column="1"
                 Content="Cancel" Command="{Binding CancelCommand}" />

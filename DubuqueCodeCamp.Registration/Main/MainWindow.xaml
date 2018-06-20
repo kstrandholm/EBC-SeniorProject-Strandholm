@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:DubuqueCodeCamp.Registration"
         mc:Ignorable="d"
         Title="Registation"
-        Height="450" Width="400"
-        MinHeight="370" MinWidth="350">
+        WindowState="Maximized"
+        WindowStyle="None">
   
   <ContentControl prism:RegionManager.RegionName="{Binding MainContentRegion, Source={StaticResource RegionNames}}" />
 </Window>
