@@ -7,5 +7,7 @@
         public static string MainContentRegion => "MainContentRegion";
 
         public static string SplashScreen => "SplashScreenView";
+
+        public static string RegisterView => "RegisterView";
     }
 }

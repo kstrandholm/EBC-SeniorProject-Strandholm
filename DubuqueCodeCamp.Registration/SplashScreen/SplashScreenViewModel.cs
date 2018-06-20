@@ -20,7 +20,7 @@ namespace DubuqueCodeCamp.Registration
 
         private void Navigate(string destination)
         {
-            _regionManager.RequestNavigate("MainRegion", destination);
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, destination);
         }
     }
 }
