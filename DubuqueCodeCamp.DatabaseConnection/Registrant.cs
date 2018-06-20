@@ -28,13 +28,10 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public string EmailAddress { get; set; }
 
         [Column]
-        public bool IsSpeaker { get; set; }
-
-        [Column]
         public DateTime UpdateTime { get; set; }
 
         [Column]
-        public string DiagnosticInfo { get; set; }
+        public string DiagnosticInformation { get; set; }
 
         /// <inheritdoc />
         public bool Equals(Registrant other)

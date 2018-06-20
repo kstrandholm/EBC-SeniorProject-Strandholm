@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="DubuqueCodeCamp.Scheduler.MainSessionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <!-- Session Buttons -->
+    <Grid Grid.Column="0">
+      <StackPanel VerticalAlignment="Center">
+        <Button Content="Add Session" Command="{Binding NavigateCommand}" CommandParameter="AddSessionView" />
+        <Button>Remove Session</Button>
+      </StackPanel>
+    </Grid>
+
+    <!-- Sessions Listbox -->
+    <StackPanel Grid.Column="1">
+      <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
+      <ListView ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}"
+               DisplayMemberPath="TimeStart"
+               ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  >
+        <ListView.View>
+          <GridView>
+            <GridViewColumn DisplayMemberBinding="{Binding SessionDate, StringFormat='MM/dd/yyyy'}" Header="Date" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding TimeStart, StringFormat='{}{0: hh:mm tt}'}" Header="Start Time" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding TimeEnd, StringFormat='{}{0: hh:mm tt}'}" Header="End Time" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding CalcLengthMinutes}" Header="Length(Mins)" Width="Auto" />
+          </GridView>
+        </ListView.View>
+      </ListView>
+    </StackPanel>
+  </Grid>
+</UserControl>

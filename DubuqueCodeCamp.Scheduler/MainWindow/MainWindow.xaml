@@ -1,0 +1,54 @@
+﻿<Window x:Class="DubuqueCodeCamp.Scheduler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
+        mc:Ignorable="d"
+        Title="Dubuque Code Camp Schedule Creator"
+        Height="486.885" Width="655.635"
+        MinHeight="486" MinWidth="598"
+        Padding="15 20">
+
+  <Grid Margin="15 20" >
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+
+          <Calendar SelectedDate="{Binding EventDate}" />
+
+          <Button HorizontalAlignment="Center"
+                  Command="{Binding CreateScheduleCommand}">
+            <TextBlock TextAlignment="Center">
+              Create<LineBreak />Proposed Schedule
+            </TextBlock>
+          </Button>
+          
+        </StackPanel>
+        
+        <ContentControl Grid.Column="2"
+                        prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" />
+      </Grid>
+
+    </StackPanel>
+
+    <ContentControl Grid.Row="1" Margin="0 15 0 0"
+                    prism:RegionManager.RegionName="{Binding ScheduleRegion, Source={StaticResource RegionNames}}" />
+
+  </Grid>
+</Window>

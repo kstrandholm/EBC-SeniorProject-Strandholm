@@ -24,7 +24,6 @@ namespace DubuqueCodeCamp.Downloader
                     StandardColumn.Level,
                     StandardColumn.Message,
                     StandardColumn.Exception,
-                    StandardColumn.Properties
                 },
                 AdditionalDataColumns = new Collection<DataColumn>
                 {
