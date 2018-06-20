@@ -91,10 +91,9 @@ namespace DubuqueCodeCamp.Scheduler
 
             // TODO: consider overriding the equality check on Session?
             // If the database doesn't have any existing sessions matching the new one, save to the database
-            if (!database.Sessions.Any(session =>
-                session.SessionDate == newSession.SessionDate &&
-                session.TimeStart == newSession.TimeStart &&
-                session.TimeEnd == newSession.TimeEnd))
+            if (!database.Sessions.Any(session => session.SessionDate == newSession.SessionDate &&
+                                                  session.TimeStart == newSession.TimeStart &&
+                                                  session.TimeEnd == newSession.TimeEnd))
             {
                 database.Sessions.InsertOnSubmit(newSession);
                 database.SubmitChanges();
@@ -105,7 +104,7 @@ namespace DubuqueCodeCamp.Scheduler
             else
             {
                 // Otherwise, tell the user one exists and navigate away as usual
-                MessageBox.Show("A session with the same date and start and end times already exists in the database.", "Canceling Save",
+                MessageBox.Show("A session with the same date and start and end times already exists in the database. Canceling", "Canceling Save",
                     MessageBoxButton.OK);
             }
 

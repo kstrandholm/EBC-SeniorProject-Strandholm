@@ -6,7 +6,7 @@
     <ResourceDictionary>
       
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Styles.xaml" />
+        <ResourceDictionary Source="Main/Styles.xaml" />
       </ResourceDictionary.MergedDictionaries>
 
       <local:RegionNames x:Key="RegionNames" />
