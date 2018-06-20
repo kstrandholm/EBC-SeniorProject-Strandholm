@@ -11,6 +11,7 @@ namespace DubuqueCodeCamp.Registration
     public class RegisterViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
 
         private RegistrationInformation _registration = new RegistrationInformation();
         private RegistrationInformation Registration
@@ -25,8 +26,8 @@ namespace DubuqueCodeCamp.Registration
             get => _firstName;
             set
             {
-                SetProperty(ref _firstName, value);
-                Registration.FirstName = _firstName;
+                if (SetProperty(ref _firstName, value))
+                    _eventAggregator.GetEvent<UpdatedFirstNameEvent>().Publish(_firstName);
             }
         }
 
@@ -36,8 +37,8 @@ namespace DubuqueCodeCamp.Registration
             get => _lastName;
             set
             {
-                SetProperty(ref _lastName, value);
-                Registration.LastName = _lastName;
+                if (SetProperty(ref _lastName, value))
+                    _eventAggregator.GetEvent<UpdatedLastNameEvent>().Publish(_lastName);
             }
         }
 
@@ -47,8 +48,8 @@ namespace DubuqueCodeCamp.Registration
             get => _emailAddress;
             set
             {
-                SetProperty(ref _emailAddress, value);
-                Registration.EmailAddress = _emailAddress;
+                if (SetProperty(ref _emailAddress, value))
+                    _eventAggregator.GetEvent<UpdatedEmailEvent>().Publish(_emailAddress);
             }
         }
 
@@ -58,8 +59,8 @@ namespace DubuqueCodeCamp.Registration
             get => _occupation;
             set
             {
-                SetProperty(ref _occupation, value);
-                Registration.Occupation = _occupation;
+                if (SetProperty(ref _occupation, value))
+                    _eventAggregator.GetEvent<UpdatedOccupationEvent>().Publish(_occupation);
             }
         }
 
@@ -69,8 +70,8 @@ namespace DubuqueCodeCamp.Registration
             get => _birthDate;
             set
             {
-                SetProperty(ref _birthDate, value);
-                Registration.BirthDate = _birthDate;
+                if (SetProperty(ref _birthDate, value))
+                    _eventAggregator.GetEvent<UpdatedBirthDateEvent>().Publish(_birthDate);
             }
         }
 
@@ -92,13 +93,44 @@ namespace DubuqueCodeCamp.Registration
         public RegisterViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
 
             // Define Commands
             NextCommand = new DelegateCommand(Execute, CanExecute);
             CancelCommand = new DelegateCommand(Cancel);
 
             // Subscribe to Events
-            eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Subscribe(UpdateTalkInterests);
+            _eventAggregator.GetEvent<UpdatedFirstNameEvent>().Subscribe(UpdateRegistrationFirstName);
+            _eventAggregator.GetEvent<UpdatedLastNameEvent>().Subscribe(UpdateRegistrationLastName);
+            _eventAggregator.GetEvent<UpdatedEmailEvent>().Subscribe(UpdateRegistrationEmail);
+            _eventAggregator.GetEvent<UpdatedOccupationEvent>().Subscribe(UpdateRegistrationOccupation);
+            _eventAggregator.GetEvent<UpdatedBirthDateEvent>().Subscribe(UpdateRegistrationBirthDate);
+            _eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Subscribe(UpdateTalkInterests);
+        }
+
+        private void UpdateRegistrationFirstName(string firstName)
+        {
+            Registration.FirstName = firstName;
+        }
+
+        private void UpdateRegistrationLastName(string lastName)
+        {
+            Registration.LastName = lastName;
+        }
+
+        private void UpdateRegistrationEmail(string emailAddress)
+        {
+            Registration.EmailAddress = emailAddress;
+        }
+
+        private void UpdateRegistrationOccupation(string occupation)
+        {
+            Registration.Occupation = occupation;
+        }
+
+        private void UpdateRegistrationBirthDate(DateTime birthDate)
+        {
+            Registration.BirthDate = birthDate;
         }
 
         private void UpdateTalkInterests(List<ChosenTalk> chosenTalks)

@@ -46,7 +46,7 @@ namespace DubuqueCodeCamp.Registration
         /// Constructor for the view model of the Talk Interests view
         /// </summary>
         /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
-        /// <param name="eventAggregator">Event aggregator created and passed in by Prism/Unity</param>
+        /// <param name="eventAggregator">Event aggregatory created and passed in by Prism/Unity</param>
         public TalkInterestsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
