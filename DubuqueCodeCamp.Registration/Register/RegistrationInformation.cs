@@ -14,7 +14,7 @@ namespace DubuqueCodeCamp.Registration
 
         public string Occupation { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public List<ChosenTalk> ChosenTalks { get; set; } = DatabaseOperations.GetChosenTalks();
 

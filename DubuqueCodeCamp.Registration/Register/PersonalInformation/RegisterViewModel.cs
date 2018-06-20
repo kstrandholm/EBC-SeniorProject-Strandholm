@@ -41,8 +41,8 @@ namespace DubuqueCodeCamp.Registration
             set => SetProperty(ref _occupation, value);
         }
 
-        private DateTime _birthDate;
-        public DateTime BirthDate
+        private DateTime? _birthDate;
+        public DateTime? BirthDate
         {
             get => _birthDate;
             set => SetProperty(ref _birthDate, value);
