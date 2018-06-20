@@ -71,6 +71,18 @@ namespace DubuqueCodeCamp.Registration
             // Define Commands
             NextCommand = new DelegateCommand(Execute, CanExecute);
             CancelCommand = new DelegateCommand(Cancel);
+
+            // Subscribe to Events
+            _eventAggregator.GetEvent<ClearRegistrationEvent>().Subscribe(ClearFields);
+        }
+
+        private void ClearFields()
+        {
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            EmailAddress = string.Empty;
+            Occupation = string.Empty;
+            BirthDate = null;
         }
 
         private bool CanExecute()
@@ -98,6 +110,9 @@ namespace DubuqueCodeCamp.Registration
 
         private void Cancel()
         {
+            // Clear the fields
+            _eventAggregator.GetEvent<ClearRegistrationEvent>().Publish();
+
             // Navigate back to the Splash Screen
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.SplashScreen);
         }

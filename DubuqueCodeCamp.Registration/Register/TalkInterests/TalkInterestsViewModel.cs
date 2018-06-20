@@ -16,6 +16,7 @@ namespace DubuqueCodeCamp.Registration
     public class TalkInterestsViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
 
         private RegistrationInformation _registration;
 
@@ -49,6 +50,7 @@ namespace DubuqueCodeCamp.Registration
         public TalkInterestsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
 
             // Define Commands
             SubmitCommand = new DelegateCommand(Execute);
@@ -56,12 +58,18 @@ namespace DubuqueCodeCamp.Registration
             BackCommand = new DelegateCommand(Back);
 
             // Subscribe to Events
-            eventAggregator.GetEvent<UpdatedRegistrationEvent>().Subscribe(UpdateRegistration);
+            _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Subscribe(UpdateRegistration);
+            _eventAggregator.GetEvent<ClearRegistrationEvent>().Subscribe(ClearFields);
         }
 
         private void UpdateRegistration(RegistrationInformation registration)
         {
             _registration = registration;
+        }
+
+        private void ClearFields()
+        {
+            ChosenTalks = DatabaseOperations.GetChosenTalks();
         }
 
         private void Execute()
@@ -84,7 +92,7 @@ namespace DubuqueCodeCamp.Registration
 
         private void NavigateToSplashScreen()
         {
-            // TODO: Clear the information on this and the Register screen
+            _eventAggregator.GetEvent<ClearRegistrationEvent>().Publish();
 
             // Navigate back to the Splash Screen
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.SplashScreen);
