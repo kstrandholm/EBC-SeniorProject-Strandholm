@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DubuqueCodeCamp.DatabaseConnection;
 using System.Linq;
 
@@ -38,29 +39,49 @@ namespace DubuqueCodeCamp.Registration
 
         public static void SaveRegistration(RegistrationInformation registration)
         {
-            //TODO: implement the other items to save
+            SaveRegistrant(registration);
 
+            SaveTalkInterest(registration);
+        }
+
+        private static void SaveRegistrant(IRegistrant registration)
+        {
             var registrant = new Registrant
             {
                 FirstName = registration.FirstName,
+                LastName = registration.LastName,
+                EmailAddress = registration.EmailAddress,
+                Occupation = registration.Occupation,
+                BirthDate = registration.BirthDate
             };
             DATABASE.Registrants.InsertOnSubmit(registrant);
+            DATABASE.SubmitChanges();
+        }
+
+        private static void SaveTalkInterest(RegistrationInformation registration)
+        {
+            var registrantID = DATABASE
+                .Registrants.Single(reg => reg.FirstName == registration.FirstName && reg.LastName == registration.LastName).ID;
 
             foreach (var talk in registration.ChosenTalks)
             {
                 if (talk.Chosen)
                 {
+                    var talkID = DATABASE.Talks.Single(t => t.Title == talk.TalkTitle && t.Summary == talk.TalkSummary).ID;
+
                     var talkInterest = new TalkInterest
                     {
-                        InterestedRegistrantID = 7,
-                        TalkID = 8,
-
+                        InterestedRegistrantID = registrantID,
+                        TalkID = talkID,
+                        UpdateTime = DateTime.Now,
+                        DiagnosticInformation = new StackTrace().ToString()
                     };
+
                     DATABASE.TalkInterest.InsertOnSubmit(talkInterest);
                 }
             }
 
-            //_database.SubmitChanges();
+            DATABASE.SubmitChanges();
         }
     }
 }
