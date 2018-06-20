@@ -19,6 +19,7 @@ namespace DubuqueCodeCamp.Registration
 
             // Define Commands
             SubmitCommand = new DelegateCommand(Execute, CanExecute);
+            CancelCommand = new DelegateCommand(Navigate);
         }
 
         private bool CanExecute()

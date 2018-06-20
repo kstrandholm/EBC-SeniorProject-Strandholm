@@ -11,7 +11,7 @@
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
     
-    <Button Grid.Column="1" Content="Submit" />
-    <Button Grid.Column="2" Content="Cancel" />
+    <Button Grid.Column="1" Content="Submit" Command="{Binding SubmitCommand}" />
+    <Button Grid.Column="2" Content="Cancel" Command="{Binding CancelCommand}" />
   </Grid>
 </UserControl>
