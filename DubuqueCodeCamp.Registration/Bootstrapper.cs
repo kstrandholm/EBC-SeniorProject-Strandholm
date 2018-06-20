@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Prism.Unity;
+using System.Windows;
 
 namespace DubuqueCodeCamp.Registration
 {
@@ -27,6 +22,7 @@ namespace DubuqueCodeCamp.Registration
             base.ConfigureContainer();
 
             Container.RegisterTypeForNavigation<MainWindow>(RegionNames.MainWindow);
+            Container.RegisterTypeForNavigation<SplashScreenView>(RegionNames.SplashScreen);
         }
 
         /// <inheritdoc />

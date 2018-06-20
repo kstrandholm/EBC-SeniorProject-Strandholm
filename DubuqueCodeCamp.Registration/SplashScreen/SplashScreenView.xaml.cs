@@ -3,11 +3,11 @@
 namespace DubuqueCodeCamp.Registration.SplashScreen
 {
     /// <summary>
-    /// Interaction logic for SplashScreen
+    /// Interaction logic for SplashScreenView
     /// </summary>
-    public partial class SplashScreen : UserControl
+    public partial class SplashScreenView : UserControl
     {
-        public SplashScreen()
+        public SplashScreenView()
         {
             InitializeComponent();
         }

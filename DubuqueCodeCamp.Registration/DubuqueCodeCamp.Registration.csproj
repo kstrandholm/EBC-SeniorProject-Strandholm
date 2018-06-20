@@ -80,8 +80,8 @@
     </ApplicationDefinition>
     <Compile Include="MainContentModule.cs" />
     <Compile Include="RegionNames.cs" />
-    <Compile Include="SplashScreen\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    <Compile Include="SplashScreen\SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SplashScreen\SplashScreenViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -97,7 +97,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SplashScreen\SplashScreen.xaml">
+    <Page Include="SplashScreen\SplashScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

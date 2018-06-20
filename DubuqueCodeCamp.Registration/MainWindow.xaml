@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:DubuqueCodeCamp.Registration"
         mc:Ignorable="d"
         Title="Registation" Height="450" Width="800">
-    <ContentControl >
+  <ContentControl prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" >
         
     </ContentControl>
 </Window>

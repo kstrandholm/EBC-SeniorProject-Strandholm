@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DubuqueCodeCamp.Registration
+﻿namespace DubuqueCodeCamp.Registration
 {
     public class RegionNames
     {
@@ -12,5 +6,6 @@ namespace DubuqueCodeCamp.Registration
 
         public static string MainContent => "MainContentRegion";
 
+        public static string SplashScreen => "SplashScreenView";
     }
 }
