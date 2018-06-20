@@ -22,15 +22,15 @@
       <!-- Personal Information Entry -->
       <StackPanel Grid.Row="1">
         <TextBlock Text="First Name *" Style="{StaticResource Label}" />
-        <TextBox />
+        <TextBox Text="{Binding FirstName}" />
         <TextBlock Text="Last Name *" Style="{StaticResource Label}" />
-        <TextBox />
+        <TextBox Text="{Binding LastName}" />
         <TextBlock Text="Email *" Style="{StaticResource Label}" />
-        <TextBox />
+        <TextBox Text="{Binding EmailAddress}" />
         <TextBlock Text="Occupation" Style="{StaticResource Label}" />
-        <TextBox />
+        <TextBox Text="{Binding Occupation}" />
         <TextBlock Text="Birth Date" Style="{StaticResource Label}" />
-        <TextBox />
+        <TextBox Text="{Binding BirthDate}" />
       </StackPanel>
 
       <!-- Buttons -->

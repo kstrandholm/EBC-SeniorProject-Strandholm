@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Events;
@@ -10,17 +11,66 @@ namespace DubuqueCodeCamp.Registration
     public class RegisterViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
 
-        private RegistrationInformation _registration;
-
-        public RegistrationInformation Registration
+        private RegistrationInformation _registration = new RegistrationInformation();
+        private RegistrationInformation Registration
         {
             get => _registration;
+            set => SetProperty(ref _registration, value);
+        }
+
+        private string _firstName;
+        public string FirstName
+        {
+            get => _firstName;
             set
             {
-                if (SetProperty(ref _registration, value))
-                    _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Publish(Registration);
+                SetProperty(ref _firstName, value);
+                Registration.FirstName = _firstName;
+            }
+        }
+
+        private string _lastName;
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                SetProperty(ref _lastName, value);
+                Registration.LastName = _lastName;
+            }
+        }
+
+        private string _emailAddress;
+        public string EmailAddress
+        {
+            get => _emailAddress;
+            set
+            {
+                SetProperty(ref _emailAddress, value);
+                Registration.EmailAddress = _emailAddress;
+            }
+        }
+
+        private string _occupation;
+        public string Occupation
+        {
+            get => _occupation;
+            set
+            {
+                SetProperty(ref _occupation, value);
+                Registration.Occupation = _occupation;
+            }
+        }
+
+        private DateTime _birthDate;
+        public DateTime BirthDate
+        {
+            get => _birthDate;
+            set
+            {
+                SetProperty(ref _birthDate, value);
+                Registration.BirthDate = _birthDate;
             }
         }
 
@@ -42,14 +92,13 @@ namespace DubuqueCodeCamp.Registration
         public RegisterViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
 
             // Define Commands
             NextCommand = new DelegateCommand(Execute, CanExecute);
             CancelCommand = new DelegateCommand(Cancel);
 
             // Subscribe to Events
-            _eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Subscribe(UpdateTalkInterests);
+            eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Subscribe(UpdateTalkInterests);
         }
 
         private void UpdateTalkInterests(List<ChosenTalk> chosenTalks)
