@@ -18,7 +18,7 @@
           <GridViewColumn DisplayMemberBinding="{Binding SessionStartTime}" Header="Start Time" Width="Auto" />
           <GridViewColumn DisplayMemberBinding="{Binding SessionEndTime}" Header="End Time" Width="Auto" />
           <GridViewColumn DisplayMemberBinding="{Binding RoomName}" Header="Room Name" Width="Auto" />
-          <GridViewColumn DisplayMemberBinding="{Binding RoomCapacity}" Header="Room Capacity" Width="Auto" />
+          <GridViewColumn DisplayMemberBinding="{Binding RoomCapacity}" Header="Capacity" Width="Auto" />
           <GridViewColumn DisplayMemberBinding="{Binding TalkTitle}" Header="Talk Title" Width="Auto" />
           <GridViewColumn DisplayMemberBinding="{Binding SpeakerFirstName}" Header="Speaker's First Name" Width="Auto" />
           <GridViewColumn DisplayMemberBinding="{Binding SpeakerLastName}" Header="Speaker's Last Name" Width="Auto" />
