@@ -57,7 +57,8 @@ namespace DubuqueCodeCamp.Downloader
             }
 
             // Open an existing file or create a new one
-            using (Stream fileStream = File.OpenWrite(fullLocalPath))
+            // We want to overwrite all contents of the old file, if they exist
+            using (Stream fileStream = File.Create(fullLocalPath))
             {
                 sftp.DownloadFile(fullSFTPPath, fileStream);
                 return true;    // Indicates the file was downloaded
