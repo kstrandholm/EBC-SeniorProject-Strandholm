@@ -83,6 +83,7 @@
     <Compile Include="Main\DatabaseOperations.cs" />
     <Compile Include="Main\MainContentModule.cs" />
     <Compile Include="Main\RegionNames.cs" />
+    <Compile Include="Register\ChosenTalk.cs" />
     <Compile Include="Register\PersonalInformation\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +93,8 @@
       <DependentUpon>TalkInterestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Register\TalkInterests\TalkInterestsViewModel.cs" />
+    <Compile Include="Register\UpdatedTalkInterestsEvent.cs" />
+    <Compile Include="Register\UpdatedRegistrationEvent.cs" />
     <Compile Include="SplashScreen\SplashScreenView.xaml.cs">
       <DependentUpon>SplashScreenView.xaml</DependentUpon>
     </Compile>
