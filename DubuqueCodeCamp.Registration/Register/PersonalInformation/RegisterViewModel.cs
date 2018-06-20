@@ -9,7 +9,7 @@ namespace DubuqueCodeCamp.Registration
     {
         private readonly IRegionManager _regionManager;
 
-        public ICommand SubmitCommand { get; set; }
+        public ICommand NextCommand { get; set; }
 
         public ICommand CancelCommand { get; set; }
         
@@ -18,8 +18,8 @@ namespace DubuqueCodeCamp.Registration
             _regionManager = regionManager;
 
             // Define Commands
-            SubmitCommand = new DelegateCommand(Execute, CanExecute);
-            CancelCommand = new DelegateCommand(Navigate);
+            NextCommand = new DelegateCommand(Execute, CanExecute);
+            CancelCommand = new DelegateCommand(Cancel);
         }
 
         private bool CanExecute()
@@ -32,11 +32,12 @@ namespace DubuqueCodeCamp.Registration
         {
             // TODO: Submit the information to the database
 
-            // Navigate back to the splash screen
-            Navigate();
+            // Navigate to the Talk Interest screen to continue registration
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.TalkInterests);
+
         }
 
-        private void Navigate()
+        private void Cancel()
         {
             // Navigate back to the Splash Screen
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.SplashScreen);

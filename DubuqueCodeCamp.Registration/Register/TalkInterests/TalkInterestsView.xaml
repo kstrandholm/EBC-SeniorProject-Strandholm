@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DubuqueCodeCamp.Registration.RegisterView"
+﻿<UserControl x:Class="DubuqueCodeCamp.Registration.TalkInterestsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
@@ -10,7 +10,7 @@
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
-    
+
     <Button Grid.Column="1" Content="Submit" Command="{Binding SubmitCommand}" />
     <Button Grid.Column="2" Content="Cancel" Command="{Binding CancelCommand}" />
   </Grid>

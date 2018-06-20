@@ -80,10 +80,14 @@
     </ApplicationDefinition>
     <Compile Include="MainContentModule.cs" />
     <Compile Include="RegionNames.cs" />
-    <Compile Include="Register\RegisterView.xaml.cs">
+    <Compile Include="Register\PersonalInformation\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Register\RegisterViewModel.cs" />
+    <Compile Include="Register\PersonalInformation\RegisterViewModel.cs" />
+    <Compile Include="Register\TalkInterests\TalkInterestsView.xaml.cs">
+      <DependentUpon>TalkInterestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Register\TalkInterests\TalkInterestsViewModel.cs" />
     <Compile Include="SplashScreen\SplashScreenView.xaml.cs">
       <DependentUpon>SplashScreenView.xaml</DependentUpon>
     </Compile>
@@ -101,7 +105,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Register\RegisterView.xaml">
+    <Page Include="Register\PersonalInformation\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Register\TalkInterests\TalkInterestsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,8 +149,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Register\TalkInterests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

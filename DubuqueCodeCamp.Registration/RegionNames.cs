@@ -9,5 +9,7 @@
         public static string SplashScreen => "SplashScreenView";
 
         public static string RegisterView => "RegisterView";
-    }
+
+        public static string TalkInterests => "TalkInterestsView";
+        }
 }
