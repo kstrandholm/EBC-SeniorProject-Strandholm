@@ -7,12 +7,45 @@
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" />
-    <Button Grid.Column="2" Content="Next -->" Command="{Binding NextCommand}" />
-    
+    <!-- Main Content -->
+    <Grid Grid.Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <!-- Personal Information Entry -->
+      <StackPanel Grid.Row="1">
+        <TextBlock Text="First Name *" Style="{StaticResource Label}" />
+        <TextBox />
+        <TextBlock Text="Last Name *" Style="{StaticResource Label}" />
+        <TextBox />
+        <TextBlock Text="Email *" Style="{StaticResource Label}" />
+        <TextBox />
+        <TextBlock Text="Occupation" Style="{StaticResource Label}" />
+        <TextBox />
+        <TextBlock Text="Birth Date" Style="{StaticResource Label}" />
+        <TextBox />
+      </StackPanel>
+
+      <!-- Buttons -->
+      <Grid Grid.Row="2" Margin="0 10 0 0" >
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" HorizontalAlignment="Right"
+                Content="Cancel" Command="{Binding CancelCommand}" />
+        <Button Grid.Column="1" HorizontalAlignment="Left"
+                Content="Next -->" Command="{Binding NextCommand}" />
+      </Grid>
+    </Grid>
+
   </Grid>
 </UserControl>
