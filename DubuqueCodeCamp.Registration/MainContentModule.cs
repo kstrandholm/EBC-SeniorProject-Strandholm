@@ -1,22 +1,34 @@
 ﻿using Prism.Modularity;
 using System;
+using Microsoft.Practices.Unity;
+using Prism.Regions;
 
 namespace DubuqueCodeCamp.Registration
 {
     public class MainContentModule : IModule
     {
+        private readonly IUnityContainer _container;
+        private readonly IRegionManager _regionManager;
+
         /// <summary>
         /// Constructor for the Main Content's module that manages the views for the Main Content region
         /// </summary>
-        public MainContentModule()
+        public MainContentModule(IUnityContainer container, IRegionManager regionManager)
         {
-            
+            _container = container;
+            _regionManager = regionManager;
+
         }
 
         /// <inheritdoc />
         public void Initialize()
         {
-            throw new NotImplementedException();
+            _container.RegisterType<SplashScreenView>();
+
+            var region = _regionManager.Regions[RegionNames.MainContentRegion];
+            var splashScreenView = _container.Resolve<SplashScreenView>();
+            region.Add(splashScreenView, RegionNames.SplashScreen);
+            region.Activate(splashScreenView);
         }
     }
 }

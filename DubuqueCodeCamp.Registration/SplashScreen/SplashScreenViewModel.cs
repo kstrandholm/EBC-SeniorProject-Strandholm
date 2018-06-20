@@ -8,7 +8,7 @@ namespace DubuqueCodeCamp.Registration
     {
         private readonly IRegionManager _regionManager;
 
-        private DelegateCommand<string> NavigateCommand { get; set; }
+        public DelegateCommand<string> NavigateCommand { get; set; }
 
         public SplashScreenViewModel(IRegionManager regionManager)
         {

@@ -4,7 +4,7 @@
     {
         public static string MainWindow => "MainWindow";
 
-        public static string MainContent => "MainContentRegion";
+        public static string MainContentRegion => "MainContentRegion";
 
         public static string SplashScreen => "SplashScreenView";
     }
