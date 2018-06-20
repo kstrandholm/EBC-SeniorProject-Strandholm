@@ -13,66 +13,39 @@ namespace DubuqueCodeCamp.Registration
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        private RegistrationInformation _registration = new RegistrationInformation();
-        private RegistrationInformation Registration
-        {
-            get => _registration;
-            set => SetProperty(ref _registration, value);
-        }
-
         private string _firstName;
         public string FirstName
         {
             get => _firstName;
-            set
-            {
-                if (SetProperty(ref _firstName, value))
-                    _eventAggregator.GetEvent<UpdatedFirstNameEvent>().Publish(_firstName);
-            }
+            set => SetProperty(ref _firstName, value);
         }
 
         private string _lastName;
         public string LastName
         {
             get => _lastName;
-            set
-            {
-                if (SetProperty(ref _lastName, value))
-                    _eventAggregator.GetEvent<UpdatedLastNameEvent>().Publish(_lastName);
-            }
+            set => SetProperty(ref _lastName, value);
         }
 
         private string _emailAddress;
         public string EmailAddress
         {
             get => _emailAddress;
-            set
-            {
-                if (SetProperty(ref _emailAddress, value))
-                    _eventAggregator.GetEvent<UpdatedEmailEvent>().Publish(_emailAddress);
-            }
+            set => SetProperty(ref _emailAddress, value);
         }
 
         private string _occupation;
         public string Occupation
         {
             get => _occupation;
-            set
-            {
-                if (SetProperty(ref _occupation, value))
-                    _eventAggregator.GetEvent<UpdatedOccupationEvent>().Publish(_occupation);
-            }
+            set => SetProperty(ref _occupation, value);
         }
 
         private DateTime _birthDate;
         public DateTime BirthDate
         {
             get => _birthDate;
-            set
-            {
-                if (SetProperty(ref _birthDate, value))
-                    _eventAggregator.GetEvent<UpdatedBirthDateEvent>().Publish(_birthDate);
-            }
+            set => SetProperty(ref _birthDate, value);
         }
 
         /// <summary>
@@ -98,44 +71,6 @@ namespace DubuqueCodeCamp.Registration
             // Define Commands
             NextCommand = new DelegateCommand(Execute, CanExecute);
             CancelCommand = new DelegateCommand(Cancel);
-
-            // Subscribe to Events
-            _eventAggregator.GetEvent<UpdatedFirstNameEvent>().Subscribe(UpdateRegistrationFirstName);
-            _eventAggregator.GetEvent<UpdatedLastNameEvent>().Subscribe(UpdateRegistrationLastName);
-            _eventAggregator.GetEvent<UpdatedEmailEvent>().Subscribe(UpdateRegistrationEmail);
-            _eventAggregator.GetEvent<UpdatedOccupationEvent>().Subscribe(UpdateRegistrationOccupation);
-            _eventAggregator.GetEvent<UpdatedBirthDateEvent>().Subscribe(UpdateRegistrationBirthDate);
-            _eventAggregator.GetEvent<UpdatedTalkInterestsEvent>().Subscribe(UpdateTalkInterests);
-        }
-
-        private void UpdateRegistrationFirstName(string firstName)
-        {
-            Registration.FirstName = firstName;
-        }
-
-        private void UpdateRegistrationLastName(string lastName)
-        {
-            Registration.LastName = lastName;
-        }
-
-        private void UpdateRegistrationEmail(string emailAddress)
-        {
-            Registration.EmailAddress = emailAddress;
-        }
-
-        private void UpdateRegistrationOccupation(string occupation)
-        {
-            Registration.Occupation = occupation;
-        }
-
-        private void UpdateRegistrationBirthDate(DateTime birthDate)
-        {
-            Registration.BirthDate = birthDate;
-        }
-
-        private void UpdateTalkInterests(List<ChosenTalk> chosenTalks)
-        {
-            Registration.ChosenTalks = chosenTalks;
         }
 
         private bool CanExecute()
@@ -146,7 +81,16 @@ namespace DubuqueCodeCamp.Registration
 
         private void Execute()
         {
-            // TODO: Pass this information to the next screen to enable 
+            var registration = new RegistrationInformation
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                EmailAddress = EmailAddress,
+                BirthDate = BirthDate,
+                Occupation = Occupation
+            };
+            _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Publish(registration);
+
             // Navigate to the Talk Interest screen to continue registration
             _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.TalkInterests);
 
