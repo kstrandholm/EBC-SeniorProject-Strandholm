@@ -2,6 +2,7 @@
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
     /// Interaction logic for TalkInterestsView
     /// </summary>

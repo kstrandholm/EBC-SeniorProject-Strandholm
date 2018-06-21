@@ -55,7 +55,7 @@ namespace DubuqueCodeCamp.Registration
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            SubmitCommand = new DelegateCommand(Execute);
+            SubmitCommand = new DelegateCommand(Submit);
             CancelCommand = new DelegateCommand(Cancel);
             BackCommand = new DelegateCommand(Back);
 
@@ -74,9 +74,9 @@ namespace DubuqueCodeCamp.Registration
             ChosenTalks = DatabaseOperations.GetChosenTalks();
         }
 
-        private void Execute()
+        private void Submit()
         {
-            // TODO: Submit all the information to the database
+            // TODO: Verify submited all the information to the database
             _registration.ChosenTalks = ChosenTalks;
             DatabaseOperations.SaveRegistration(_registration);
 
@@ -87,7 +87,7 @@ namespace DubuqueCodeCamp.Registration
 
         private void Cancel()
         {
-            var result = MessageBox.Show("This will discard all your changes.", "Are you sure?", MessageBoxButton.OKCancel);
+            var result = MessageBox.Show("This will discard all your changes. Are you sure?", "Are you sure?", MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
                 NavigateToSplashScreen();
