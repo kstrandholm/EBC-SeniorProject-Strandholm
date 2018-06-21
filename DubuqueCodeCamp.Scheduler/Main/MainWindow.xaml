@@ -12,6 +12,7 @@
         MinHeight="486" MinWidth="598"
         Padding="15 20">
 
+  <!-- Main Content -->
   <Grid Margin="15 20" >
 
     <Grid.RowDefinitions>
@@ -20,6 +21,7 @@
     </Grid.RowDefinitions>
 
     <StackPanel Grid.Row="0">
+      <!-- Top Section of the Window -->
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"></ColumnDefinition>
@@ -30,8 +32,10 @@
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
 
+          <!-- Set the Base Date for the Window -->
           <Calendar SelectedDate="{Binding EventDate}" />
 
+          <!-- Create the Proposed Schedule -->
           <Button HorizontalAlignment="Center"
                   Command="{Binding CreateScheduleCommand}">
             <TextBlock TextAlignment="Center">
@@ -40,13 +44,15 @@
           </Button>
           
         </StackPanel>
-        
+
+        <!-- Sessions Region -->
         <ContentControl Grid.Column="2"
                         prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" />
       </Grid>
 
     </StackPanel>
 
+    <!-- Schedule Region -->
     <ContentControl Grid.Row="1" Margin="0 15 0 0"
                     prism:RegionManager.RegionName="{Binding ScheduleRegion, Source={StaticResource RegionNames}}" />
 

@@ -60,7 +60,6 @@
     </Setter>
   </Style>
 
-
   <!-- Text Box Style Template -->
   <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
   <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
@@ -107,7 +106,5 @@
       </MultiTrigger>
     </Style.Triggers>
   </Style>
-
-
 
 </ResourceDictionary>

@@ -6,6 +6,9 @@ using System.Windows;
 
 namespace DubuqueCodeCamp.Scheduler
 {
+    /// <summary>
+    /// Class for performing various read and write operations on the Database for the Scheduler project
+    /// </summary>
     public class DatabaseOperations
     {
         private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
@@ -78,6 +81,11 @@ namespace DubuqueCodeCamp.Scheduler
             return true;
         }
 
+        /// <summary>
+        /// Get the existing schedule entries for the given date from the database
+        /// </summary>
+        /// <param name="eventDate">Date of the event to query for</param>
+        /// <returns>List of <see cref="ProposedSchedule"/></returns>
         public static List<ProposedSchedule> GetProposedSchedule(DateTime eventDate)
         {
             return (from sched in DATABASE.ProposedSchedules
@@ -86,6 +94,11 @@ namespace DubuqueCodeCamp.Scheduler
                     select sched).ToList();
         }
 
+        /// <summary>
+        /// Get the existing sessions for the given date from the database
+        /// </summary>
+        /// <param name="eventDate">Date of the event to query for</param>
+        /// <returns>List of <see cref="Session"/></returns>
         public static List<Session> GetExistingSessions(DateTime eventDate)
         {
             return (from session in DATABASE.Sessions
@@ -93,6 +106,11 @@ namespace DubuqueCodeCamp.Scheduler
                     select session).ToList();
         }
 
+        /// <summary>
+        /// Get the existing talks for the given date from the database
+        /// </summary>
+        /// <param name="eventDate">Date of the event to query for</param>
+        /// <returns>List of <see cref="Talk"/></returns>
         public static List<Talk> GetExistingTalks(DateTime eventDate)
         {
             // TODO: remove null check once database null nonsense is taken care of
@@ -101,6 +119,11 @@ namespace DubuqueCodeCamp.Scheduler
                     select talk).ToList();
         }
 
+        /// <summary>
+        /// Get the existing schedule entries for the given date and map it into a format the UI can read
+        /// </summary>
+        /// <param name="eventDate">Date of the event to query for</param>
+        /// <returns>List of <see cref="TalkSession"/></returns>
         public static List<TalkSession> GetMappedTalkSessions(DateTime eventDate)
         {
             var proposedSchedule = GetProposedSchedule(eventDate);

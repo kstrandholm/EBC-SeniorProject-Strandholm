@@ -73,7 +73,8 @@ namespace DubuqueCodeCamp.Scheduler
         /// </remarks>
         private void UpdatePropertyCanExecute()
         {
-            CanExecuteCreateSchedule = DatabaseOperations.GetExistingSessions(_eventDate).Any() && DatabaseOperations.GetExistingTalks(_eventDate).Any();
+            CanExecuteCreateSchedule = DatabaseOperations.GetExistingSessions(_eventDate).Any() &&
+                                       DatabaseOperations.GetExistingTalks(_eventDate).Any();
         }
 
         private void Execute()
