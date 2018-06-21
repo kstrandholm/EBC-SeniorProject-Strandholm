@@ -32,12 +32,12 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         /// <summary>
-        /// Command to 
+        /// Command to add a new Session and navigate to the Register view
         /// </summary>
-        public ICommand NavigateCommand { get; set; }
+        public ICommand AddSessionCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Command to remove the selected Session
         /// </summary>
         public ICommand RemoveSessionCommand { get; set; }
 
@@ -52,7 +52,7 @@ namespace DubuqueCodeCamp.Scheduler
             _regionManager = regionManager;
 
             // Define Commands
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            AddSessionCommand = new DelegateCommand<string>(Navigate);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
