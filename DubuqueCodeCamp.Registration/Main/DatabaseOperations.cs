@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <summary>
+    /// Class for performing various read and write operations on the Database for the Registration project
+    /// </summary>
     public class DatabaseOperations
     {
         private static readonly DCCKellyDatabase DATABASE = new DCCKellyDatabase();
-
-        // TODO: potentially get rid of this method
-        public static List<Talk> GetTalks()
-        {
-            // TODO: remove null check once database nullability stuff is taken care of
-            return DATABASE.Talks.Where(talk => talk.DateGiven == DateTime.Today || talk.DateGiven == null).ToList();
-        }
-
+        
+        /// <summary>
+        /// Get a list of the Talks in the database and map them to a list of ChosenTalks
+        /// </summary>
+        /// <returns>List of talks that can be chosen</returns>
         public static List<ChosenTalk> GetChosenTalks()
         {
             const bool NOT_CHOSEN = false;
@@ -38,6 +38,10 @@ namespace DubuqueCodeCamp.Registration
                                }).ToList();
         }
 
+        /// <summary>
+        /// Save the given Registration Information to the database
+        /// </summary>
+        /// <param name="registration">RegistrationInformation record to save</param>
         public static void SaveRegistration(RegistrationInformation registration)
         {
             SaveRegistrant(registration);
