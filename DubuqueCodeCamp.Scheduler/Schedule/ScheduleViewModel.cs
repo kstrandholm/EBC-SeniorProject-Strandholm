@@ -5,11 +5,18 @@ using System.Collections.Generic;
 
 namespace DubuqueCodeCamp.Scheduler
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// View Model associated with the Schedule view
+    /// </summary>
     public class ScheduleViewModel : BindableBase
     {
         private DateTime _eventDate = DateTime.Today;
 
         private List<TalkSession> _schedule = DatabaseOperations.GetMappedTalkSessions(DateTime.Today);
+        /// <summary>
+        /// List of <see cref="TalkSession"/> that make up the proposed schedule
+        /// </summary>
         public List<TalkSession> Schedule
         {
             get => _schedule;
@@ -17,9 +24,9 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         /// <summary>
-        /// 
+        /// Constructor for the view model of the Schedule view
         /// </summary>
-        /// <param name="eventAggregator"></param>
+        /// <param name="eventAggregator">Event aggregatory created and passed in by Prism/Unity</param>
         public ScheduleViewModel(IEventAggregator eventAggregator)
         {
             // Subscribe to Events

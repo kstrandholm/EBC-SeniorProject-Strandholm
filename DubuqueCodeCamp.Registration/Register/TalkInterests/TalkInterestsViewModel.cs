@@ -10,7 +10,7 @@ namespace DubuqueCodeCamp.Registration
 {
     /// <inheritdoc />
     /// <summary>
-    /// View Model linked to the Talk Interests view
+    /// View Model associated with the Talk Interests view
     /// </summary>
     public class TalkInterestsViewModel : BindableBase
     {
