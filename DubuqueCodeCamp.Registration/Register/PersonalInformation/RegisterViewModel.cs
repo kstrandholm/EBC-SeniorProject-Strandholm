@@ -69,7 +69,8 @@ namespace DubuqueCodeCamp.Registration
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            NextCommand = new DelegateCommand(Execute, CanExecute);
+            NextCommand = new DelegateCommand(Execute, CanExecute)
+                .ObservesProperty(() => FirstName).ObservesProperty(() => LastName).ObservesProperty(() => EmailAddress);
             CancelCommand = new DelegateCommand(Cancel);
 
             // Subscribe to Events
@@ -87,8 +88,7 @@ namespace DubuqueCodeCamp.Registration
 
         private bool CanExecute()
         {
-            // TODO: implement real logic
-            return true;
+            return !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(EmailAddress);
         }
 
         private void Execute()

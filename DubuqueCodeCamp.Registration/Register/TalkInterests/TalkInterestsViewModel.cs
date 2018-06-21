@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Input;
 
 namespace DubuqueCodeCamp.Registration
 {

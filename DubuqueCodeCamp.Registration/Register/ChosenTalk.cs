@@ -1,6 +1,4 @@
-﻿using DubuqueCodeCamp.DatabaseConnection;
-
-namespace DubuqueCodeCamp.Registration
+﻿namespace DubuqueCodeCamp.Registration
 {
     public class ChosenTalk
     {

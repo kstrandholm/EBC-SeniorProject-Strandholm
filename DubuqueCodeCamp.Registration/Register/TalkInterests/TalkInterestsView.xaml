@@ -14,8 +14,8 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-
-      <!-- Talk Interest Selection -->
+      
+      <!-- List of available talks -->
       <ListView Grid.Row="1"
                 ItemsSource="{Binding ChosenTalks, UpdateSourceTrigger=PropertyChanged}"
                 FontSize="14" MaxHeight="750"
@@ -26,7 +26,7 @@
               <GridViewColumn>
                 <GridViewColumn.CellTemplate>
                   <DataTemplate>
-                    <CheckBox IsChecked="{Binding Chosen}" />
+                  <CheckBox IsChecked="{Binding Chosen}" />
                   </DataTemplate>
                 </GridViewColumn.CellTemplate>
             </GridViewColumn>
