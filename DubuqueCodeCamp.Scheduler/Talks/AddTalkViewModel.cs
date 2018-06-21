@@ -18,7 +18,7 @@ namespace DubuqueCodeCamp.Scheduler
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        private DateTime _date;
+        private DateTime _date = DateTime.Today;
         public DateTime Date
         {
             get => _date;
@@ -72,25 +72,27 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            SaveTalkCommand = new DelegateCommand<string>(SaveTalk, CanExecute);
-            CancelCommand = new DelegateCommand(ReturnToTalks);
+            SaveTalkCommand = new DelegateCommand<string>(SaveTalk, CanExecute)
+                .ObservesProperty(() => Date).ObservesProperty(() => Title).ObservesProperty(() => Summary)
+                .ObservesProperty(() => SpeakerFirstName).ObservesProperty(() => SpeakerLastName);
+            CancelCommand = new DelegateCommand<string>(ReturnToTalks);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
         }
 
-        private void ReturnToTalks()
+        private void ReturnToTalks(string destination)
         {
-            _regionManager.RequestNavigate(RegionNames.TalksRegion, RegionNames.TalksView);
+            _regionManager.RequestNavigate(RegionNames.TalksRegion, destination);
         }
 
         private bool CanExecute(string arg)
         {
             return Date != DateTime.MinValue && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Summary) &&
-                   !string.IsNullOrEmpty(SpeakerFirstName);
+                   !string.IsNullOrEmpty(SpeakerFirstName) && !string.IsNullOrEmpty(SpeakerLastName);
         }
 
-        private void SaveTalk()
+        private void SaveTalk(string destination)
         {
             // Map the current data to the Sessions class
             var newTalk = new TalkInformation()
@@ -109,7 +111,7 @@ namespace DubuqueCodeCamp.Scheduler
                 _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish();
 
                 // Navigate to the main Sessions View
-                ReturnToTalks();
+                ReturnToTalks(destination);
             }
         }
 

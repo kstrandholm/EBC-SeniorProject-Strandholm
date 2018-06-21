@@ -5,35 +5,37 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"></ColumnDefinition>
       <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
     </Grid.ColumnDefinitions>
 
-    <!-- Talk Buttons -->
-    <Grid Grid.Column="0">
-      <StackPanel VerticalAlignment="Center">
-        <Button Content="Add Talk" Command="{Binding AddTalkCommand}" CommandParameter="AddTalkView" />
-        <Button Content="Remove Talk" Command="{Binding RemoveTalkCommand}" />
-      </StackPanel>
-    </Grid>
-
     <!-- Sessions Listbox -->
-    <StackPanel Grid.Column="1">
+    <StackPanel Grid.Column="0" Margin="10">
       <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="18">Talks</TextBlock>
       <ListView ItemsSource="{Binding Talks, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding TalkInformation}" SelectionMode="Single"
-                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250" 
-                Name="TalksListView" >
+                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="150" 
+                Name="TalksListView" MaxWidth="500" MinHeight="125" >
         <ListView.View>
           <GridView>
-            <GridViewColumn DisplayMemberBinding="{Binding TalkDate, StringFormat='MM/dd/yyyy'}" Header="Date" Width="Auto" />
-            <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="Auto" />
-            <GridViewColumn DisplayMemberBinding="{Binding Summary}" Header="Summary" Width="Auto" />
-            <GridViewColumn DisplayMemberBinding="{Binding Speaker}" Header="Speaker" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding TalkTitle}" Header="Title" Width="123" />
+            <GridViewColumn DisplayMemberBinding="{Binding TalkSummary}" Header="Summary" Width="200" />
+            <GridViewColumn DisplayMemberBinding="{Binding SpeakerFirstName}" Header="Speaker First Name" Width="75" />
+            <GridViewColumn DisplayMemberBinding="{Binding SpeakerLastName}" Header="Speaker Last Name" Width="75" />
           </GridView>
         </ListView.View>
       </ListView>
     </StackPanel>
+
+    <!-- Talk Buttons -->
+    <Grid Grid.Column="1">
+      <StackPanel VerticalAlignment="Center">
+        <Button Content="Add Talk" Command="{Binding AddTalkCommand}"
+                CommandParameter="AddTalkView" Style="{StaticResource MainButton}" />
+        <Button Content="Remove Talk" Command="{Binding RemoveTalkCommand}"
+                Style="{StaticResource MainButton}"/>
+      </StackPanel>
+    </Grid>
 
   </Grid>
 </UserControl>

@@ -59,6 +59,11 @@
       </Setter.Value>
     </Setter>
   </Style>
+  
+  <!-- Main Window Buttons Style -->
+  <Style x:Key="MainButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="MinWidth" Value="100" />
+  </Style>
 
   <!-- Text Box Style Template -->
   <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>

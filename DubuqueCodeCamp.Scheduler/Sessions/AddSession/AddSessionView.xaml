@@ -18,16 +18,10 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-    
-    <!-- Date Selector for the new Session -->
-    <Calendar Grid.Column="1" Grid.Row="0"
-              SelectionMode="SingleDate"
-              SelectedDate="{Binding SessionDate,
-                              Mode=TwoWay,
-                              UpdateSourceTrigger=PropertyChanged,
-                              BindsDirectlyToSource=True}" />
 
+    <TextBlock Grid.Column="1" Grid.Row="0" Text="Session Start Time" Margin="5" />
     <!-- Time Start Selector for the new Session -->
     <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="1"
                          Value="{Binding TimeStart, UpdateSourceTrigger=PropertyChanged}"
@@ -35,17 +29,17 @@
                          Kind="Utc" CurrentDateTimePart="Hour12"
                          Format="ShortTime" />
 
+    <TextBlock Grid.Column="1" Grid.Row="2" Text="Session End Time" Margin="5" />
     <!-- Time End Selector for the new Session -->
-    <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="2"
+    <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="3"
                          Value="{Binding TimeEnd,
                                   UpdateSourceTrigger=PropertyChanged}"
                          Margin="5"
                          Kind="Utc" CurrentDateTimePart="Hour12"
                          Format="ShortTime" />
 
-
     <!-- Buttons -->
-    <Grid Grid.Column="1" Grid.Row="3">
+    <Grid Grid.Column="1" Grid.Row="4">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
         <ColumnDefinition Width="Auto" />

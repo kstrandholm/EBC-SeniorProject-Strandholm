@@ -135,7 +135,7 @@
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Schedule\ScheduleViewModel.cs" />
-    <Compile Include="Sessions\SessionsModule.cs" />
+    <Compile Include="Sessions\ContentModule.cs" />
     <Compile Include="Sessions\AddSession\SessionsUpdatedEvent.cs" />
     <Compile Include="Sessions\AddSession\AddSessionViewModel.cs" />
     <Compile Include="Main\MainWindowViewModel.cs" />

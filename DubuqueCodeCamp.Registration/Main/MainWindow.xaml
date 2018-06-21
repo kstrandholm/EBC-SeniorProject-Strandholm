@@ -7,9 +7,8 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:DubuqueCodeCamp.Registration"
         mc:Ignorable="d"
-        Title="Registation"
-        WindowState="Maximized"
-        WindowStyle="None">
+        Title="Registation" Background="WhiteSmoke"
+        WindowState="Maximized" WindowStyle="None">
   
   <ContentControl prism:RegionManager.RegionName="{Binding MainContentRegion, Source={StaticResource RegionNames}}" />
 </Window>

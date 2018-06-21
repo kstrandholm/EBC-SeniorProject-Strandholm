@@ -8,9 +8,9 @@
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
-        Height="650" Width="1000"
-        MinHeight="600" MinWidth="700"
-        Padding="15 20">
+        Height="750" Width="1000"
+        MinHeight="750" MinWidth="700"
+        Padding="15 20" Background="AliceBlue">
 
   <!-- Main Content -->
   <Grid Margin="15 20" >
@@ -31,7 +31,7 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
 
           <!-- Set the Base Date for the Window -->
           <Calendar SelectedDate="{Binding EventDate}" Margin="5" />

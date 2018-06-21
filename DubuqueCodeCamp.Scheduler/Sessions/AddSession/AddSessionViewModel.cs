@@ -19,7 +19,7 @@ namespace DubuqueCodeCamp.Scheduler
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
-        private DateTime _sessionDate;
+        private DateTime _sessionDate = DateTime.Today;
         /// <summary>
         /// Date the session being added will occur
         /// </summary>

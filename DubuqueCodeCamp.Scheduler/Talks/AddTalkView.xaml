@@ -3,7 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-            
+
+  <Grid Margin="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- Talk Information Entry -->
+    <StackPanel Grid.Row="1">
+      <TextBlock Text="Title" />
+      <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+
+      <TextBlock Text="Summary" />
+      <TextBox Text="{Binding Summary, UpdateSourceTrigger=PropertyChanged}"
+               MinHeight="50"/>
+
+      <TextBlock Text="Speaker First Name" />
+      <TextBox Text="{Binding SpeakerFirstName, UpdateSourceTrigger=PropertyChanged}" />
+
+      <TextBlock Text="Speaker Last Name" />
+      <TextBox Text="{Binding SpeakerLastName, UpdateSourceTrigger=PropertyChanged}" />
+    </StackPanel>
+
+    <!-- Buttons -->
+    <Grid Grid.Row="3">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="1"
+              Content="Save Session"
+            HorizontalAlignment="Center"
+            Command="{Binding SaveSesssionCommand}" />
+
+      <Button Grid.Column="2"
+              Content="Cancel"
+              HorizontalAlignment="Center"
+              Command="{Binding CancelCommand}" />
     </Grid>
+  </Grid>
 </UserControl>

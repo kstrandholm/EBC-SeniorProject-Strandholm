@@ -6,26 +6,17 @@
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto"></ColumnDefinition>
-      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
     </Grid.ColumnDefinitions>
 
-    <!-- Session Buttons -->
-    <Grid Grid.Column="0">
-      <StackPanel VerticalAlignment="Center">
-        <Button Content="Add Session" Command="{Binding AddSessionCommand}" CommandParameter="AddSessionView" />
-        <Button>Remove Session</Button>
-      </StackPanel>
-    </Grid>
-
     <!-- Sessions Listbox -->
-    <StackPanel Grid.Column="1">
-      <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
+    <StackPanel Grid.Column="0" Margin="10">
+      <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="18">Sessions</TextBlock>
       <ListView ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SessionInformation}" SelectionMode="Single"
-               ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  >
+               ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="150" MinHeight="125"  >
         <ListView.View>
           <GridView>
-            <GridViewColumn DisplayMemberBinding="{Binding SessionDate, StringFormat='MM/dd/yyyy'}" Header="Date" Width="Auto" />
             <GridViewColumn DisplayMemberBinding="{Binding TimeStart, StringFormat='{}{0: hh:mm tt}'}" Header="Start Time" Width="Auto" />
             <GridViewColumn DisplayMemberBinding="{Binding TimeEnd, StringFormat='{}{0: hh:mm tt}'}" Header="End Time" Width="Auto" />
             <GridViewColumn DisplayMemberBinding="{Binding CalcLengthMinutes}" Header="Length(Mins)" Width="Auto" />
@@ -33,6 +24,16 @@
         </ListView.View>
       </ListView>
     </StackPanel>
+
+    <!-- Session Buttons -->
+    <Grid Grid.Column="1">
+      <StackPanel VerticalAlignment="Center">
+        <Button Content="Add Session" Command="{Binding AddSessionCommand}"
+                CommandParameter="AddSessionView" Style="{StaticResource MainButton}" />
+        <Button Content="Remove Session" Command="{Binding RemoveSessionCommand}"
+                Style="{StaticResource MainButton}" />
+      </StackPanel>
+    </Grid>
     
   </Grid>
 </UserControl>
