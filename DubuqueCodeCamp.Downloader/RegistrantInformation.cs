@@ -6,6 +6,7 @@ namespace DubuqueCodeCamp.Downloader
 {
     /// <inheritdoc cref="IRegistrant" />
     /// <summary>
+    /// Class that represents a single record in the Registrant Download File
     /// </summary>
     public class RegistrantInformation : IRegistrant, IEquatable<RegistrantInformation>
     {
