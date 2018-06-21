@@ -21,7 +21,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private DateTime _sessionDate;
         /// <summary>
-        /// 
+        /// Date the session being added will occur
         /// </summary>
         public DateTime SessionDate
         {
@@ -36,7 +36,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private DateTime _timeStart = DateTime.Today;
         /// <summary>
-        /// 
+        /// Time the session being added will begin
         /// </summary>
         public DateTime TimeStart
         {
@@ -46,7 +46,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private DateTime _timeEnd = DateTime.Today;
         /// <summary>
-        /// 
+        /// Time the session being added will end
         /// </summary>
         public DateTime TimeEnd
         {
@@ -54,12 +54,19 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _timeEnd, value);
         }
 
+        /// <summary>
+        /// Command to finish editing and save the new Session, and to return to the <see cref="MainSessionsView"/>
+        /// </summary>
         public ICommand SaveSesssionCommand { get; set; }
 
+
+        /// <summary>
+        /// Command to cancel adding a new Session, and to return to the <see cref="MainSessionsView"/>
+        /// </summary>
         public ICommand CancelCommand { get; set; }
 
         /// <summary>
-        /// 
+        /// Constructor for the view model associated with the <see cref="AddSessionView"/>
         /// </summary>
         /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         /// <param name="eventAggregator">Event aggregator created and passed in by Prism/Unity</param>

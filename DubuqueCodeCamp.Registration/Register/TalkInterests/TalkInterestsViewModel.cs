@@ -40,7 +40,7 @@ namespace DubuqueCodeCamp.Registration
         public ICommand CancelCommand { get; set; }
 
         /// <summary>
-        /// Command to save the current state and go back to the Personal Information view
+        /// Command to leave the view in its current state and go back to the Personal Information view
         /// </summary>
         public ICommand BackCommand { get; set; }
 

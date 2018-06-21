@@ -5,9 +5,14 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace DubuqueCodeCamp.Scheduler
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// View Model associated with the <see cref="MainSessionsView"/>
+    /// </summary>
     public class MainSessionsViewModel : BindableBase
     {
         private IEventAggregator _eventAggregator;
@@ -26,13 +31,21 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _sessions, value);
         }
 
-        public DelegateCommand<string> NavigateCommand { get; set; }
+        /// <summary>
+        /// Command to 
+        /// </summary>
+        public ICommand NavigateCommand { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
+        public ICommand RemoveSessionCommand { get; set; }
+
+        /// <summary>
+        /// Constructor for the view model associated with the <see cref="MainSessionsView"/>
+        /// </summary>
         /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
-        /// <param name="eventAggregator"></param>
+        /// <param name="eventAggregator">Event aggregator created and passed in by Prism/Unity</param>
         public MainSessionsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -45,8 +58,6 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(RefreshSessions);
 
-            // Publish Events
-            // TODO: publish necessary events
             // TODO: implement remove session button
         }
 

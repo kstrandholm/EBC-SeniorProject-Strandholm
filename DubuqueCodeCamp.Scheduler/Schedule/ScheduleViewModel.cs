@@ -24,9 +24,9 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         /// <summary>
-        /// Constructor for the view model of the Schedule view
+        /// Constructor for the view model associated with the <see cref="ScheduleView"/>
         /// </summary>
-        /// <param name="eventAggregator">Event aggregatory created and passed in by Prism/Unity</param>
+        /// <param name="eventAggregator">Event aggregator created and passed in by Prism/Unity</param>
         public ScheduleViewModel(IEventAggregator eventAggregator)
         {
             // Subscribe to Events
