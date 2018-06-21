@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Windows.Input;
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// View model associated to the Register view
+    /// </summary>
     public class RegisterViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
         private string _firstName;
+        /// <summary>
+        /// First name of the currently registering person
+        /// </summary>
         public string FirstName
         {
             get => _firstName;
@@ -21,6 +27,9 @@ namespace DubuqueCodeCamp.Registration
         }
 
         private string _lastName;
+        /// <summary>
+        /// Last name of the currently registering person. Required field
+        /// </summary>
         public string LastName
         {
             get => _lastName;
@@ -28,6 +37,9 @@ namespace DubuqueCodeCamp.Registration
         }
 
         private string _emailAddress;
+        /// <summary>
+        /// Email Address of the currently registering person. Required field
+        /// </summary>
         public string EmailAddress
         {
             get => _emailAddress;
@@ -35,6 +47,9 @@ namespace DubuqueCodeCamp.Registration
         }
 
         private string _occupation;
+        /// <summary>
+        /// Occupation of the currently registering person. Optional field
+        /// </summary>
         public string Occupation
         {
             get => _occupation;
@@ -42,6 +57,9 @@ namespace DubuqueCodeCamp.Registration
         }
 
         private DateTime? _birthDate;
+        /// <summary>
+        /// Birth date of the currently registering person. Optional field
+        /// </summary>
         public DateTime? BirthDate
         {
             get => _birthDate;

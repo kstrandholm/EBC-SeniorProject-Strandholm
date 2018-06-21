@@ -20,6 +20,9 @@ namespace DubuqueCodeCamp.Registration
         private RegistrationInformation _registration;
 
         private List<ChosenTalk> _chosenTalks = DatabaseOperations.GetChosenTalks();
+        /// <summary>
+        /// List of Talks and whether they have been chosen by the user or not
+        /// </summary>
         public List<ChosenTalk> ChosenTalks
         {
             get => _chosenTalks;
