@@ -32,6 +32,8 @@ namespace DubuqueCodeCamp.Scheduler
             Container.RegisterTypeForNavigation<MainSessionsView>(RegionNames.MainSessions);
             Container.RegisterTypeForNavigation<AddSessionView>(RegionNames.AddSession);
             Container.RegisterTypeForNavigation<ScheduleView>(RegionNames.ScheduleView);
+            Container.RegisterTypeForNavigation<TalksView>(RegionNames.TalksView);
+            Container.RegisterTypeForNavigation<AddTalkView>(RegionNames.AddTalkView);
         }
 
         /// <inheritdoc />

@@ -71,7 +71,6 @@ namespace DubuqueCodeCamp.Downloader
 
             var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
-            // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
             var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
             logger.Information(messageToUse);
         }

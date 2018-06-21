@@ -8,7 +8,9 @@
     <!-- Register Button -->
     <Button Content="Register" FontSize="50"
             Command="{Binding NavigateCommand}"
-            CommandParameter="{Binding RegisterView, Source={StaticResource RegionNames}}" />
+            CommandParameter="{Binding RegisterView, Source={StaticResource RegionNames}}"
+            Background="Aqua"
+            BorderThickness="5" BorderBrush="DarkSlateGray" />
     
   </Grid>
 </UserControl>

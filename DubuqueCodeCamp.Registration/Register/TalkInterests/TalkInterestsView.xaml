@@ -18,7 +18,7 @@
       <!-- List of available talks -->
       <ListView Grid.Row="1"
                 ItemsSource="{Binding ChosenTalks, UpdateSourceTrigger=PropertyChanged}"
-                FontSize="14" MaxHeight="750"
+                FontSize="14" MaxHeight="750" MinHeight="400"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                 AlternationCount="2" >
         <ListView.View>
@@ -32,7 +32,7 @@
             </GridViewColumn>
             <GridViewColumn DisplayMemberBinding="{Binding SpeakerFirstName}" Header="First" Width="75" />
             <GridViewColumn DisplayMemberBinding="{Binding SpeakerLastName}" Header="Last" Width="75" />
-            <GridViewColumn Header="Talk">
+            <GridViewColumn Header="Talk" Width="300">
               <GridViewColumn.CellTemplate>
                 <DataTemplate>
                   <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding TalkTitle}" MaxWidth="300" />

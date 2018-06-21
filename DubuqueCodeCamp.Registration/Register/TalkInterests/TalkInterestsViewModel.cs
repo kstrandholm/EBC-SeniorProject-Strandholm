@@ -76,7 +76,6 @@ namespace DubuqueCodeCamp.Registration
 
         private void Submit(string destination)
         {
-            // TODO: Verify submited all the information to the database
             _registration.ChosenTalks = ChosenTalks;
             DatabaseOperations.SaveRegistration(_registration);
 

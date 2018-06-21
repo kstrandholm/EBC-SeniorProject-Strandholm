@@ -91,7 +91,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private bool CanExecute()
         {
-            return SessionDate != DateTime.MinValue && SessionDate != DateTime.Today && TimeStart.Date == SessionDate &&
+            return SessionDate != DateTime.MinValue && TimeStart.Date == SessionDate &&
                    TimeEnd.Date == SessionDate && TimeEnd > TimeStart;
         }
 

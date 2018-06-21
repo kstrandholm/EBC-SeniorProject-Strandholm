@@ -108,7 +108,7 @@ namespace DubuqueCodeCamp.Scheduler
             if (DatabaseOperations.SaveTalk(newTalk))
             {
                 // Publish the event
-                _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish();
+                _eventAggregator.GetEvent<TalksUpdatedEvent>().Publish();
 
                 // Navigate to the main Sessions View
                 ReturnToTalks(destination);

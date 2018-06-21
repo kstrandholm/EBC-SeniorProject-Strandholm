@@ -21,9 +21,8 @@ namespace DubuqueCodeCamp.Registration
         {
             const bool NOT_CHOSEN = false;
 
-            // TODO: remove null check once database nullability stuff is taken care of
             return (from talk in DATABASE.Talks
-                               where talk.DateGiven == DateTime.Today || talk.DateGiven == null
+                               where talk.DateGiven == DateTime.Today
                                let speaker = (from s in DATABASE.Speakers
                                               where s.ID == talk.SpeakerID
                                               select s).Single()

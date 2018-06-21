@@ -39,8 +39,9 @@
 
       <Button Grid.Column="1"
               Content="Save Session"
-            HorizontalAlignment="Center"
-            Command="{Binding SaveSesssionCommand}" />
+              HorizontalAlignment="Center"
+              Command="{Binding SaveTalkCommand}"
+              CommandParameter="{Binding TalksView, Source={StaticResource RegionNames}}" />
 
       <Button Grid.Column="2"
               Content="Cancel"
