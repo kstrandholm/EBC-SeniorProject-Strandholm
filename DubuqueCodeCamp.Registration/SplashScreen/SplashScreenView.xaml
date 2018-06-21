@@ -4,8 +4,11 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
   <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    
+    <!-- Register Button -->
     <Button Content="Register" FontSize="50"
             Command="{Binding NavigateCommand}"
             CommandParameter="{Binding RegisterView, Source={StaticResource RegionNames}}" />
+    
   </Grid>
 </UserControl>

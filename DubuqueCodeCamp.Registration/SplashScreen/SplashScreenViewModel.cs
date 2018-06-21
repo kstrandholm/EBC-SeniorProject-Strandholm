@@ -4,6 +4,10 @@ using Prism.Regions;
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// View model of the associated Splash Screen view
+    /// </summary>
     public class SplashScreenViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;

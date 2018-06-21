@@ -7,15 +7,17 @@ namespace DubuqueCodeCamp.Registration
 {
     /// <inheritdoc />
     /// <summary>
-    /// Bootstrapper for the Registration project. Manages the screens.
+    /// Bootstrapper for the Registration project that initializes and manages the various views
     /// </summary>
     public class Bootstrapper : UnityBootstrapper
     {
+        /// <inheritdoc />
         protected override DependencyObject CreateShell()
         {
             return Container.Resolve<MainWindow>();
         }
 
+        /// <inheritdoc />
         protected override void InitializeShell()
         {
             Application.Current.MainWindow.Show();
