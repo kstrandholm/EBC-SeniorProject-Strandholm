@@ -37,9 +37,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         /// <summary>
         /// Date this talk was or will be given
         /// </summary>
-        [Column(CanBeNull = true)]
-        // TODO: make non-nullable after dealing with database null nonsense
-        public DateTime? DateGiven { get; set; }
+        public DateTime DateGiven { get; set; }
 
         /// <summary>
         /// Last update time of this Talk record

@@ -34,7 +34,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         /// <summary>
         /// Email Address of the person represented by this Registrant record
         /// </summary>
-        [Column(CanBeNull = true)]
+        [Column]
         public string EmailAddress { get; set; }
 
         /// <inheritdoc />

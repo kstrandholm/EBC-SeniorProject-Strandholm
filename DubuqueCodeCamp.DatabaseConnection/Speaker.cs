@@ -34,8 +34,6 @@ namespace DubuqueCodeCamp.DatabaseConnection
         /// <summary>
         /// Email Address of the person represented by this Speaker record
         /// </summary>
-        // TODO: remove nullability once database is taken care of
-        [Column(CanBeNull = true)]
         public string EmailAddress { get; set; }
 
         /// <summary>
