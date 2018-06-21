@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:DubuqueCodeCamp.Scheduler"
         mc:Ignorable="d"
         Title="Dubuque Code Camp Schedule Creator"
-        Height="486.885" Width="655.635"
-        MinHeight="486" MinWidth="598"
+        Height="650" Width="1000"
+        MinHeight="600" MinWidth="700"
         Padding="15 20">
 
   <!-- Main Content -->
@@ -27,13 +27,14 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
           <ColumnDefinition Width="Auto"></ColumnDefinition>
           <ColumnDefinition Width="Auto"></ColumnDefinition>
-          <ColumnDefinition Width="2*"></ColumnDefinition>
+          <ColumnDefinition Width="Auto"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
 
           <!-- Set the Base Date for the Window -->
-          <Calendar SelectedDate="{Binding EventDate}" />
+          <Calendar SelectedDate="{Binding EventDate}" Margin="5" />
 
           <!-- Create the Proposed Schedule -->
           <Button HorizontalAlignment="Center"
@@ -45,9 +46,21 @@
           
         </StackPanel>
 
-        <!-- Sessions Region -->
-        <ContentControl Grid.Column="2"
+        <Grid Grid.Column="2">
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+          </Grid.RowDefinitions>
+          
+          <!-- Sessions Region -->
+          <ContentControl Grid.Row="0"
                         prism:RegionManager.RegionName="{Binding SessionsRegion, Source={StaticResource RegionNames}}" />
+
+          <!-- Talks Region -->
+        <ContentControl Grid.Row="1"
+                        prism:RegionManager.RegionName="{Binding TalksRegion, Source={StaticResource RegionNames}}" />
+        </Grid>
       </Grid>
 
     </StackPanel>

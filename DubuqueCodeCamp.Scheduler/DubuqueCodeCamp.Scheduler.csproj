@@ -125,12 +125,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Main\Bootstrapper.cs" />
-    <Compile Include="Main\DateUpdatedEvent.cs" />
-    <Compile Include="Main\RegionNames.cs" />
+    <Compile Include="DateUpdatedEvent.cs" />
+    <Compile Include="RegionNames.cs" />
     <Compile Include="Schedule\ScheduleCreatedEvent.cs" />
     <Compile Include="Schedule\TalkSession.cs" />
     <Compile Include="Schedule\ScheduleModule.cs" />
-    <Compile Include="Main\DatabaseOperations.cs" />
+    <Compile Include="DatabaseOperations.cs" />
     <Compile Include="Schedule\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +146,16 @@
     <Compile Include="Sessions\SessionsDisplay\MainSessionsView.xaml.cs">
       <DependentUpon>MainSessionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Talks\AddTalkView.xaml.cs">
+      <DependentUpon>AddTalkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Talks\AddTalkViewModel.cs" />
+    <Compile Include="Talks\TalksUpdatedEvent.cs" />
+    <Compile Include="Talks\TalkInformation.cs" />
+    <Compile Include="Talks\TalksView.xaml.cs">
+      <DependentUpon>TalksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Talks\TalksViewModel.cs" />
     <Page Include="Main\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +181,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sessions\SessionsDisplay\MainSessionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Talks\AddTalkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Talks\TalksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

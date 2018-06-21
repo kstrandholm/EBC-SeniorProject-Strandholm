@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="DubuqueCodeCamp.Scheduler.TalksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <!-- Talk Buttons -->
+    <Grid Grid.Column="0">
+      <StackPanel VerticalAlignment="Center">
+        <Button Content="Add Talk" Command="{Binding AddTalkCommand}" CommandParameter="AddTalkView" />
+        <Button Content="Remove Talk" Command="{Binding RemoveTalkCommand}" />
+      </StackPanel>
+    </Grid>
+
+    <!-- Sessions Listbox -->
+    <StackPanel Grid.Column="1">
+      <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="18">Talks</TextBlock>
+      <ListView ItemsSource="{Binding Talks, UpdateSourceTrigger=PropertyChanged}"
+                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  >
+        <ListView.View>
+          <GridView>
+            <GridViewColumn DisplayMemberBinding="{Binding TalkDate, StringFormat='MM/dd/yyyy'}" Header="Date" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding Summary}" Header="Summary" Width="Auto" />
+            <GridViewColumn DisplayMemberBinding="{Binding Speaker}" Header="Speaker" Width="Auto" />
+          </GridView>
+        </ListView.View>
+      </ListView>
+    </StackPanel>
+
+  </Grid>
+</UserControl>

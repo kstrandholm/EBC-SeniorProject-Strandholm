@@ -39,7 +39,7 @@ namespace DubuqueCodeCamp.Scheduler
             set
             {
                 SetProperty(ref _eventDate, value);
-                _eventAggregator.GetEvent<DateUpdatedEvent>().Publish(EventDate);
+                _eventAggregator.GetEvent<DateUpdatedEvent>().Publish(_eventDate);
                 UpdatePropertyCanExecute();
             }
         }

@@ -148,5 +148,21 @@ namespace DubuqueCodeCamp.Scheduler
                         SpeakerLastName = speaker.LastName
                     }).ToList();
         }
+
+        public static List<TalkInformation> GetTalkInformation(DateTime eventDate)
+        {
+            return (from talk in DATABASE.Talks
+                       where talk.DateGiven == eventDate
+                       let speaker = (from s in DATABASE.Speakers
+                                     where s.ID == talk.ID
+                                     select s).Single()
+                       select new TalkInformation
+                       {
+                           TalkDate = talk.DateGiven,
+                           TalkTitle = talk.Title,
+                           TalkSummary = talk.Summary,
+                           SpeakerName = speaker.FirstName + " " + speaker.LastName
+                       }).ToList();
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         /// <summary>
         /// Date this talk was or will be given
         /// </summary>
+        [Column]
         public DateTime DateGiven { get; set; }
 
         /// <summary>

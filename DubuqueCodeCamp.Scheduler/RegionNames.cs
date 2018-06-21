@@ -34,5 +34,15 @@
         /// Name of the schedule region
         /// </summary>
         public static string ScheduleRegion => "ScheduleRegion";
+
+        /// <summary>
+        /// Name of the talks region
+        /// </summary>
+        public static string TalksRegion => "TalksRegion";
+
+        /// <summary>
+        /// Name of the talks view
+        /// </summary>
+        public static string TalksView => "TalksView";
     }
 }

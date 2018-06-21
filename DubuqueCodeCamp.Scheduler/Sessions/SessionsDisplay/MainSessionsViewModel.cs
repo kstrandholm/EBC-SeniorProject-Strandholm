@@ -21,7 +21,6 @@ namespace DubuqueCodeCamp.Scheduler
         private DateTime _eventDate = DateTime.Today;
 
         private List<Session> _sessions = DatabaseOperations.GetExistingSessions(DateTime.Today);
-
         /// <summary>
         /// List of Proposed Schedules currently in the database
         /// </summary>
@@ -52,8 +51,9 @@ namespace DubuqueCodeCamp.Scheduler
             _regionManager = regionManager;
 
             // Define Commands
-            AddSessionCommand = new DelegateCommand<string>(Navigate);
-
+            AddSessionCommand = new DelegateCommand<string>(AddSession);
+            RemoveSessionCommand = new DelegateCommand(RemoveSession);
+            
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(RefreshSessions);
@@ -67,14 +67,20 @@ namespace DubuqueCodeCamp.Scheduler
             RefreshSessions();
         }
 
+        private void AddSession(string destination)
+        {
+            _regionManager.RequestNavigate(RegionNames.SessionsRegion, destination);
+        }
+
+        private void RemoveSession()
+        {
+            // TODO: remove session
+            _eventAggregator.GetEvent<SessionsUpdatedEvent>();
+        }
+
         private void RefreshSessions()
         {
             Sessions = DatabaseOperations.GetExistingSessions(_eventDate);
-        }
-
-        private void Navigate(string destination)
-        {
-            _regionManager.RequestNavigate(RegionNames.SessionsRegion, destination);
         }
     }
 }
