@@ -28,6 +28,6 @@
         /// <summary>
         /// Name of the TalkInterests view
         /// </summary>
-        public static string TalkInterests => "TalkInterestsView";
+        public static string TalkInterestsView => "TalkInterestsView";
         }
 }

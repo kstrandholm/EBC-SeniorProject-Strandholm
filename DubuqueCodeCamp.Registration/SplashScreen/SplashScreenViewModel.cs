@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -15,7 +16,7 @@ namespace DubuqueCodeCamp.Registration
         /// <summary>
         /// Command to begin registration and navigate to the Register view
         /// </summary>
-        public DelegateCommand<string> NavigateCommand { get; set; }
+        public ICommand NavigateCommand { get; set; }
 
         /// <summary>
         /// Constructor for the view model of the Splash Screen view

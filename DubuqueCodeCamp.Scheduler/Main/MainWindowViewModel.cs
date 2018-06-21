@@ -59,7 +59,7 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            CreateScheduleCommand = new DelegateCommand(Execute).ObservesCanExecute(() => CanExecuteCreateSchedule);
+            CreateScheduleCommand = new DelegateCommand(CreateSchedule).ObservesCanExecute(() => CanExecuteCreateSchedule);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(UpdatePropertyCanExecute);
@@ -77,7 +77,7 @@ namespace DubuqueCodeCamp.Scheduler
                                        DatabaseOperations.GetExistingTalks(_eventDate).Any();
         }
 
-        private void Execute()
+        private void CreateSchedule()
         {
             var scheduleSaved = DatabaseOperations.CreateProposedSchedule(EventDate);
 
