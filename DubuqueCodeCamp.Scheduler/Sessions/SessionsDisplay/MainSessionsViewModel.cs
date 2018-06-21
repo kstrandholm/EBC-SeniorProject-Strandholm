@@ -30,6 +30,16 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _sessions, value);
         }
 
+        private Session _sessionInformation;
+        /// <summary>
+        /// List of Proposed Schedules currently in the database
+        /// </summary>
+        public Session SessionInformation
+        {
+            get => _sessionInformation;
+            set => SetProperty(ref _sessionInformation, value);
+        }
+
         /// <summary>
         /// Command to add a new Session and navigate to the Register view
         /// </summary>
@@ -72,7 +82,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void RemoveSession()
         {
-            // TODO: remove session
+            DatabaseOperations.RemoveSession(SessionInformation);
             _eventAggregator.GetEvent<SessionsUpdatedEvent>();
         }
 

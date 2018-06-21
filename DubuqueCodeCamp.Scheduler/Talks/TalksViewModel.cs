@@ -26,7 +26,16 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _talks, value);
         }
 
+        private TalkInformation _talkInformation;
+        public TalkInformation TalkInformation
+        {
+            get => _talkInformation;
+            set => SetProperty(ref _talkInformation, value);
+        }
+
         public ICommand AddTalkCommand { get; set; }
+
+        public ICommand RemoveTalkCommand { get; set; }
 
         /// <summary>
         /// Constructor for the view model asociated with the <see cref="TalksView" />
@@ -38,6 +47,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Define Commands
             AddTalkCommand = new DelegateCommand<string>(AddTalk);
+            RemoveTalkCommand = new DelegateCommand(RemoveTalk);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
@@ -47,6 +57,12 @@ namespace DubuqueCodeCamp.Scheduler
         private void AddTalk(string destination)
         {
             _regionManager.RequestNavigate(RegionNames.TalksRegion, destination);
+        }
+
+        private void RemoveTalk()
+        {
+            DatabaseOperations.RemoveTalk(TalkInformation);
+            _eventAggregator.GetEvent<TalksUpdatedEvent>().Publish();
         }
 
         private void GetEventDate(DateTime eventDate)

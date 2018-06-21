@@ -21,7 +21,7 @@
     <StackPanel Grid.Column="1">
       <TextBlock FontWeight="Bold" Margin="0 0 0 5">Sessions</TextBlock>
       <ListView ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}"
-               DisplayMemberPath="TimeStart"
+                SelectedItem="{Binding SessionInformation}" SelectionMode="Single"
                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  >
         <ListView.View>
           <GridView>

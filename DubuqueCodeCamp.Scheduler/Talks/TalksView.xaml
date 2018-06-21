@@ -21,7 +21,9 @@
     <StackPanel Grid.Column="1">
       <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="18">Talks</TextBlock>
       <ListView ItemsSource="{Binding Talks, UpdateSourceTrigger=PropertyChanged}"
-                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250"  >
+                SelectedItem="{Binding TalkInformation}" SelectionMode="Single"
+                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="250" 
+                Name="TalksListView" >
         <ListView.View>
           <GridView>
             <GridViewColumn DisplayMemberBinding="{Binding TalkDate, StringFormat='MM/dd/yyyy'}" Header="Date" Width="Auto" />

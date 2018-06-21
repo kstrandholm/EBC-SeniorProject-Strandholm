@@ -23,9 +23,8 @@ namespace DubuqueCodeCamp.Scheduler
             // Ensure the Event Date does not have an unnecessary time added
             eventDate = eventDate.Date;
 
-            // TODO: filter on dategiven once database null nonsense taken care of
             // Get the talkIDs and order them by decreasing count
-            var cachedTalks = DATABASE.Talks.Select(talk => talk.ID).ToList();
+            var cachedTalks = DATABASE.Talks.Where(talk => talk.DateGiven == eventDate).Select(talk => talk.ID).ToList();
             var talks = (from talkID in cachedTalks
                          let count = DATABASE.TalkInterest.Count(interest => interest.TalkID == talkID)
                          orderby count descending
@@ -114,9 +113,8 @@ namespace DubuqueCodeCamp.Scheduler
         /// <returns>List of <see cref="Talk"/></returns>
         public static List<Talk> GetExistingTalks(DateTime eventDate)
         {
-            // TODO: remove null check once database null nonsense is taken care of
             return (from talk in DATABASE.Talks
-                    where talk.DateGiven == eventDate || talk.DateGiven == null
+                    where talk.DateGiven == eventDate
                     select talk).ToList();
         }
 
@@ -170,6 +168,14 @@ namespace DubuqueCodeCamp.Scheduler
             return false;
         }
 
+        public static void RemoveSession(Session removeSession)
+        {
+            var removedItem = DATABASE.Sessions.Single(session => session.SessionDate == removeSession.SessionDate &&
+                                                                  session.TimeStart == removeSession.TimeStart &&
+                                                                  session.TimeEnd == removeSession.TimeEnd);
+            DATABASE.Sessions.DeleteOnSubmit(removedItem);
+        }
+
         public static List<TalkInformation> GetTalkInformation(DateTime eventDate)
         {
             return (from talk in DATABASE.Talks
@@ -219,6 +225,18 @@ namespace DubuqueCodeCamp.Scheduler
             }
 
             return false;
+        }
+
+        public static void RemoveTalk(TalkInformation removeTalk)
+        {
+            var speakerID = DATABASE
+                .Speakers.Single(s => s.FirstName == removeTalk.SpeakerFirstName && s.LastName == removeTalk.SpeakerLastName).ID;
+
+            var removedItem = DATABASE.Talks.Single(talk => talk.DateGiven == removeTalk.TalkDate &&
+                                                           talk.Title == removeTalk.TalkTitle &&
+                                                           talk.Summary == removeTalk.TalkTitle &&
+                                                           talk.SpeakerID == speakerID);
+            DATABASE.Talks.DeleteOnSubmit(removedItem);
         }
     }
 }
