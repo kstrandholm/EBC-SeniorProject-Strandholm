@@ -20,6 +20,7 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     
+    <!-- Date Selector for the new Session -->
     <Calendar Grid.Column="1" Grid.Row="0"
               SelectionMode="SingleDate"
               SelectedDate="{Binding SessionDate,
@@ -27,13 +28,14 @@
                               UpdateSourceTrigger=PropertyChanged,
                               BindsDirectlyToSource=True}" />
 
+    <!-- Time Start Selector for the new Session -->
     <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="1"
-                         Value="{Binding TimeStart,
-                                  UpdateSourceTrigger=PropertyChanged}"
+                         Value="{Binding TimeStart, UpdateSourceTrigger=PropertyChanged}"
                          Margin="5"
                          Kind="Utc" CurrentDateTimePart="Hour12"
                          Format="ShortTime" />
 
+    <!-- Time End Selector for the new Session -->
     <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="2"
                          Value="{Binding TimeEnd,
                                   UpdateSourceTrigger=PropertyChanged}"
@@ -42,6 +44,7 @@
                          Format="ShortTime" />
 
 
+    <!-- Buttons -->
     <Grid Grid.Column="1" Grid.Row="3">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />

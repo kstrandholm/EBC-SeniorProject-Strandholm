@@ -10,12 +10,19 @@ using System.Windows.Input;
 
 namespace DubuqueCodeCamp.Scheduler
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// View model associated with the <see cref="AddSessionView"/>
+    /// </summary>
     public class AddSessionViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
         private DateTime _sessionDate;
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime SessionDate
         {
             get => _sessionDate;
@@ -28,6 +35,9 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         private DateTime _timeStart = DateTime.Today;
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime TimeStart
         {
             get => _timeStart;
@@ -35,6 +45,9 @@ namespace DubuqueCodeCamp.Scheduler
         }
 
         private DateTime _timeEnd = DateTime.Today;
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime TimeEnd
         {
             get => _timeEnd;
@@ -75,6 +88,7 @@ namespace DubuqueCodeCamp.Scheduler
                    TimeEnd.Date == SessionDate && TimeEnd > TimeStart;
         }
 
+        // TODO: extract this into the DatabaseOperations class
         private void Execute()
         {
             var database = new DCCKellyDatabase();
@@ -110,8 +124,6 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Navigate to the main Sessions View
             ReturnToMainSessions();
-
-            // TODO: reset the controls?
         }
 
         private void ReturnToMainSessions()

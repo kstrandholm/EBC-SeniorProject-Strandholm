@@ -7,7 +7,7 @@ namespace DubuqueCodeCamp.Scheduler
 {
     /// <inheritdoc />
     /// <summary>
-    /// View Model associated with the Schedule view
+    /// View Model associated with the <see cref="ScheduleView"/>
     /// </summary>
     public class ScheduleViewModel : BindableBase
     {
