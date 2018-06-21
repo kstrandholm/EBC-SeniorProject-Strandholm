@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Renci.SshNet;
+using System;
 using System.Configuration;
 using System.IO;
-using Renci.SshNet;
-using Renci.SshNet.Sftp;
 
 namespace DubuqueCodeCamp.Downloader
 {
+    /// <summary>
+    /// Class that handles downloading the specified file from the 3rd party's FTP site
+    /// </summary>
     public class SFTPDownload
     {
         private static string FTPHost => ConfigurationManager.AppSettings["RegistrantInformationFilePath"];
@@ -13,16 +15,19 @@ namespace DubuqueCodeCamp.Downloader
         private static string FTPPassword => ConfigurationManager.AppSettings["FTPPassword"];
         private static string FTPFileLocation => ConfigurationManager.AppSettings["FTPFileLocation"];
 
-
-
+        /// <summary>
+        /// Download the specified file from the 3rd party's FTP site
+        /// </summary>
+        /// <param name="fileToDownload">Name of the file to download</param>
+        /// <param name="localFileLocation">Path to the local location to save the file to</param>
+        /// <returns></returns>
         public static bool DownloadFileUsingSftpClient(string fileToDownload, string localFileLocation)
         {
             Console.WriteLine("Local File Location: " + localFileLocation);
             Console.WriteLine("File Name: " + fileToDownload);
             Console.WriteLine("FTP File Location: " + FTPFileLocation);
 
-            var fileDownloaded = false;
-
+            bool fileDownloaded;
             using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
             {
                 try

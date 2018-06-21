@@ -7,6 +7,9 @@ using Serilog;
 
 namespace DubuqueCodeCamp.Downloader
 {
+    /// <summary>
+    /// Class that handles writing records to the database
+    /// </summary>
     public class WriteToDatabase
     {
         public static void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
@@ -35,7 +38,7 @@ namespace DubuqueCodeCamp.Downloader
             // If the record is not a duplicate of what is already in the database, add it to the database
             var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
                 dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
-                dataReg.City == newReg.City && dataReg.State == newReg.State)).ToList();
+                dataReg.EmailAddress == newReg.EmailAddress)).ToList();
 
             // Try using the new Equals operator I implemented - can't figure out how to get this to work
             //var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
@@ -101,10 +104,9 @@ namespace DubuqueCodeCamp.Downloader
                               {
                                   FirstName = regInfo.FirstName,
                                   LastName = regInfo.LastName,
-                                  StreetAddress = regInfo.StreetAddress,
-                                  City = regInfo.City,
-                                  State = regInfo.State,
                                   EmailAddress = regInfo.EmailAddress,
+                                  Occupation = regInfo.Occupation,
+                                  BirthDate = regInfo.BirthDate,
                                   UpdateTime = DateTime.Now,
                                   DiagnosticInformation = new StackTrace().ToString()
                               })
@@ -116,22 +118,20 @@ namespace DubuqueCodeCamp.Downloader
             IEnumerable<(string FirstName, string LastName, List<int> Interests)> interests)
         {
             return (from record in interests
-                    from interest in record.Interests
-                    // Find any talks that match the interest ID given - if none, create a new empty list
-                    let talkExists = database.Talks.Any(talk => talk.ID == interest)
+                    from talkID in record.Interests
+                    // Make sure we don't try to add any talk interests that don't have an existing talk id
+                    let talkExists = database.Talks.Any(talk => talk.ID == talkID)
                     let registrantID = database.Registrants.Single(reg =>
                         reg.FirstName == record.FirstName &&
                         reg.LastName == record.LastName).ID
+                    where talkExists
                     select new TalkInterest
                     {
                         InterestedRegistrantID = registrantID,
-                        TalkID = talkExists ? interest : -1,
+                        TalkID = talkID,
                         UpdateTime = DateTime.Now,
                         DiagnosticInformation = new StackTrace().ToString()
-                    })
-                .Where(interest =>
-                    interest.TalkID != -1) // Make sure we don't try to add any talk interests that don't have an existing talk id
-                .ToList();
+                    }).ToList();
         }
     }
 }

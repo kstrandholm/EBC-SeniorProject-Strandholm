@@ -8,8 +8,15 @@ using System.Linq;
 
 namespace DubuqueCodeCamp.Downloader
 {
+    /// <summary>
+    /// Class that runs the File Downloader to download and save the registrant information file from the 3rd party
+    /// </summary>
     public class Runner
     {
+        /// <summary>
+        /// Main method that handles the organization of downloading and saving the registrant information file from the 3rd party
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
 #if DEBUG
@@ -19,9 +26,9 @@ namespace DubuqueCodeCamp.Downloader
             var fileName = "SampleFile.txt";
             var logger = LoggingInitializer.GetLogger();
 
+            // Download the file from the FTP site
             try
             {
-                // Download the file from the FTP site
                 DownloadFile(fileName, localFileLocation, logger);
             }
             catch (Exception ex)
@@ -29,10 +36,10 @@ namespace DubuqueCodeCamp.Downloader
                 logger.ForContext<SFTPDownload>().Error(ex, "SFTP Download failed.");
             }
 
+            // Parse the file from the local file path
             var registrants = new List<RegistrantInformation>();
             try
             {
-                // Parse the file from the local file path
                 registrants = GetParsedFileRecords(localFileLocation, fileName);
             }
             catch (Exception ex)

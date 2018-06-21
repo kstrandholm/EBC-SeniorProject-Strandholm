@@ -1,16 +1,22 @@
-﻿using System;
-using Serilog;
+﻿using Serilog;
+using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
-using Serilog.Core;
 
 namespace DubuqueCodeCamp.Downloader
 {
+    /// <summary>
+    /// Class to create and initialize a Serilog logger
+    /// </summary>
     public class LoggingInitializer
     {
+        /// <summary>
+        /// Create and initialize a Serilog logger
+        /// </summary>
+        /// <returns>Serilog <see cref="Logger"/></returns>
         public static Logger GetLogger()
         {
             var databaseConnectionString = ConfigurationManager.ConnectionStrings["DCCDatabase"].ConnectionString;
