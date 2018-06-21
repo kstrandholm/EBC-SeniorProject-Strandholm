@@ -29,6 +29,7 @@ namespace DubuqueCodeCamp.Registration
                                               select s).Single()
                                select new ChosenTalk
                                {
+                                   TalkID = talk.ID,
                                    TalkTitle = talk.Title,
                                    TalkSummary = talk.Summary,
                                    SpeakerFirstName = speaker.FirstName,
@@ -63,23 +64,17 @@ namespace DubuqueCodeCamp.Registration
             var registrantID = DATABASE
                 .Registrants.Single(reg => reg.FirstName == registration.FirstName && reg.LastName == registration.LastName).ID;
 
-            foreach (var talk in registration.ChosenTalks)
-            {
-                if (talk.Chosen)
-                {
-                    var talkID = DATABASE.Talks.Single(t => t.Title == talk.TalkTitle && t.Summary == talk.TalkSummary).ID;
+            var talkInterests = (from talk in registration.ChosenTalks
+                                 where talk.Chosen
+                                 select new TalkInterest
+                                 {
+                                     InterestedRegistrantID = registrantID,
+                                     TalkID = talk.TalkID,
+                                     UpdateTime = DateTime.Now,
+                                     DiagnosticInformation = new StackTrace().ToString()
+                                 }).ToList();
 
-                    var talkInterest = new TalkInterest
-                    {
-                        InterestedRegistrantID = registrantID,
-                        TalkID = talkID,
-                        UpdateTime = DateTime.Now,
-                        DiagnosticInformation = new StackTrace().ToString()
-                    };
-
-                    DATABASE.TalkInterest.InsertOnSubmit(talkInterest);
-                }
-            }
+            DATABASE.TalkInterest.InsertAllOnSubmit(talkInterests);
 
             DATABASE.SubmitChanges();
         }

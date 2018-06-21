@@ -2,6 +2,8 @@
 {
     public class ChosenTalk
     {
+        public int TalkID { get; set; }
+
         public string TalkTitle { get; set; }
 
         public string TalkSummary { get; set; }
