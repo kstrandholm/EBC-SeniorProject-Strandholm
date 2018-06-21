@@ -58,7 +58,7 @@ namespace DubuqueCodeCamp.DatabaseConnection
         public DateTime UpdateTime { get; set; }
 
         /// <summary>
-        /// Diagnostic Information for this Registrant record
+        /// Latest diagnostic Information for this Registrant record
         /// </summary>
         [Column]
         public string DiagnosticInformation { get; set; }
