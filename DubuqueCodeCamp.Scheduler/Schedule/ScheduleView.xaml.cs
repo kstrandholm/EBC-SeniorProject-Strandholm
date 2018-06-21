@@ -2,6 +2,7 @@
 
 namespace DubuqueCodeCamp.Scheduler
 {
+    /// <inheritdoc cref="UserControl" />
     /// <summary>
     /// Interaction logic for Schedule
     /// </summary>

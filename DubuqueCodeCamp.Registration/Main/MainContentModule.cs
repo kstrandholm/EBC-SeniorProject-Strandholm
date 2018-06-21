@@ -16,6 +16,8 @@ namespace DubuqueCodeCamp.Registration
         /// <summary>
         /// Constructor for the Main Content's module that manages the views for the Main Content region
         /// </summary>
+        /// <param name="container">Unity Dependency Injection container created and passed in by Unity</param>
+        /// <param name="regionManager">Region Manager created and passed in by Prism/Unity</param>
         public MainContentModule(IUnityContainer container, IRegionManager regionManager)
         {
             _container = container;

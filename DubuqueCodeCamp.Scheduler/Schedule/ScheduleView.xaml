@@ -10,6 +10,7 @@
       <RowDefinition Height="*"></RowDefinition>
     </Grid.RowDefinitions>
 
+    <!-- Proposed Schedule -->
     <TextBlock Grid.Row="0" FontWeight="Bold" >Proposed Schedule</TextBlock>
     <ListView Grid.Row="2" ItemsSource="{Binding Schedule, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
       <ListView.View>
