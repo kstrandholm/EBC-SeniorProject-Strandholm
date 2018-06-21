@@ -23,12 +23,16 @@
       <StackPanel Grid.Row="1">
         <TextBlock Text="First Name *" Style="{StaticResource Label}" />
         <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+        
         <TextBlock Text="Last Name *" Style="{StaticResource Label}" />
         <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+        
         <TextBlock Text="Email *" Style="{StaticResource Label}" />
         <TextBox Text="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}" />
+        
         <TextBlock Text="Occupation" Style="{StaticResource Label}" />
         <TextBox Text="{Binding Occupation, UpdateSourceTrigger=PropertyChanged}" />
+        
         <TextBlock Text="Birth Date" Style="{StaticResource Label}" />
         <DatePicker Margin="10" SelectedDate="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged}" />
       </StackPanel>

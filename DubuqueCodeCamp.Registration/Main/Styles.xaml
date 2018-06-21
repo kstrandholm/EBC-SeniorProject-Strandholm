@@ -112,7 +112,7 @@
     </Style.Triggers>
   </Style>
 
-  <!-- TextBlock Label Style Template -->
+  <!-- TextBlock Label-Style Template -->
   <Style x:Key="Label" TargetType="{x:Type TextBlock}">
     <Setter Property="TextWrapping" Value="NoWrap"/>
     <Setter Property="TextTrimming" Value="None"/>
@@ -127,7 +127,7 @@
         <Setter Property="Background" Value="LightGray" />
       </Trigger>
       <Trigger Property="ItemsControl.AlternationIndex"  Value="1">
-        <Setter Property="Background" Value="LightSlateGray" />
+        <Setter Property="Background" Value="Gray" />
       </Trigger>
     </Style.Triggers>
   </Style>

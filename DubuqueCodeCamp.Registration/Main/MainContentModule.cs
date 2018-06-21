@@ -4,6 +4,10 @@ using Prism.Regions;
 
 namespace DubuqueCodeCamp.Registration
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Module that handles initializing and managing the Main Content Region
+    /// </summary>
     public class MainContentModule : IModule
     {
         private readonly IUnityContainer _container;
@@ -16,7 +20,6 @@ namespace DubuqueCodeCamp.Registration
         {
             _container = container;
             _regionManager = regionManager;
-
         }
 
         /// <inheritdoc />
