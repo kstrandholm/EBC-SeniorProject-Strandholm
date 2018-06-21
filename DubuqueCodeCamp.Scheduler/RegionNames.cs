@@ -44,5 +44,10 @@
         /// Name of the talks view
         /// </summary>
         public static string TalksView => "TalksView";
+
+        /// <summary>
+        /// Name of the talks view
+        /// </summary>
+        public static string AddTalkView => "AddTalkView";
     }
 }

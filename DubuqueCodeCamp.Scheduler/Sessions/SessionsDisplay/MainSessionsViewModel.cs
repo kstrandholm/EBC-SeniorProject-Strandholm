@@ -57,8 +57,6 @@ namespace DubuqueCodeCamp.Scheduler
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(RefreshSessions);
-
-            // TODO: implement remove session button
         }
 
         private void GetEventDate(DateTime eventDate)

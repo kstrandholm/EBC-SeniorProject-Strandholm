@@ -23,8 +23,13 @@ namespace DubuqueCodeCamp.Scheduler
         public string TalkSummary { get; set; }
 
         /// <summary>
-        /// First and last name of the seaker of this talk
+        /// First name of the seaker of this talk
         /// </summary>
-        public string SpeakerName { get; set; }
+        public string SpeakerFirstName { get; set; }
+
+        /// <summary>
+        /// Last name of the seaker of this talk
+        /// </summary>
+        public string SpeakerLastName { get; set; }
     }
 }

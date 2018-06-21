@@ -1,6 +1,7 @@
 ﻿using DubuqueCodeCamp.DatabaseConnection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
@@ -52,7 +53,7 @@ namespace DubuqueCodeCamp.Scheduler
             // Combine the Rooms and Sessions to create each unique combination
             var roomSessions = (from room in DATABASE.Rooms
                                 from session in DATABASE.Sessions.Where(session => session.SessionDate == eventDate)
-                                select new { room, session })
+                                select new {room, session})
                 .OrderByDescending(rs => rs.room.Capacity) // Largest rooms first
                 .ToList();
 
@@ -149,20 +150,75 @@ namespace DubuqueCodeCamp.Scheduler
                     }).ToList();
         }
 
+        public static bool SaveSession(Session newSession)
+        {
+            // If the database doesn't have any existing sessions matching the new one, save to the database
+            if (!DATABASE.Sessions.Any(session => session.SessionDate == newSession.SessionDate &&
+                                                  session.TimeStart == newSession.TimeStart &&
+                                                  session.TimeEnd == newSession.TimeEnd))
+            {
+                DATABASE.Sessions.InsertOnSubmit(newSession);
+                DATABASE.SubmitChanges();
+
+                return true;
+            }
+
+            // Otherwise, tell the user one exists and navigate away as usual
+            MessageBox.Show("A session with the same date and start and end times already exists in the database. Canceling",
+                "Canceling Save",
+                MessageBoxButton.OK);
+            return false;
+        }
+
         public static List<TalkInformation> GetTalkInformation(DateTime eventDate)
         {
             return (from talk in DATABASE.Talks
-                       where talk.DateGiven == eventDate
-                       let speaker = (from s in DATABASE.Speakers
-                                     where s.ID == talk.ID
-                                     select s).Single()
-                       select new TalkInformation
-                       {
-                           TalkDate = talk.DateGiven,
-                           TalkTitle = talk.Title,
-                           TalkSummary = talk.Summary,
-                           SpeakerName = speaker.FirstName + " " + speaker.LastName
-                       }).ToList();
+                    where talk.DateGiven == eventDate
+                    let speaker = (from s in DATABASE.Speakers
+                                   where s.ID == talk.ID
+                                   select s).Single()
+                    select new TalkInformation
+                    {
+                        TalkDate = talk.DateGiven,
+                        TalkTitle = talk.Title,
+                        TalkSummary = talk.Summary,
+                        SpeakerFirstName = speaker.FirstName,
+                        SpeakerLastName = speaker.LastName
+                    }).ToList();
+        }
+
+        public static bool SaveTalk(TalkInformation newTalk)
+        {
+            var speaker = DATABASE.Speakers.SingleOrDefault(s =>
+                s.FirstName == newTalk.SpeakerFirstName && s.LastName == newTalk.SpeakerLastName);
+            if (speaker == null)
+            {
+                // Warn the user that no speaker exists with that name
+                MessageBox.Show($"No speaker exists with the name {newTalk.SpeakerFirstName} {newTalk.SpeakerLastName}",
+                    "Canceling Save",
+                    MessageBoxButton.OK);
+                return false;
+            }
+
+            // If the database doesn't have any existing sessions matching the new one, save to the database
+            if (!DATABASE.Talks.Any(talk => talk.DateGiven == newTalk.TalkDate &&
+                                            talk.Title == newTalk.TalkTitle &&
+                                            talk.Summary == newTalk.TalkSummary))
+            {
+                DATABASE.Talks.InsertOnSubmit(new Talk
+                {
+                    DateGiven = newTalk.TalkDate,
+                    Title = newTalk.TalkTitle,
+                    Summary = newTalk.TalkSummary,
+                    SpeakerID = speaker.ID,
+                    UpdateTime = DateTime.Now,
+                    DiagnosticInformation = new StackTrace().ToString()
+                });
+                DATABASE.SubmitChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

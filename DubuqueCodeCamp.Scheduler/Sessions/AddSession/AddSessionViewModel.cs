@@ -76,7 +76,7 @@ namespace DubuqueCodeCamp.Scheduler
             _eventAggregator = eventAggregator;
 
             // Define our commands
-            SaveSesssionCommand = new DelegateCommand(Execute, CanExecute)
+            SaveSesssionCommand = new DelegateCommand(SaveSession, CanExecute)
                 .ObservesProperty(() => SessionDate).ObservesProperty(() => TimeStart).ObservesProperty(() => TimeEnd);
             CancelCommand = new DelegateCommand(ReturnToMainSessions);
 
@@ -95,11 +95,8 @@ namespace DubuqueCodeCamp.Scheduler
                    TimeEnd.Date == SessionDate && TimeEnd > TimeStart;
         }
 
-        // TODO: extract this into the DatabaseOperations class
-        private void Execute()
+        private void SaveSession()
         {
-            var database = new DCCKellyDatabase();
-
             // Map the current data to the Sessions class
             var newSession = new Session
             {
@@ -110,23 +107,10 @@ namespace DubuqueCodeCamp.Scheduler
                 DiagnosticInformation = "User added session"
             };
 
-            // TODO: consider overriding the equality check on Session?
-            // If the database doesn't have any existing sessions matching the new one, save to the database
-            if (!database.Sessions.Any(session => session.SessionDate == newSession.SessionDate &&
-                                                  session.TimeStart == newSession.TimeStart &&
-                                                  session.TimeEnd == newSession.TimeEnd))
+            if (DatabaseOperations.SaveSession(newSession))
             {
-                database.Sessions.InsertOnSubmit(newSession);
-                database.SubmitChanges();
-
-                // Publish the event for listeners
+                // Publish the event
                 _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish();
-            }
-            else
-            {
-                // Otherwise, tell the user one exists and navigate away as usual
-                MessageBox.Show("A session with the same date and start and end times already exists in the database. Canceling", "Canceling Save",
-                    MessageBoxButton.OK);
             }
 
             // Navigate to the main Sessions View

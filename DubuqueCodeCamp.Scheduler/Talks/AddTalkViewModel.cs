@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using DubuqueCodeCamp.DatabaseConnection;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -37,11 +39,18 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _summary, value);
         }
 
-        private string _speaker;
-        public string Speaker
+        private string _speakerFirstName;
+        public string SpeakerFirstName
         {
-            get => _speaker;
-            set => SetProperty(ref _speaker, value);
+            get => _speakerFirstName;
+            set => SetProperty(ref _speakerFirstName, value);
+        }
+
+        private string _speakerLastName;
+        public string SpeakerLastName
+        {
+            get => _speakerLastName;
+            set => SetProperty(ref _speakerLastName, value);
         }
 
         /// <summary>
@@ -64,20 +73,44 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Define Commands
             SaveTalkCommand = new DelegateCommand<string>(SaveTalk, CanExecute);
+            CancelCommand = new DelegateCommand(ReturnToTalks);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<DateUpdatedEvent>().Subscribe(GetEventDate);
         }
 
-        private bool CanExecute(string arg)
+        private void ReturnToTalks()
         {
-            throw new System.NotImplementedException();
+            _regionManager.RequestNavigate(RegionNames.TalksRegion, RegionNames.TalksView);
         }
 
-        private void SaveTalk(string destination)
+        private bool CanExecute(string arg)
         {
-            _eventAggregator.GetEvent<TalksUpdatedEvent>().Publish();
-            _regionManager.RequestNavigate(RegionNames.TalksRegion, destination);
+            return Date != DateTime.MinValue && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Summary) &&
+                   !string.IsNullOrEmpty(SpeakerFirstName);
+        }
+
+        private void SaveTalk()
+        {
+            // Map the current data to the Sessions class
+            var newTalk = new TalkInformation()
+            {
+                TalkDate = Date,
+                TalkTitle = Title,
+                TalkSummary = Summary,
+                SpeakerFirstName = SpeakerFirstName,
+                SpeakerLastName = SpeakerLastName
+            };
+
+            // Continue as usual only if saving works
+            if (DatabaseOperations.SaveTalk(newTalk))
+            {
+                // Publish the event
+                _eventAggregator.GetEvent<SessionsUpdatedEvent>().Publish();
+
+                // Navigate to the main Sessions View
+                ReturnToTalks();
+            }
         }
 
         private void GetEventDate(DateTime eventDate)
