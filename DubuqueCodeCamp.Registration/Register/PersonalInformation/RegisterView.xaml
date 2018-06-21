@@ -45,7 +45,8 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0" HorizontalAlignment="Right"
-                Content="Cancel" Command="{Binding CancelCommand}" />
+                Content="Cancel" Command="{Binding CancelCommand}"
+                CommandParameter="{Binding SplashScreen, Source={StaticResource RegionNames}}" />
         <Button Grid.Column="1" HorizontalAlignment="Left"
                 Content="Next --&gt;" Command="{Binding NextCommand}" />
       </Grid>

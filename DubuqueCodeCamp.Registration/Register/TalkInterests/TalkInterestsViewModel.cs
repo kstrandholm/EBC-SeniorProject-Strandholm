@@ -55,9 +55,9 @@ namespace DubuqueCodeCamp.Registration
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            SubmitCommand = new DelegateCommand(Submit);
-            CancelCommand = new DelegateCommand(Cancel);
-            BackCommand = new DelegateCommand(Back);
+            SubmitCommand = new DelegateCommand<string>(Submit);
+            CancelCommand = new DelegateCommand<string>(Cancel);
+            BackCommand = new DelegateCommand<string>(Navigate);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Subscribe(UpdateRegistration);
@@ -74,36 +74,35 @@ namespace DubuqueCodeCamp.Registration
             ChosenTalks = DatabaseOperations.GetChosenTalks();
         }
 
-        private void Submit()
+        private void Submit(string destination)
         {
             // TODO: Verify submited all the information to the database
             _registration.ChosenTalks = ChosenTalks;
             DatabaseOperations.SaveRegistration(_registration);
 
-            NavigateToSplashScreen();
+            ClearFieldsAndNavigate(destination);
 
             MessageBox.Show("Registration Complete", "Registration Complete", MessageBoxButton.OK);
         }
 
-        private void Cancel()
+        private void Cancel(string destination)
         {
             var result = MessageBox.Show("This will discard all your changes. Are you sure?", "Are you sure?", MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
-                NavigateToSplashScreen();
+                ClearFieldsAndNavigate(destination);
         }
 
-        private void NavigateToSplashScreen()
+        private void ClearFieldsAndNavigate(string destination)
         {
             _eventAggregator.GetEvent<ClearRegistrationEvent>().Publish();
 
-            // Navigate back to the Splash Screen
-            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.SplashScreen);
+            Navigate(destination);
         }
 
-        private void Back()
+        private void Navigate(string destination)
         {
-            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.RegisterView);
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, destination);
         }
     }
 }

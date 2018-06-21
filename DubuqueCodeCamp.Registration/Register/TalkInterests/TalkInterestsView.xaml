@@ -59,11 +59,16 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0" HorizontalAlignment="Right"
-                Content="&lt;-- Back" Command="{Binding BackCommand}" />
+                Content="&lt;-- Back" Command="{Binding BackCommand}"
+                CommandParameter="{Binding RegisterView, Source={StaticResource RegionNames}}" />
+        
         <Button Grid.Column="1"
-                Content="Cancel" Command="{Binding CancelCommand}" />
+                Content="Cancel" Command="{Binding CancelCommand}"
+                CommandParameter="{Binding SplashScreen, Source={StaticResource RegionNames}}" />
+        
         <Button Grid.Column="2" HorizontalAlignment="Left"
-                Content="Submit" Command="{Binding SubmitCommand}" />
+                Content="Submit" Command="{Binding SubmitCommand}"
+                CommandParameter="{Binding SplashScreen, Source={StaticResource RegionNames}}" />
       </Grid>
     </Grid>
 

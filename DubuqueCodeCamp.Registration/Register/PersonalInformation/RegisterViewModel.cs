@@ -87,9 +87,9 @@ namespace DubuqueCodeCamp.Registration
             _eventAggregator = eventAggregator;
 
             // Define Commands
-            NextCommand = new DelegateCommand(Execute, CanExecute)
+            NextCommand = new DelegateCommand(Next, CanExecute)
                 .ObservesProperty(() => FirstName).ObservesProperty(() => LastName).ObservesProperty(() => EmailAddress);
-            CancelCommand = new DelegateCommand(Cancel);
+            CancelCommand = new DelegateCommand<string>(Cancel);
 
             // Subscribe to Events
             _eventAggregator.GetEvent<ClearRegistrationEvent>().Subscribe(ClearFields);
@@ -109,7 +109,7 @@ namespace DubuqueCodeCamp.Registration
             return !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(EmailAddress);
         }
 
-        private void Execute()
+        private void Next()
         {
             var registration = new RegistrationInformation
             {
@@ -122,17 +122,17 @@ namespace DubuqueCodeCamp.Registration
             _eventAggregator.GetEvent<UpdatedRegistrationEvent>().Publish(registration);
 
             // Navigate to the Talk Interest screen to continue registration
-            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.TalkInterests);
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.TalkInterestsView);
 
         }
 
-        private void Cancel()
+        private void Cancel(string destination)
         {
             // Clear the fields
             _eventAggregator.GetEvent<ClearRegistrationEvent>().Publish();
 
             // Navigate back to the Splash Screen
-            _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegionNames.SplashScreen);
+            _regionManager.RequestNavigate(RegionNames.MainContentRegion, destination);
         }
     }
 }
