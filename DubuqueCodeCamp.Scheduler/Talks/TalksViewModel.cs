@@ -20,12 +20,18 @@ namespace DubuqueCodeCamp.Scheduler
         private DateTime _eventDate = DateTime.Today;
 
         private List<TalkInformation> _talks = DatabaseOperations.GetTalkInformation(DateTime.Today);
+        /// <summary>
+        /// List of <see cref="TalkInformation"/> that contains all the information about a talk to be displayed
+        /// </summary>
         public List<TalkInformation> Talks
         {
             get => _talks;
             set => SetProperty(ref _talks, value);
         }
 
+        /// <summary>
+        /// Holds the information of the currently selected talk
+        /// </summary>
         private TalkInformation _talkInformation;
         public TalkInformation TalkInformation
         {
@@ -33,8 +39,14 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _talkInformation, value);
         }
 
+        /// <summary>
+        /// Command to add a new talk
+        /// </summary>
         public ICommand AddTalkCommand { get; set; }
 
+        /// <summary>
+        /// Command to remove the currently selected talk
+        /// </summary>
         public ICommand RemoveTalkCommand { get; set; }
 
         /// <summary>

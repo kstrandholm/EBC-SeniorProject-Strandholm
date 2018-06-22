@@ -19,12 +19,10 @@ namespace DubuqueCodeCamp.Scheduler
         private readonly IEventAggregator _eventAggregator;
 
         private DateTime _date = DateTime.Today;
-        public DateTime Date
-        {
-            get => _date;
-            set => SetProperty(ref _date, value);
-        }
 
+        /// <summary>
+        /// Title of the talk
+        /// </summary>
         private string _title;
         public string Title
         {
@@ -32,6 +30,9 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _title, value);
         }
 
+        /// <summary>
+        /// Summary of the talk
+        /// </summary>
         private string _summary;
         public string Summary
         {
@@ -39,6 +40,9 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _summary, value);
         }
 
+        /// <summary>
+        /// First name of the talk's speaker
+        /// </summary>
         private string _speakerFirstName;
         public string SpeakerFirstName
         {
@@ -46,6 +50,9 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _speakerFirstName, value);
         }
 
+        /// <summary>
+        /// Last name of the talk's speaker
+        /// </summary>
         private string _speakerLastName;
         public string SpeakerLastName
         {
@@ -73,7 +80,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Define Commands
             SaveTalkCommand = new DelegateCommand<string>(SaveTalk, CanExecute)
-                .ObservesProperty(() => Date).ObservesProperty(() => Title).ObservesProperty(() => Summary)
+                .ObservesProperty(() => _date).ObservesProperty(() => Title).ObservesProperty(() => Summary)
                 .ObservesProperty(() => SpeakerFirstName).ObservesProperty(() => SpeakerLastName);
             CancelCommand = new DelegateCommand<string>(ReturnToTalks);
 
@@ -88,7 +95,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private bool CanExecute(string arg)
         {
-            return Date != DateTime.MinValue && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Summary) &&
+            return _date != DateTime.MinValue && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Summary) &&
                    !string.IsNullOrEmpty(SpeakerFirstName) && !string.IsNullOrEmpty(SpeakerLastName);
         }
 
@@ -97,7 +104,7 @@ namespace DubuqueCodeCamp.Scheduler
             // Map the current data to the Sessions class
             var newTalk = new TalkInformation()
             {
-                TalkDate = Date,
+                TalkDate = _date,
                 TalkTitle = Title,
                 TalkSummary = Summary,
                 SpeakerFirstName = SpeakerFirstName,
@@ -117,7 +124,7 @@ namespace DubuqueCodeCamp.Scheduler
 
         private void GetEventDate(DateTime eventDate)
         {
-            Date = eventDate;
+            _date = eventDate;
         }
     }
 }
