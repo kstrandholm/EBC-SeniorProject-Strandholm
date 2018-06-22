@@ -2,14 +2,20 @@
 
 namespace DubuqueCodeCamp.DatabaseConnection
 {
-    public interface IRegistrant
+    /// <inheritdoc />
+    /// <summary>
+    /// Interface that represents the minimum fields required for a Registrant class
+    /// </summary>
+    public interface IRegistrant : IPerson
     {
-        string FirstName { get; set; }
+        /// <summary>
+        /// Occupation of the registrant
+        /// </summary>
+        string Occupation { get; set; }
 
-        string LastName { get; set; }
-
-        string City { get; set; }
-
-        string State { get; set; }
+        /// <summary>
+        /// BirthDate of the registrant
+        /// </summary>
+        DateTime? BirthDate { get; set; }
     }
 }

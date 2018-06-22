@@ -19,6 +19,8 @@ namespace DubuqueCodeCamp.DatabaseConnection
 
         public Table<Talk> Talks;
 
+        public Table<Speaker> Speakers;
+
         public Table<ProposedSchedule> ProposedSchedules;
 
     }

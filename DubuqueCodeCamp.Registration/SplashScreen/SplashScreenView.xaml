@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="DubuqueCodeCamp.Registration.SplashScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+  <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    
+    <!-- Register Button -->
+    <Button Content="Register" FontSize="50"
+            Command="{Binding NavigateCommand}"
+            CommandParameter="{Binding RegisterView, Source={StaticResource RegionNames}}"
+            Background="Aqua"
+            BorderThickness="5" BorderBrush="DarkSlateGray" />
+    
+  </Grid>
+</UserControl>

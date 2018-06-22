@@ -8,8 +8,15 @@ using System.Linq;
 
 namespace DubuqueCodeCamp.Downloader
 {
+    /// <summary>
+    /// Class that runs the File Downloader to download and save the registrant information file from the 3rd party
+    /// </summary>
     public class Runner
     {
+        /// <summary>
+        /// Main method that handles the organization of downloading and saving the registrant information file from the 3rd party
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
 #if DEBUG
@@ -19,9 +26,9 @@ namespace DubuqueCodeCamp.Downloader
             var fileName = "SampleFile.txt";
             var logger = LoggingInitializer.GetLogger();
 
+            // Download the file from the FTP site
             try
             {
-                // Download the file from the FTP site
                 DownloadFile(fileName, localFileLocation, logger);
             }
             catch (Exception ex)
@@ -29,10 +36,10 @@ namespace DubuqueCodeCamp.Downloader
                 logger.ForContext<SFTPDownload>().Error(ex, "SFTP Download failed.");
             }
 
+            // Parse the file from the local file path
             var registrants = new List<RegistrantInformation>();
             try
             {
-                // Parse the file from the local file path
                 registrants = GetParsedFileRecords(localFileLocation, fileName);
             }
             catch (Exception ex)
@@ -47,7 +54,7 @@ namespace DubuqueCodeCamp.Downloader
                 using (var database = new DCCKellyDatabase())
                 {
                     // Write the records to the database
-                    WriteToDatabase.WriteRecords(database, registrants, logger);
+                    WriteToDatabase.WriteDownloadRecords(database, registrants, logger);
                 }
             }
 
@@ -64,7 +71,6 @@ namespace DubuqueCodeCamp.Downloader
 
             var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
 
-            // TODO: Since this will hopefully become an automated process, find some better way to indicate a success vs. failure
             var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
             logger.Information(messageToUse);
         }

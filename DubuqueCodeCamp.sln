@@ -14,6 +14,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems*{24ba8bb8-1a7e-45a4-8831-71220936bc0b}*SharedItemsImports = 4
+		DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems*{60950d16-e689-49e0-ab2b-7a74bbca8cb6}*SharedItemsImports = 4
 		DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems*{7c60ef4d-7bcf-482f-8262-123ae99450a4}*SharedItemsImports = 13
 		DubuqueCodeCamp.DatabaseConnection\DubuqueCodeCamp.DatabaseConnection.projitems*{8cf9bd3d-4649-4c2d-aafa-0eaea8bbba50}*SharedItemsImports = 4
 	EndGlobalSection
