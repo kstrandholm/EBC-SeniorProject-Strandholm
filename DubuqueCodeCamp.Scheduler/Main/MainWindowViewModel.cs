@@ -81,7 +81,7 @@ namespace DubuqueCodeCamp.Scheduler
         {
             var scheduleSaved = DatabaseOperations.CreateProposedSchedule(EventDate);
 
-            // Only publish the event if the schedule was created and saved
+            // Only publish the event if the schedule was created and saved properly
             if (scheduleSaved)
                 _eventAggregator.GetEvent<ScheduleCreatedEvent>().Publish();
         }
