@@ -29,10 +29,11 @@ Document the database connection string in the app.config file
 
 This project uses WPF to create the UI and C# for the logic, using the MVVM pattern to separate
 the UI from the logic and from the data models.  Additionally, it implements Prism and Unity to
-enable easier to understand and more concise code.
+enable easier to understand and more concise code, as well as better control over the UI.
 
 Working on this project will require knowlege about how to use WPF, bindings, user controls,
-the MVVM pattern.
+the MVVM pattern, commanding, and how Prism and Unity connect the UI views with the logic in
+the view models.
 
 
 
