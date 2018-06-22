@@ -27,45 +27,32 @@ Document the database connection string in the app.config file
 
 ## Developing
 
+This project uses WPF to create the UI and C# for the logic, using the MVVM pattern to separate
+the UI from the logic and from the data models.  Additionally, it implements Prism and Unity to
+enable easier to understand and more concise code.
 
+Working on this project will require knowlege about how to use WPF, bindings, user controls,
+the MVVM pattern.
 
 
 
 ## Features
 
-What's all the bells and whistles this project can perform?
-* What's the main functionality
-* You can also do another thing
-* If you get really randy, you can even do this
+### Downloader
 
-## Configuration
+Get and save the registrant information from the 3rd party!
 
-Here you should write what are all of the configurations a user can enter when
-using the project.
+### Scheduler
 
-#### Argument 1
-Type: `String`  
-Default: `'default value'`
+Add Sessions and Talks, then create the proposed schedule, all from the same window!
 
-State what an argument does and how you can use it. If needed, you can provide
-an example below.
+### Registration
 
-Example:
-```bash
-awesome-project "Some other value"  # Prints "You're nailing this readme!"
-```
-
-#### Argument 2
-Type: `Number|Boolean`  
-Default: 100
-
-Copy-paste as many of these as you need.
+Enable on-site registration with the option to select interesting talks!
 
 ## Links
 
-Even though this information can be found inside the project on machine-readable
-format like in a .json file, it's good to include a summary of most useful
-links to humans using your project. You can include links like:
+
 
 - Project homepage: https://your.github.com/awesome-project/
 - Repository: https://github.com/your/awesome-project/
