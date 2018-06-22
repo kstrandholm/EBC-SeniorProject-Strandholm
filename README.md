@@ -57,7 +57,22 @@ Arguably the hardest part about working with this code base is understanding the
 of the Prism Nuget package in the projects with a UI.  This solution also uses Unity as a controller
 that manages dependency injections.
 
+As defined on the github page:
+> Prism is a framework for building loosely coupled, maintainable, and testable XAML applications
 
+The main focus of Prism WPF is to make implementing the MVVM pattern easier and more understandable.
+It uses View Model Locators that can automatically determine which view model is associated with which view,
+based on the naming convention of [ViewName]ViewModel.cs.  Prism also allows convenient control
+over the UI by using Region Managers that pass views back and forth, basically like a mini window inside
+of a window, similar to the idea of an iFrame in html.  To make property binding easier, Prism automatically
+implements the INotifyPropertyChanged interface, removing the need to manually call PropertyChanged on
+every property connected to the UI.  Additionally, Prism includes Events that can be
+published and subscribed to, which enable passing information and status updates between views.  Finally,
+Prism takes the Command concept and enhances that as well by using Delegate Commands that can automatically
+determine if a command can be executed or not.
+
+Please note that this is just an overview of the Prism features this solution implements and is not
+a substitute for reading the Prism documentation to get a good understanding of how it works.
 
 ## Features
 
