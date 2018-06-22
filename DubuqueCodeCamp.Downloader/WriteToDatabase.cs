@@ -33,86 +33,94 @@ namespace DubuqueCodeCamp.Downloader
             using (_database)
             {
                 var databaseType = _database.GetType().ToString();
+                var registrantsTable = _database.Registrants.GetType().ToString();
 
-                WriteRegistrantInformation(registrantInformation, databaseType);
+                var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
+                var uniqueRegistrants = GetUniqueRegistrants(newRegistrants);
 
-                // Now map the registrant's Talk Interests
-                WriteTalkInterests(registrantInformation, databaseType); 
+                WriteRegistrantsToDatabase(registrantInformation, uniqueRegistrants, databaseType, registrantsTable, newRegistrants);
+
+                WriteTalkInterestsToDatabase(registrantInformation, databaseType); 
             }
         }
 
-        private void WriteRegistrantInformation(IReadOnlyCollection<RegistrantInformation> registrantInformation, string databaseType)
+        private void WriteRegistrantsToDatabase(IReadOnlyCollection<RegistrantInformation> registrantInformation,
+            IReadOnlyCollection<Registrant> uniqueRegistrants, string databaseType, string registrantsTable, List<Registrant> newRegistrants)
         {
-            const string REGISTRANTS = nameof(_database.Registrants);
-
-            var databaseRegistrants = _database.Registrants;
-
-            // Convert the RegistrantInformation from the parser into a format that can be saved to the database
-            var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
-
-            // TODO: Get Equality overrides to work
-            // If the record is not a duplicate of what is already in the database, add it to the database
-            var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
-                dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
-                string.Equals(dataReg.EmailAddress, newReg.EmailAddress))).ToList();
-
-            // Try using the new Equals operator I implemented - can't figure out how to get this to work
-            //var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
-            //    dataReg == newReg)).ToList();
-
             if (uniqueRegistrants.Any())
             {
                 try
                 {
-                    _logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
-                        REGISTRANTS);
+                    _logger.Information(
+                        $"Writing {registrantInformation} to {databaseType}.{registrantsTable}...", newRegistrants,
+                        databaseType, registrantsTable);
 
                     _database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     _database.SubmitChanges();
 
-                    _logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants,
-                        databaseType,
-                        REGISTRANTS);
+                    _logger.Information(
+                        $"Finished writing {registrantInformation} to {databaseType}.{registrantsTable}.", newRegistrants,
+                        databaseType, registrantsTable);
                 }
                 catch (Exception ex)
                 {
-                    _logger.ForContext<DCCKellyDatabase>()
-                           .Error(ex, $"Failed to write {0} to {1}.{2}", newRegistrants, databaseType, REGISTRANTS);
+                    _logger.ForContext<DCCKellyDatabase>().Error(ex,
+                        $"Failed to write {newRegistrants} to {databaseType}.{registrantsTable}",
+                        newRegistrants, databaseType, registrantsTable);
                 }
             }
             else
             {
-                _logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
+                _logger.Information(
+                    $"No new registrants to write to {databaseType}.{registrantsTable}", databaseType, registrantsTable);
             }
         }
 
-        private void WriteTalkInterests(IEnumerable<RegistrantInformation> registrantInformation,
-            string databaseType)
+        private void WriteTalkInterestsToDatabase(IEnumerable<RegistrantInformation> registrantInformation, string databaseType)
         {
-            const string TALKINTERESTS = nameof(_database.TalkInterest);
-            List<(string FirstName, string LastName, List<int> Interests)> interests =
-                registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
+            var talkInterestsTable = _database.TalkInterest.GetType().ToString();
 
             try
             {
-                _logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType,
-                    TALKINTERESTS);
+                List<(string FirstName, string LastName, List<int> Interests)> interests =
+                registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
+
+                _logger.Verbose(interests.ToString());
+
+                _logger.Information(
+                    $"Writing Talk Interests {interests} to {databaseType}.{talkInterestsTable}...", interests, databaseType,
+                    talkInterestsTable);
 
                 var talkInterestList = MatchTalkInterestsToTalks(_database, interests);
-
                 _database.TalkInterest.InsertAllOnSubmit(talkInterestList);
-
                 _database.SubmitChanges();
 
-                _logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.",
+                _logger.Information(
+                    $"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{talkInterestsTable}.",
                     talkInterestList.Count, databaseType,
-                    TALKINTERESTS);
+                    talkInterestsTable);
             }
             catch (Exception ex)
             {
-                _logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write {0} to {1}.{2}", interests, databaseType, TALKINTERESTS);
+                _logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write interests to {databaseType}.{talkInterestsTable}", databaseType, talkInterestsTable);
             }
+        }
+
+        private List<Registrant> GetUniqueRegistrants(IEnumerable<Registrant> newRegistrants)
+        {
+            // TODO: Get Equality overrides to work
+            var uniqueRegistrants = newRegistrants.Where(newReg => !_database.Registrants.Any(dataReg =>
+                                                      dataReg.FirstName == newReg.FirstName &&
+                                                      dataReg.LastName == newReg.LastName &&
+                                                      string.Equals(dataReg.EmailAddress, newReg.EmailAddress)))
+                                                  .ToList();
+
+            // Try using the new Equals operator I implemented - can't figure out how to get this to work
+            //var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
+            //    dataReg == newReg)).ToList();
+
+            return uniqueRegistrants;
         }
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)
