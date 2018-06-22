@@ -23,7 +23,7 @@
         /// <summary>
         /// Name of the register view
         /// </summary>
-        public static string RegisterView => "RegisterView";
+        public static string RegisterView => "PersonalInformation";
 
         /// <summary>
         /// Name of the TalkInterests view

@@ -11,6 +11,8 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
+    
+    <TextBlock Text="Add a Session" Style="{StaticResource Label}" />
 
     <!-- Talk Information Entry -->
     <StackPanel Grid.Row="1">
@@ -46,7 +48,8 @@
       <Button Grid.Column="2"
               Content="Cancel"
               HorizontalAlignment="Center"
-              Command="{Binding CancelCommand}" />
+              Command="{Binding CancelCommand}"
+              CommandParameter="{Binding TalksView, Source={StaticResource RegionNames}}" />
     </Grid>
   </Grid>
 </UserControl>

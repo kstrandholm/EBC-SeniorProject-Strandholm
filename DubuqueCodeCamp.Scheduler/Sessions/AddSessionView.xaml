@@ -21,7 +21,11 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <TextBlock Grid.Column="1" Grid.Row="0" Text="Session Start Time" Margin="5" />
+    <StackPanel Grid.Column="1" Grid.Row="0">
+      <TextBlock Text="Add a Session" Style="{StaticResource Label}" />
+      <TextBlock  Text="Session Start Time" Margin="5" />
+    </StackPanel>
+    
     <!-- Time Start Selector for the new Session -->
     <xctk:DateTimeUpDown Grid.Column="1" Grid.Row="1"
                          Value="{Binding TimeStart, UpdateSourceTrigger=PropertyChanged}"

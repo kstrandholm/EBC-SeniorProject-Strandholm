@@ -33,6 +33,8 @@
 
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
 
+          <TextBlock Text="Event Date" HorizontalAlignment="Center" Style="{StaticResource Label}" />
+          
           <!-- Set the Base Date for the Window -->
           <Calendar SelectedDate="{Binding EventDate}" Margin="5" />
 

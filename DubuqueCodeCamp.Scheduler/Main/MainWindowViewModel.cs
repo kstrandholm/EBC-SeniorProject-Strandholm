@@ -15,9 +15,8 @@ namespace DubuqueCodeCamp.Scheduler
     {
         private readonly IEventAggregator _eventAggregator;
 
-        private bool _canExecuteCreateSchedule;
-        private DateTime _eventDate = DateTime.Today;
-
+        private bool _canExecuteCreateSchedule = DatabaseOperations.GetExistingSessions(DateTime.Today).Any() &&
+                                                 DatabaseOperations.GetExistingTalks(DateTime.Today).Any();
         /// <summary>
         /// Only create a schedule if there are existing sessions and talks, determined in <see cref="UpdatePropertyCanExecute()"/>
         /// </summary>
@@ -30,6 +29,7 @@ namespace DubuqueCodeCamp.Scheduler
             set => SetProperty(ref _canExecuteCreateSchedule, value);
         }
 
+        private DateTime _eventDate = DateTime.Today;
         /// <summary>
         /// Date of the event to edit
         /// </summary>
@@ -63,6 +63,7 @@ namespace DubuqueCodeCamp.Scheduler
 
             // Subscribe to Events
             _eventAggregator.GetEvent<SessionsUpdatedEvent>().Subscribe(UpdatePropertyCanExecute);
+            _eventAggregator.GetEvent<TalksUpdatedEvent>().Subscribe(UpdatePropertyCanExecute);
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace DubuqueCodeCamp.Registration
 
             Container.RegisterTypeForNavigation<MainWindow>(RegionNames.MainWindow);
             Container.RegisterTypeForNavigation<SplashScreenView>(RegionNames.SplashScreen);
-            Container.RegisterTypeForNavigation<RegisterView>(RegionNames.RegisterView);
+            Container.RegisterTypeForNavigation<PersonalInformation>(RegionNames.RegisterView);
             Container.RegisterTypeForNavigation<TalkInterestsView>(RegionNames.TalkInterestsView);
         }
 
