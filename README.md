@@ -27,13 +27,35 @@ Document the database connection string in the app.config file
 
 ## Developing
 
+### Important!
+
+This project has a few Nuget packages that rely on other now-outdated Nuget packages.  
+If a package has not been updated, do not update it without having a rollback plan.
+
+### Basics
+
 This project uses WPF to create the UI and C# for the logic, using the MVVM pattern to separate
 the UI from the logic and from the data models.  Additionally, it implements Prism and Unity to
 enable easier to understand and more concise code, as well as better control over the UI.
 
 Working on this project will require knowlege about how to use WPF, bindings, user controls,
 the MVVM pattern, commanding, and how Prism and Unity connect the UI views with the logic in
-the view models.
+the view models using Region Managers.
+
+### Nuget Packages
+
+The Downloader implements Logging in the form of Serilog and file parsing in the form of CsvHealper.  
+It also uses SSH.NET to create a connection to the 3rd party's FTP site, and implements Linq's DataContext 
+class to create a database connection.
+
+UI is done in WPF with the help of Prism.
+
+
+### Understanding Prism
+
+Arguably the hardest part about working with this code base is understanding the implementation of
+of the Prism Nuget package in the projects with a UI.  This solution also uses Unity as a controller
+that manages dependency injections.
 
 
 
@@ -55,15 +77,9 @@ Enable on-site registration with the option to select interesting talks!
 
 
 
-- Project homepage: https://your.github.com/awesome-project/
-- Repository: https://github.com/your/awesome-project/
-- Issue tracker: https://github.com/your/awesome-project/issues
-  - In case of sensitive bugs like security vulnerabilities, please contact
-    my@email.com directly instead of using issue tracker. We value your effort
-    to improve the security and privacy of this project!
-- Related projects:
-  - Your other project: https://github.com/your/other-project/
-  - Someone else's project: https://github.com/someones/awesome-project/
+- Unity: https://github.com/unitycontainer/unity
+- Prism: https://github.com/PrismLibrary/Prism
+- Serilog: https://github.com/serilog/serilog
 
 
 ## Licensing
