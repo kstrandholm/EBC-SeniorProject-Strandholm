@@ -28,18 +28,10 @@ namespace DubuqueCodeCamp.Downloader
 
             // Download the file from the FTP site
             var ftp = new SftpDownload();
-
-            try
-            {
-                var messageToUse = ftp.DownloadFileUsingSftpClient(fileName, localFileLocation)
-                    ? "\nFile retrieved."
-                    : "\nFile not downloaded.";
-
-                logger.Information(messageToUse, fileName, localFileLocation);
-            }
-            catch (Exception ex)
-            {
-            }
+            var messageToUse = ftp.DownloadFileUsingSftpClient(fileName, localFileLocation)
+                ? "\nFile retrieved."
+                : "\nFile not downloaded.";
+            logger.Information(messageToUse, fileName, localFileLocation);
 
             // Parse the file from the local file path
             List<RegistrantInformation> registrants;
@@ -73,10 +65,6 @@ namespace DubuqueCodeCamp.Downloader
             Console.ReadKey();
 #endif
             logger.Dispose();
-        }
-
-        private static void DownloadFile(string fileName, string localFileLocation, ILogger logger)
-        {
         }
     }
 }

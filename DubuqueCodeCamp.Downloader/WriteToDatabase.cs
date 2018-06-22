@@ -12,19 +12,26 @@ namespace DubuqueCodeCamp.Downloader
     /// </summary>
     public class WriteToDatabase
     {
-        public static void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
+        private readonly ILogger _logger;
+
+        public WriteToDatabase()
+        {
+            _logger = LoggingInitializer.GetLogger();
+        }
+
+        public void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
             ILogger logger)
         {
             var databaseType = database.GetType().ToString();
 
-            WriteRegistrantInformation(database, registrantInformation, logger, databaseType);
+            WriteRegistrantInformation(database, registrantInformation, databaseType);
 
             // Now map the registrant's Talk Interests
-            WriteTalkInterests(database, registrantInformation, logger, databaseType);
+            WriteTalkInterests(database, registrantInformation, databaseType);
         }
 
-        private static void WriteRegistrantInformation(DCCKellyDatabase database,
-            IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
+        private void WriteRegistrantInformation(DCCKellyDatabase database,
+            IReadOnlyCollection<RegistrantInformation> registrantInformation,
             string databaseType)
         {
             const string REGISTRANTS = nameof(database.Registrants);
@@ -33,7 +40,7 @@ namespace DubuqueCodeCamp.Downloader
 
             // Convert the RegistrantInformation from the parser into a format that can be saved to the database
             var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
-            
+
             // TODO: Get Equality overrides to work
             // If the record is not a duplicate of what is already in the database, add it to the database
             var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
@@ -48,31 +55,30 @@ namespace DubuqueCodeCamp.Downloader
             {
                 try
                 {
-                    logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
+                    _logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
                         REGISTRANTS);
 
                     database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
                     database.SubmitChanges();
 
-                    logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants,
+                    _logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants,
                         databaseType,
                         REGISTRANTS);
                 }
                 catch (Exception ex)
                 {
-                    logger.ForContext<DCCKellyDatabase>()
-                          .Error(ex, $"Failed to write {0} to {1}.{2}", newRegistrants, databaseType, REGISTRANTS);
+                    _logger.ForContext<DCCKellyDatabase>()
+                           .Error(ex, $"Failed to write {0} to {1}.{2}", newRegistrants, databaseType, REGISTRANTS);
                 }
             }
             else
             {
-                logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
+                _logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
             }
         }
 
-        private static void WriteTalkInterests(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
-            ILogger logger,
+        private void WriteTalkInterests(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
             string databaseType)
         {
             const string TALKINTERESTS = nameof(database.TalkInterest);
@@ -81,7 +87,8 @@ namespace DubuqueCodeCamp.Downloader
 
             try
             {
-                logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
+                _logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType,
+                    TALKINTERESTS);
 
                 var talkInterestList = MatchTalkInterestsToTalks(database, interests);
 
@@ -89,12 +96,13 @@ namespace DubuqueCodeCamp.Downloader
 
                 database.SubmitChanges();
 
-                logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.", talkInterestList.Count, databaseType,
+                _logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.",
+                    talkInterestList.Count, databaseType,
                     TALKINTERESTS);
             }
             catch (Exception ex)
             {
-                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write {0} to {1}.{2}", interests, databaseType, TALKINTERESTS);
+                _logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write {0} to {1}.{2}", interests, databaseType, TALKINTERESTS);
             }
         }
 
