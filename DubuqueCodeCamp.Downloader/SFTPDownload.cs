@@ -19,6 +19,9 @@ namespace DubuqueCodeCamp.Downloader
 
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Constructor for the  SftpDownload
+        /// </summary>
         public SftpDownload()
         {
             _logger = LoggingInitializer.GetLogger();
@@ -32,28 +35,38 @@ namespace DubuqueCodeCamp.Downloader
         /// <returns></returns>
         public bool DownloadFileUsingSftpClient(string fileToDownload, string localFileLocation)
         {
+            _logger.Information($"Downloading File {fileToDownload}...\n", fileToDownload);
+
             _logger.Verbose($"Local File Location: {localFileLocation}", localFileLocation);
             _logger.Verbose($"File Name: {fileToDownload}", fileToDownload);
             _logger.Verbose($"FTP File Location: {FTPFileLocation}", FTPFileLocation);
 
-            using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
+            try
             {
-                sftp.Connect();
-
-                var fullLocalPath = localFileLocation + fileToDownload;
-                var fullSftpPath = FTPFileLocation + fileToDownload;
-
-                // If the file already exists in the local directory, compare the dates on the two files
-                if (File.Exists(fullLocalPath))
+                using (var sftp = new SftpClient(FTPHost, FTPUserName, FTPPassword))
                 {
-                    var newFileInfo = sftp.GetAttributes(fullSftpPath);
-                    var existingFileInfo = new FileInfo(fullLocalPath);
+                    sftp.Connect();
 
-                    if (!ShouldDownloadNewFile(existingFileInfo, newFileInfo))
-                        return false;
+                    var fullLocalPath = localFileLocation + fileToDownload;
+                    var fullSftpPath = FTPFileLocation + fileToDownload;
+
+                    // If the file already exists in the local directory, compare the dates on the two files
+                    if (File.Exists(fullLocalPath))
+                    {
+                        var newFileInfo = sftp.GetAttributes(fullSftpPath);
+                        var existingFileInfo = new FileInfo(fullLocalPath);
+
+                        if (!ShouldDownloadNewFile(existingFileInfo, newFileInfo))
+                            return false;
+                    }
+
+                    return DownloadFile(sftp, fullLocalPath, fullSftpPath);
                 }
-
-                return DownloadFile(sftp, fullLocalPath, fullSftpPath);
+            }
+            catch (Exception ex)
+            {
+                _logger.ForContext<SftpDownload>().Fatal(ex, "SFTP Download failed.");
+                return false;
             }
         }
 
@@ -82,13 +95,13 @@ namespace DubuqueCodeCamp.Downloader
                 // If the file on the FTP site is not newer than our current file, the file won't be downloaded
                 if (newFileInfo.LastWriteTime < existingFileInfo.LastWriteTime)
                 {
-                    _logger.Information("File already exists and does not need to be re-downloaded.");
+                    _logger.Information("File already exists and does not need to be re-downloaded.", existingFileInfo, newFileInfo);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unable to compare the existing file to the file to download.  Not downloading file.");
+                _logger.Error(ex, "Unable to compare the existing file to the file to download.");
                 return false;
             }
 

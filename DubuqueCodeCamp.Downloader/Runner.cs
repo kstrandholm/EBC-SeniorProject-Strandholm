@@ -29,18 +29,16 @@ namespace DubuqueCodeCamp.Downloader
             // Download the file from the FTP site
             var ftp = new SftpDownload();
 
-            logger.Information($"Downloading File {fileName}...\n", fileName);
             try
             {
                 var messageToUse = ftp.DownloadFileUsingSftpClient(fileName, localFileLocation)
                     ? "\nFile retrieved."
-                    : "\nFile already exists and does not need to be re-downloaded.";
+                    : "\nFile not downloaded.";
 
                 logger.Information(messageToUse, fileName, localFileLocation);
             }
             catch (Exception ex)
             {
-                logger.ForContext<SftpDownload>().Error(ex, "SFTP Download failed.");
             }
 
             // Parse the file from the local file path
