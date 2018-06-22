@@ -4,9 +4,12 @@
 ## Getting started
 
 The manager has been broken down into 3 main projects:
-* Downloader gets the latest data from the 3rd party
-* Scheduler creates a proposed schedule
-* Registration enables on-site registration in the form of a kiosk window
+
+- Downloader gets the latest data from the 3rd party
+
+- Scheduler creates a proposed schedule
+
+- Registration enables on-site registration in the form of a kiosk window
 
 ### Initial Configuration
 
