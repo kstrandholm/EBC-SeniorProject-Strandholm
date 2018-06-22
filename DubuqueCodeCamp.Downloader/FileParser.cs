@@ -1,11 +1,10 @@
-﻿using System;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CsvHelper;
-using CsvHelper.Configuration;
-using Serilog;
-using Serilog.Core;
 
 namespace DubuqueCodeCamp.Downloader
 {
@@ -15,9 +14,13 @@ namespace DubuqueCodeCamp.Downloader
     public class FileParser
     {
         private const string DELIMITER = "|";
-        private ILogger _logger;
-        private TextReader _fileReader;
+        private readonly ILogger _logger;
+        private readonly TextReader _fileReader;
 
+        /// <summary>
+        /// Constructor for the File Parser
+        /// </summary>
+        /// <param name="fileReader"><see cref="TextReader"/> of the file to parse</param>
         public FileParser(TextReader fileReader)
         {
             _logger = LoggingInitializer.GetLogger();

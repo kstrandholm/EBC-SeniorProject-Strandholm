@@ -27,13 +27,20 @@ namespace DubuqueCodeCamp.Downloader
             var logger = LoggingInitializer.GetLogger();
 
             // Download the file from the FTP site
+            var ftp = new SftpDownload();
+
+            logger.Information($"Downloading File {fileName}...\n", fileName);
             try
             {
-                DownloadFile(fileName, localFileLocation, logger);
+                var messageToUse = ftp.DownloadFileUsingSftpClient(fileName, localFileLocation)
+                    ? "\nFile retrieved."
+                    : "\nFile already exists and does not need to be re-downloaded.";
+
+                logger.Information(messageToUse, fileName, localFileLocation);
             }
             catch (Exception ex)
             {
-                logger.ForContext<SFTPDownload>().Error(ex, "SFTP Download failed.");
+                logger.ForContext<SftpDownload>().Error(ex, "SFTP Download failed.");
             }
 
             // Parse the file from the local file path
@@ -72,12 +79,6 @@ namespace DubuqueCodeCamp.Downloader
 
         private static void DownloadFile(string fileName, string localFileLocation, ILogger logger)
         {
-            logger.Information("Getting File {fileName}...\n", fileName);
-
-            var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
-
-            var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
-            logger.Information(messageToUse);
         }
     }
 }
