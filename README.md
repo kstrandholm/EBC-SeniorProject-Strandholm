@@ -73,15 +73,15 @@ a substitute for reading the Prism documentation to get a good understanding of 
 
 ## Features
 
-### Downloader
+#### Downloader
 
 Get and save the registrant information from the 3rd party!
 
-### Scheduler
+#### Scheduler
 
 Add Sessions and Talks, then create the proposed schedule, all from the same window!
 
-### Registration
+#### Registration
 
 Enable on-site registration with the option to select interesting talks!
 
@@ -96,8 +96,4 @@ Enable on-site registration with the option to select interesting talks!
 
 ## Licensing
 
-One really important part: Give your project a proper license. Here you should
-state what the license is and how to find the text version of the license.
-Something like:
-
-"The code in this project is licensed under MIT license."
+> This code base is probably liscensed by Platinum Supplemental Insurance
