@@ -37,15 +37,20 @@ namespace DubuqueCodeCamp.Downloader
             }
 
             // Parse the file from the local file path
-            var registrants = new List<RegistrantInformation>();
-            try
+            List<RegistrantInformation> registrants;
+            var filePath = localFileLocation + fileName;
+
+            if (File.Exists(filePath))
             {
-                registrants = GetParsedFileRecords(localFileLocation, fileName);
+                var streamReader = new StreamReader(filePath);
+                var fileParser = new FileParser(streamReader);
+
+                registrants = fileParser.ParseFile();
             }
-            catch (Exception ex)
+            else
             {
-                logger.ForContext<FileParser>()
-                      .Fatal(ex, $"Failed to parse {fileName} at '{localFileLocation}'.", fileName, localFileLocation);
+                // If the file does not exist, throw an exception
+                throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
             }
 
             // If the parser could not get any records, don't try to save to the database
@@ -73,17 +78,6 @@ namespace DubuqueCodeCamp.Downloader
 
             var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
             logger.Information(messageToUse);
-        }
-
-        private static List<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
-        {
-            var filePath = localFileLocation + fileName;
-            if (File.Exists(filePath))
-                return FileParser.ParseFile(filePath).ToList();
-            else
-            {
-                throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
-            }
         }
     }
 }

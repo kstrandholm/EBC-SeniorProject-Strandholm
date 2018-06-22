@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Serilog;
+using Serilog.Core;
 
 namespace DubuqueCodeCamp.Downloader
 {
@@ -13,29 +15,41 @@ namespace DubuqueCodeCamp.Downloader
     public class FileParser
     {
         private const string DELIMITER = "|";
+        private ILogger _logger;
+        private TextReader _fileReader;
+
+        public FileParser(TextReader fileReader)
+        {
+            _logger = LoggingInitializer.GetLogger();
+            _fileReader = fileReader;
+        }
 
         /// <summary>
         /// Parse the given file
         /// </summary>
-        /// <param name="filePath">Path to the file, including the name of the file to parse</param>
         /// <returns>List of <see cref="RegistrantInformation"/></returns>
-        public static IEnumerable<RegistrantInformation> ParseFile(string filePath)
+        public List<RegistrantInformation> ParseFile()
         {
-            var csvreader = GetCsvReader(filePath);
+            var csvreader = GetCsvReader(_fileReader);
+            List<RegistrantInformation> records;
 
-            Console.WriteLine("\nReading file...");
-
-            var records = csvreader.GetRecords<RegistrantInformation>().ToList();
-
-            Console.WriteLine("\nFinished reading file " + filePath);
+            _logger.Information("\nReading file...");
+            try
+            {
+                records = csvreader.GetRecords<RegistrantInformation>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Unable to parse the file", ex);
+            }
+            _logger.Information("\nFinished reading the file.");
 
             return records;
         }
 
-        private static CsvReader GetCsvReader(string filePath)
+        private CsvReader GetCsvReader(TextReader file)
         {
-            var textReader = new StreamReader(filePath);
-            var csvreader = new CsvReader(textReader);
+            var csvreader = new CsvReader(file);
 
             // Configure the CsvReader
             csvreader.Configuration.Delimiter = DELIMITER;
