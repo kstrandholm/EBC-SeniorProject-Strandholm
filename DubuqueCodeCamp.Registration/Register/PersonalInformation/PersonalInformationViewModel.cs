@@ -11,7 +11,7 @@ namespace DubuqueCodeCamp.Registration
     /// <summary>
     /// View model associated to the Register view
     /// </summary>
-    public class RegisterViewModel : BindableBase
+    public class PersonalInformationViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
@@ -81,7 +81,7 @@ namespace DubuqueCodeCamp.Registration
         /// </summary>
         /// <param name="regionManager">Region manager created and passed in by Prism/Unity</param>
         /// <param name="eventAggregator">Event aggregator created and passed in by Prism/Unity</param>
-        public RegisterViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+        public PersonalInformationViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;

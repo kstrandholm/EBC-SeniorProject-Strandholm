@@ -42,6 +42,14 @@ namespace DubuqueCodeCamp.Scheduler
             var talksView = _container.Resolve<TalksView>();
             talksRegion.Add(talksView, RegionNames.TalksView);
             talksRegion.Activate(talksView);
+
+            // Initialize the Schedule Region
+            _container.RegisterType<ScheduleView>();
+
+            var region = _regionManager.Regions[RegionNames.ScheduleRegion];
+            var scheduleView = _container.Resolve<ScheduleView>();
+            region.Add(scheduleView, RegionNames.ScheduleView);
+            region.Activate(scheduleView);
         }
     }
 }

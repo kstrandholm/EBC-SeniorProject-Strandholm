@@ -112,4 +112,11 @@
     </Style.Triggers>
   </Style>
 
+  <!-- TextBlock Label-Style Template -->
+  <Style x:Key="Label" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextWrapping" Value="NoWrap"/>
+    <Setter Property="TextTrimming" Value="None"/>
+    <Setter Property="FontSize" Value="20" />
+  </Style>
+
 </ResourceDictionary>

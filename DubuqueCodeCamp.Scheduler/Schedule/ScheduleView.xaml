@@ -11,7 +11,7 @@
     </Grid.RowDefinitions>
 
     <!-- Proposed Schedule -->
-    <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="20" >Proposed Schedule</TextBlock>
+    <TextBlock Grid.Row="0" FontWeight="Bold" Style="{StaticResource Label}" >Proposed Schedule</TextBlock>
     <ListView Grid.Row="2" ItemsSource="{Binding Schedule, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
       <ListView.View>
         <GridView>

@@ -15,8 +15,12 @@
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
       
+      <TextBlock Text="Which talks would you like to attend?"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 FontSize="25" Margin="10"/>
+      
       <!-- List of available talks -->
-      <ListView Grid.Row="1"
+      <ListView Grid.Row="1" Margin="30 15"
                 ItemsSource="{Binding ChosenTalks, UpdateSourceTrigger=PropertyChanged}"
                 FontSize="14" MaxHeight="750" MinHeight="400"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"

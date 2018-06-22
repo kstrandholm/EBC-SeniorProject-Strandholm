@@ -11,7 +11,7 @@
 
     <!-- Sessions Listbox -->
     <StackPanel Grid.Column="0" Margin="10">
-      <TextBlock FontWeight="Bold" Margin="0 0 0 5" FontSize="18">Sessions</TextBlock>
+      <TextBlock FontWeight="Bold" Margin="0 0 0 5" Style="{StaticResource Label}" >Sessions</TextBlock>
       <ListView ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SessionInformation}" SelectionMode="Single"
                ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="150" MinHeight="125"  >

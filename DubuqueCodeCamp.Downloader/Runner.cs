@@ -24,65 +24,45 @@ namespace DubuqueCodeCamp.Downloader
 #endif
             var localFileLocation = ConfigurationManager.AppSettings["LocalFileLocation"];
             var fileName = "SampleFile.txt";
-            var logger = LoggingInitializer.GetLogger();
 
-            // Download the file from the FTP site
-            try
+            using (var logger = LoggingInitializer.GetLogger())
             {
-                DownloadFile(fileName, localFileLocation, logger);
-            }
-            catch (Exception ex)
-            {
-                logger.ForContext<SFTPDownload>().Error(ex, "SFTP Download failed.");
-            }
+                // Download the file from the FTP site
+                var ftp = new SftpDownload();
+                var messageToUse = ftp.DownloadFileUsingSftpClient(fileName, localFileLocation)
+                    ? "\nFile retrieved."
+                    : "\nFile not downloaded.";
+                logger.Information(messageToUse, fileName, localFileLocation);
 
-            // Parse the file from the local file path
-            var registrants = new List<RegistrantInformation>();
-            try
-            {
-                registrants = GetParsedFileRecords(localFileLocation, fileName);
-            }
-            catch (Exception ex)
-            {
-                logger.ForContext<FileParser>()
-                      .Fatal(ex, $"Failed to parse {fileName} at '{localFileLocation}'.", fileName, localFileLocation);
-            }
+                // Parse the file from the local file path
+                List<RegistrantInformation> registrants;
+                var filePath = localFileLocation + fileName;
 
-            // If the parser could not get any records, don't try to save to the database
-            if (registrants.Any())
-            {
-                using (var database = new DCCKellyDatabase())
+                if (File.Exists(filePath))
+                {
+                    var streamReader = new StreamReader(filePath);
+                    var fileParser = new FileParser(streamReader);
+
+                    registrants = fileParser.ParseFile();
+                }
+                else
+                {
+                    // If the file does not exist, throw an exception
+                    throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
+                }
+
+                // If the parser could not get any records, don't try to save to the database
+                if (registrants.Any())
                 {
                     // Write the records to the database
-                    WriteToDatabase.WriteDownloadRecords(database, registrants, logger);
+                    var writer = new WriteToDatabase();
+                    writer.WriteDownloadRecords(registrants);
                 }
-            }
 
 #if DEBUG
-            Console.WriteLine("\nPress any key to Continue...");
-            Console.ReadKey();
+                Console.WriteLine("\nPress any key to Continue...");
+                Console.ReadKey();
 #endif
-            logger.Dispose();
-        }
-
-        private static void DownloadFile(string fileName, string localFileLocation, ILogger logger)
-        {
-            logger.Information("Getting File {fileName}...\n", fileName);
-
-            var fileDownloaded = SFTPDownload.DownloadFileUsingSftpClient(fileName, localFileLocation);
-
-            var messageToUse = fileDownloaded ? "\nFile retrieved." : "\nFile already exists and does not need to be re-downloaded.";
-            logger.Information(messageToUse);
-        }
-
-        private static List<RegistrantInformation> GetParsedFileRecords(string localFileLocation, string fileName)
-        {
-            var filePath = localFileLocation + fileName;
-            if (File.Exists(filePath))
-                return FileParser.ParseFile(filePath).ToList();
-            else
-            {
-                throw new FileNotFoundException($"File {fileName} does not exist in {localFileLocation}.", fileName);
             }
         }
     }

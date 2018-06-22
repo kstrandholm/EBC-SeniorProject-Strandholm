@@ -81,15 +81,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Main\DatabaseOperations.cs" />
-    <Compile Include="Main\MainContentModule.cs" />
-    <Compile Include="Main\RegionNames.cs" />
-    <Compile Include="Register\ChosenTalk.cs" />
+    <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="MainContentModule.cs" />
+    <Compile Include="RegionNames.cs" />
+    <Compile Include="Register\TalkInterests\ChosenTalk.cs" />
     <Compile Include="Register\ClearRegistrationEvent.cs" />
-    <Compile Include="Register\PersonalInformation\RegisterView.xaml.cs">
-      <DependentUpon>RegisterView.xaml</DependentUpon>
+    <Compile Include="Register\PersonalInformation\PersonalInformation.xaml.cs">
+      <DependentUpon>PersonalInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Register\PersonalInformation\RegisterViewModel.cs" />
+    <Compile Include="Register\PersonalInformation\PersonalInformationViewModel.cs" />
     <Compile Include="Register\RegistrationInformation.cs" />
     <Compile Include="Register\TalkInterests\TalkInterestsView.xaml.cs">
       <DependentUpon>TalkInterestsView.xaml</DependentUpon>
@@ -113,7 +113,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Register\PersonalInformation\RegisterView.xaml">
+    <Page Include="Register\PersonalInformation\PersonalInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

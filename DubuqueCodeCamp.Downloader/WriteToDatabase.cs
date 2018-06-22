@@ -12,90 +12,115 @@ namespace DubuqueCodeCamp.Downloader
     /// </summary>
     public class WriteToDatabase
     {
-        public static void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
-            ILogger logger)
+        private readonly ILogger _logger;
+        private readonly DCCKellyDatabase _database;
+
+        /// <summary>
+        /// Constructor for the WriteToDatabase class
+        /// </summary>
+        public WriteToDatabase()
         {
-            var databaseType = database.GetType().ToString();
-
-            WriteRegistrantInformation(database, registrantInformation, logger, databaseType);
-
-            // Now map the registrant's Talk Interests
-            WriteTalkInterests(database, registrantInformation, logger, databaseType);
+            _logger = LoggingInitializer.GetLogger();
+            _database = new DCCKellyDatabase();
         }
 
-        private static void WriteRegistrantInformation(DCCKellyDatabase database,
-            IReadOnlyCollection<RegistrantInformation> registrantInformation, ILogger logger,
-            string databaseType)
+        /// <summary>
+        /// Save the given registrantInformation to the database
+        /// </summary>
+        /// <param name="registrantInformation"></param>
+        public void WriteDownloadRecords(IReadOnlyCollection<RegistrantInformation> registrantInformation)
         {
-            const string REGISTRANTS = nameof(database.Registrants);
+            using (_database)
+            {
+                var databaseType = _database.GetType().ToString();
+                var registrantsTable = _database.Registrants.GetType().ToString();
 
-            var databaseRegistrants = database.Registrants;
+                var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
+                var uniqueRegistrants = GetUniqueRegistrants(newRegistrants);
 
-            // Convert the RegistrantInformation from the parser into a format that can be saved to the database
-            var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
-            
+                WriteRegistrantsToDatabase(registrantInformation, uniqueRegistrants, databaseType, registrantsTable, newRegistrants);
+
+                WriteTalkInterestsToDatabase(registrantInformation, databaseType); 
+            }
+        }
+
+        private void WriteRegistrantsToDatabase(IReadOnlyCollection<RegistrantInformation> registrantInformation,
+            IReadOnlyCollection<Registrant> uniqueRegistrants, string databaseType, string registrantsTable, List<Registrant> newRegistrants)
+        {
+            if (uniqueRegistrants.Any())
+            {
+                try
+                {
+                    _logger.Information(
+                        $"Writing {registrantInformation} to {databaseType}.{registrantsTable}...", newRegistrants,
+                        databaseType, registrantsTable);
+
+                    _database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
+
+                    _database.SubmitChanges();
+
+                    _logger.Information(
+                        $"Finished writing {registrantInformation} to {databaseType}.{registrantsTable}.", newRegistrants,
+                        databaseType, registrantsTable);
+                }
+                catch (Exception ex)
+                {
+                    _logger.ForContext<DCCKellyDatabase>().Error(ex,
+                        $"Failed to write {newRegistrants} to {databaseType}.{registrantsTable}",
+                        newRegistrants, databaseType, registrantsTable);
+                }
+            }
+            else
+            {
+                _logger.Information(
+                    $"No new registrants to write to {databaseType}.{registrantsTable}", databaseType, registrantsTable);
+            }
+        }
+
+        private void WriteTalkInterestsToDatabase(IEnumerable<RegistrantInformation> registrantInformation, string databaseType)
+        {
+            var talkInterestsTable = _database.TalkInterest.GetType().ToString();
+
+            try
+            {
+                List<(string FirstName, string LastName, List<int> Interests)> interests =
+                registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
+
+                _logger.Verbose(interests.ToString());
+
+                _logger.Information(
+                    $"Writing Talk Interests {interests} to {databaseType}.{talkInterestsTable}...", interests, databaseType,
+                    talkInterestsTable);
+
+                var talkInterestList = MatchTalkInterestsToTalks(_database, interests);
+                _database.TalkInterest.InsertAllOnSubmit(talkInterestList);
+                _database.SubmitChanges();
+
+                _logger.Information(
+                    $"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{talkInterestsTable}.",
+                    talkInterestList.Count, databaseType,
+                    talkInterestsTable);
+            }
+            catch (Exception ex)
+            {
+                _logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write interests to {databaseType}.{talkInterestsTable}", databaseType, talkInterestsTable);
+            }
+        }
+
+        private List<Registrant> GetUniqueRegistrants(IEnumerable<Registrant> newRegistrants)
+        {
             // TODO: Get Equality overrides to work
-            // If the record is not a duplicate of what is already in the database, add it to the database
-            var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
-                dataReg.FirstName == newReg.FirstName && dataReg.LastName == newReg.LastName &&
-                string.Equals(dataReg.EmailAddress, newReg.EmailAddress))).ToList();
+            var uniqueRegistrants = newRegistrants.Where(newReg => !_database.Registrants.Any(dataReg =>
+                                                      dataReg.FirstName == newReg.FirstName &&
+                                                      dataReg.LastName == newReg.LastName &&
+                                                      string.Equals(dataReg.EmailAddress, newReg.EmailAddress)))
+                                                  .ToList();
 
             // Try using the new Equals operator I implemented - can't figure out how to get this to work
             //var uniqueRegistrants = newRegistrants.Where(newReg => !databaseRegistrants.Any(dataReg =>
             //    dataReg == newReg)).ToList();
 
-            if (uniqueRegistrants.Any())
-            {
-                try
-                {
-                    logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
-                        REGISTRANTS);
-
-                    database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
-
-                    database.SubmitChanges();
-
-                    logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants,
-                        databaseType,
-                        REGISTRANTS);
-                }
-                catch (Exception ex)
-                {
-                    logger.ForContext<DCCKellyDatabase>()
-                          .Error(ex, $"Failed to write {0} to {1}.{2}", newRegistrants, databaseType, REGISTRANTS);
-                }
-            }
-            else
-            {
-                logger.Information($"No new registrants to write to {databaseType}.{REGISTRANTS}", databaseType, REGISTRANTS);
-            }
-        }
-
-        private static void WriteTalkInterests(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
-            ILogger logger,
-            string databaseType)
-        {
-            const string TALKINTERESTS = nameof(database.TalkInterest);
-            List<(string FirstName, string LastName, List<int> Interests)> interests =
-                registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
-
-            try
-            {
-                logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType, TALKINTERESTS);
-
-                var talkInterestList = MatchTalkInterestsToTalks(database, interests);
-
-                database.TalkInterest.InsertAllOnSubmit(talkInterestList);
-
-                database.SubmitChanges();
-
-                logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.", talkInterestList.Count, databaseType,
-                    TALKINTERESTS);
-            }
-            catch (Exception ex)
-            {
-                logger.ForContext<DCCKellyDatabase>().Error(ex, $"Failed to write {0} to {1}.{2}", interests, databaseType, TALKINTERESTS);
-            }
+            return uniqueRegistrants;
         }
 
         private static List<Registrant> MapRegistrantInformationToRegistrantTable(IEnumerable<RegistrantInformation> registrants)

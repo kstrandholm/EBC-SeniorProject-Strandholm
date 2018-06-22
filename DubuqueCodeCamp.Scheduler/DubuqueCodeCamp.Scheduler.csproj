@@ -25,6 +25,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -125,25 +127,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Main\Bootstrapper.cs" />
-    <Compile Include="DateUpdatedEvent.cs" />
+    <Compile Include="Main\DateUpdatedEvent.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Schedule\ScheduleCreatedEvent.cs" />
     <Compile Include="Schedule\TalkSession.cs" />
-    <Compile Include="Schedule\ScheduleModule.cs" />
     <Compile Include="DatabaseOperations.cs" />
     <Compile Include="Schedule\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Schedule\ScheduleViewModel.cs" />
-    <Compile Include="Sessions\ContentModule.cs" />
-    <Compile Include="Sessions\AddSession\SessionsUpdatedEvent.cs" />
-    <Compile Include="Sessions\AddSession\AddSessionViewModel.cs" />
+    <Compile Include="ContentModule.cs" />
+    <Compile Include="Sessions\SessionsUpdatedEvent.cs" />
+    <Compile Include="Sessions\AddSessionViewModel.cs" />
     <Compile Include="Main\MainWindowViewModel.cs" />
-    <Compile Include="Sessions\SessionsDisplay\MainSessionsViewModel.cs" />
-    <Compile Include="Sessions\AddSession\AddSessionView.xaml.cs">
+    <Compile Include="Sessions\MainSessionsViewModel.cs" />
+    <Compile Include="Sessions\AddSessionView.xaml.cs">
       <DependentUpon>AddSessionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sessions\SessionsDisplay\MainSessionsView.xaml.cs">
+    <Compile Include="Sessions\MainSessionsView.xaml.cs">
       <DependentUpon>MainSessionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Talks\AddTalkView.xaml.cs">
@@ -176,11 +177,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sessions\AddSession\AddSessionView.xaml">
+    <Page Include="Sessions\AddSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sessions\SessionsDisplay\MainSessionsView.xaml">
+    <Page Include="Sessions\MainSessionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

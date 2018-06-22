@@ -4,11 +4,11 @@ namespace DubuqueCodeCamp.Registration
 {
     /// <inheritdoc cref="UserControl" />
     /// <summary>
-    /// Interaction logic for RegisterView
+    /// Interaction logic for PersonalInformation
     /// </summary>
-    public partial class RegisterView : UserControl
+    public partial class PersonalInformation : UserControl
     {
-        public RegisterView()
+        public PersonalInformation()
         {
             InitializeComponent();
         }
