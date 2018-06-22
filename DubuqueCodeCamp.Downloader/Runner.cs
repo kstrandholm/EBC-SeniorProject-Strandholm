@@ -53,11 +53,9 @@ namespace DubuqueCodeCamp.Downloader
             // If the parser could not get any records, don't try to save to the database
             if (registrants.Any())
             {
-                using (var database = new DCCKellyDatabase())
-                {
-                    // Write the records to the database
-                    WriteToDatabase.WriteDownloadRecords(database, registrants, logger);
-                }
+                // Write the records to the database
+                var writer = new WriteToDatabase();
+                writer.WriteDownloadRecords(registrants);
             }
 
 #if DEBUG

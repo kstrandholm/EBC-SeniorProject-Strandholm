@@ -13,30 +13,39 @@ namespace DubuqueCodeCamp.Downloader
     public class WriteToDatabase
     {
         private readonly ILogger _logger;
+        private readonly DCCKellyDatabase _database;
 
+        /// <summary>
+        /// Constructor for the WriteToDatabase class
+        /// </summary>
         public WriteToDatabase()
         {
             _logger = LoggingInitializer.GetLogger();
+            _database = new DCCKellyDatabase();
         }
 
-        public void WriteDownloadRecords(DCCKellyDatabase database, IReadOnlyCollection<RegistrantInformation> registrantInformation,
-            ILogger logger)
+        /// <summary>
+        /// Save the given registrantInformation to the database
+        /// </summary>
+        /// <param name="registrantInformation"></param>
+        public void WriteDownloadRecords(IReadOnlyCollection<RegistrantInformation> registrantInformation)
         {
-            var databaseType = database.GetType().ToString();
+            using (_database)
+            {
+                var databaseType = _database.GetType().ToString();
 
-            WriteRegistrantInformation(database, registrantInformation, databaseType);
+                WriteRegistrantInformation(registrantInformation, databaseType);
 
-            // Now map the registrant's Talk Interests
-            WriteTalkInterests(database, registrantInformation, databaseType);
+                // Now map the registrant's Talk Interests
+                WriteTalkInterests(registrantInformation, databaseType); 
+            }
         }
 
-        private void WriteRegistrantInformation(DCCKellyDatabase database,
-            IReadOnlyCollection<RegistrantInformation> registrantInformation,
-            string databaseType)
+        private void WriteRegistrantInformation(IReadOnlyCollection<RegistrantInformation> registrantInformation, string databaseType)
         {
-            const string REGISTRANTS = nameof(database.Registrants);
+            const string REGISTRANTS = nameof(_database.Registrants);
 
-            var databaseRegistrants = database.Registrants;
+            var databaseRegistrants = _database.Registrants;
 
             // Convert the RegistrantInformation from the parser into a format that can be saved to the database
             var newRegistrants = MapRegistrantInformationToRegistrantTable(registrantInformation);
@@ -58,9 +67,9 @@ namespace DubuqueCodeCamp.Downloader
                     _logger.Information($"Writing {registrantInformation} to {databaseType}.{REGISTRANTS}...", newRegistrants, databaseType,
                         REGISTRANTS);
 
-                    database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
+                    _database.Registrants.InsertAllOnSubmit(uniqueRegistrants);
 
-                    database.SubmitChanges();
+                    _database.SubmitChanges();
 
                     _logger.Information($"Finished writing {registrantInformation} to {databaseType}.{REGISTRANTS}.", newRegistrants,
                         databaseType,
@@ -78,10 +87,10 @@ namespace DubuqueCodeCamp.Downloader
             }
         }
 
-        private void WriteTalkInterests(DCCKellyDatabase database, IEnumerable<RegistrantInformation> registrantInformation,
+        private void WriteTalkInterests(IEnumerable<RegistrantInformation> registrantInformation,
             string databaseType)
         {
-            const string TALKINTERESTS = nameof(database.TalkInterest);
+            const string TALKINTERESTS = nameof(_database.TalkInterest);
             List<(string FirstName, string LastName, List<int> Interests)> interests =
                 registrantInformation.Select(reg => (reg.FirstName, reg.LastName, reg.TalkInterests)).ToList();
 
@@ -90,11 +99,11 @@ namespace DubuqueCodeCamp.Downloader
                 _logger.Information($"Writing Talk Interests {interests} to {databaseType}.{TALKINTERESTS}...", interests, databaseType,
                     TALKINTERESTS);
 
-                var talkInterestList = MatchTalkInterestsToTalks(database, interests);
+                var talkInterestList = MatchTalkInterestsToTalks(_database, interests);
 
-                database.TalkInterest.InsertAllOnSubmit(talkInterestList);
+                _database.TalkInterest.InsertAllOnSubmit(talkInterestList);
 
-                database.SubmitChanges();
+                _database.SubmitChanges();
 
                 _logger.Information($"Finished writing {talkInterestList.Count} Talk Interest records to {databaseType}.{TALKINTERESTS}.",
                     talkInterestList.Count, databaseType,
