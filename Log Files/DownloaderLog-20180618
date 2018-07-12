@@ -1,0 +1,7 @@
+2018-06-18 08:55:47.162 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-18 08:55:47.884 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-18 08:55:49.153 -05:00 [Information] No new registrants to write to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.Registrants
+2018-06-18 08:55:49.162 -05:00 [Information] Writing System.Collections.Generic.List`1[System.ValueTuple`3[System.String,System.String,System.Collections.Generic.List`1[System.Int32]]] to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.TalkInterest...
+2018-06-18 08:56:00.206 -05:00 [Information] Finished writing 231 records to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.TalkInterest.

@@ -1,0 +1,25 @@
+# This is a comment, let's say...
+# Using a delimiter of Pipe Characters ( | )
+# What I will need from the 3rd party:
+# Registrant Information - what it will include!
+# First Name | Last Name | Email Address | Occupation (Optional) | BirthDate (Optional) | Interests
+Kelly | Strandholm | kstrandholm@pltnm.com | Programmer | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Eugen | Cole | ecole@pltnm.com | Spinner | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Duane | Adams | dadams@pltnm.com | Woodsman | 08/15/1995 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Nate | Burianov | nburianov@pltnm.com | Healer |  | 8 | 9 | 4 | 5 | 6 | 7 | 18 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Matthew | Herzberg | mherzberg@pltnm.com | Rogue | 08/15/1995 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Luke | Morrison | lmorrison@pltnm.com | Wizard | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 11 | 12 | 13 | 14 | 15 | 16
+Matthew | Juliano | mjuliano@pltnm.com | Mage |  | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Nicholas | Sohl | nsohl@pltnm.com | Sniper | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4
+Luke | Amdor | lamdor@pltnm.com | Ranged | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18 | 10 | 11
+Doc | Liendo | dliendo@pltnm.com | Knight |  | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Mike | Sauber | msauber@pltnm.com | Paladin |  | 5 | 16
+Scott | Hogan | shogan@pltnm.com | Hunter | 08/15/1995 | 8 | 9 | 1 | 5 | 6 | 7 | 18 | 10 | 11 | 14 | 15 | 16
+Doc | Hart | dhart@pltnm.com | Tamer | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Dana | Sodemann | dsodemann@gmail.com |  |  | 8 | 9 | 1 | 2 | 3 | 10 | 11 | 12 | 13 | 16
+Juliano | Norton | jnorton@gmail.com | | 08/15/1995 | 8 | 9 | 1 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+Brian | Finkel | bfinkel@gmail.com | | 08/15/1995 | 8 | 14 | 15 | 6
+Duffy | Newman | dnewman@gmail.com | |  | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18 
+Jaeger | Hemmings | jhemmings@pltnm.com | Personnel | 08/15/1995 | 8 | 9 | 1 | 12 | 13 | 14 | 15 | 16
+Kate | Hogan | khogan@pltnm.com | HR | 08/15/1995 | 8 | 9 | 1 | 2 | 3 | 4 | 5
+Spencer | Jaeger | sjaeger@pltnm.com | Programmer | | 8 | 9 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 18

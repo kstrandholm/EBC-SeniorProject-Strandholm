@@ -1,0 +1,98 @@
+2018-06-21 12:52:05.708 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 12:52:06.475 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 12:52:57.603 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 12:52:58.363 -05:00 [Information] 
+File retrieved.
+2018-06-21 12:52:58.517 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: ''
+    MemberType: 
+    TypeConverter: 'CsvHelper.TypeConversion.Int32Converter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 28
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 83
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 43
+2018-06-21 12:56:12.660 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 12:56:13.264 -05:00 [Information] 
+File retrieved.
+2018-06-21 12:56:13.465 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: ''
+    MemberType: 
+    TypeConverter: 'CsvHelper.TypeConversion.Int32Converter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 28
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 83
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 43
+2018-06-21 12:57:00.768 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 12:57:01.314 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 12:59:52.256 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 12:59:52.945 -05:00 [Information] 
+File retrieved.
+2018-06-21 12:59:57.173 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.ReaderException: An unexpected error occurred. ---> System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s, IFormatProvider provider, DateTimeStyles styles)
+   at CsvHelper.TypeConversion.DateTimeConverter.ConvertFromString(String text, IReaderRow row, MemberMapData memberMapData)
+   at CsvHelper.TypeConversion.NullableConverter.ConvertFromString(String text, IReaderRow row, MemberMapData memberMapData)
+   at lambda_method(Closure )
+   at CsvHelper.Expressions.RecordCreator.Create[T]()
+   at CsvHelper.Expressions.RecordManager.Create[T]()
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   --- End of inner exception stack trace ---
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 28
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 83
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 43
+2018-06-21 13:01:55.693 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:01:56.418 -05:00 [Information] 
+File retrieved.
+2018-06-21 13:07:41.721 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:07:42.303 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:09:02.346 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:09:02.852 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:12:12.780 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:12:13.195 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:17:58.602 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:17:59.556 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:21:57.388 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:21:58.052 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:24:08.757 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:24:09.444 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:24:55.052 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-21 13:24:55.757 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-21 13:24:56.271 -05:00 [Information] Writing System.Collections.Generic.List`1[DubuqueCodeCamp.Downloader.RegistrantInformation] to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.Registrants...
+2018-06-21 13:24:56.599 -05:00 [Information] Finished writing System.Collections.Generic.List`1[DubuqueCodeCamp.Downloader.RegistrantInformation] to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.Registrants.
+2018-06-21 13:24:56.612 -05:00 [Information] Writing Talk Interests System.Collections.Generic.List`1[System.ValueTuple`3[System.String,System.String,System.Collections.Generic.List`1[System.Int32]]] to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.TalkInterest...
+2018-06-21 13:25:06.851 -05:00 [Information] Finished writing 215 Talk Interest records to DubuqueCodeCamp.DatabaseConnection.DCCKellyDatabase.TalkInterest.

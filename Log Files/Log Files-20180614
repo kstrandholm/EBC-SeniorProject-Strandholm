@@ -1,0 +1,423 @@
+2018-06-14 09:37:22.107 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 09:37:22.611 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 09:38:05.752 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 09:38:06.356 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 09:38:06.612 -05:00 [Information] The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 65
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 29
+2018-06-14 10:24:27.686 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:24:28.245 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:24:28.617 -05:00 [Information] The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 65
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 29
+2018-06-14 10:26:30.667 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:26:31.306 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:26:31.448 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 65
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 29
+2018-06-14 10:30:12.744 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:30:13.249 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:30:13.362 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 59
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:32:39.708 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:32:40.241 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:32:40.429 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 59
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:43:02.502 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:43:02.993 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:43:03.107 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 59
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:43:51.972 -05:00 [Information] Getting File SampleFile.txt...
+
+2018-06-14 10:43:52.449 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:43:52.581 -05:00 [Error] The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 59
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:47:00.891 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:47:01.395 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:47:01.525 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 59
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:48:40.281 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:48:40.848 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:48:41.001 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 60
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:49:03.541 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:49:03.939 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:49:04.041 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 61
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 25
+2018-06-14 10:50:37.734 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:50:38.283 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:50:38.515 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 62
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 27
+2018-06-14 10:51:12.280 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:51:12.961 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:51:13.183 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 61
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 26
+2018-06-14 10:51:58.672 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:51:59.199 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:51:59.339 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 61
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 26
+2018-06-14 10:53:09.310 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:53:09.804 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:53:10.002 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 64
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 28
+2018-06-14 10:53:43.116 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:53:43.563 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:53:43.665 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 64
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 28
+2018-06-14 10:58:26.383 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 10:58:26.881 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 10:58:27.078 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 64
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 28
+2018-06-14 11:01:01.109 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:01:01.792 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:01:01.933 -05:00 [Error] 
+Oh no, something went wrong!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here's what I know:
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 64
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 28
+2018-06-14 11:13:09.781 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:13:10.341 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:13:10.499 -05:00 [Error] Parser failed.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 71
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:13:10.574 -05:00 [Information] Writing records to the table...
+2018-06-14 11:14:36.589 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:14:37.082 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:14:37.347 -05:00 [Fatal] Parser failed.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 74
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:16:26.869 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:16:27.489 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:16:27.633 -05:00 [Fatal] Failed to parse SampleFile.txt at C:\Development\Developer Trials\File Downloads\.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 75
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:16:53.101 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:16:53.591 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:16:53.693 -05:00 [Fatal] Failed to parse SampleFile.txt at C:\Development\Developer Trials\File Downloads\.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 75
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:18:27.918 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:18:28.532 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:18:28.695 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 75
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:20:49.137 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:20:49.658 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:20:49.809 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 75
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:22:19.994 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:22:20.550 -05:00 [Information] 
+File already exists and does not need to be re-downloaded.
+2018-06-14 11:22:20.669 -05:00 [Fatal] Failed to parse SampleFile.txt at 'C:\Development\Developer Trials\File Downloads\'.
+CsvHelper.TypeConversion.TypeConverterException: The conversion cannot be performed.
+    Text: '1 0'
+    MemberType: System.Boolean
+    TypeConverter: 'CsvHelper.TypeConversion.BooleanConverter'
+   at CsvHelper.Configuration.Configuration.<>c.<.ctor>b__148_4(CsvHelperException exception)
+   at CsvHelper.CsvReader.<GetRecords>d__63`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at DubuqueCodeCamp.Downloader.FileParser.ParseFile(String filePath) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\FileParser.cs:line 30
+   at DubuqueCodeCamp.Downloader.Runner.GetParsedFileRecords(String localFileLocation, String fileName) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 75
+   at DubuqueCodeCamp.Downloader.Runner.Main(String[] args) in C:\Development\Developer Trials\DubuqueCodeCamp\DubuqueCodeCamp.Downloader\Runner.cs:line 36
+2018-06-14 11:26:51.414 -05:00 [Information] Getting File "SampleFile.txt"...
+
+2018-06-14 11:26:51.949 -05:00 [Information] 
+File retrieved.
+2018-06-14 11:26:52.105 -05:00 [Information] Writing records to the table...

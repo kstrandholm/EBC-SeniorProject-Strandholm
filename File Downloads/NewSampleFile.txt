@@ -1,0 +1,6 @@
+# This is a comment, let's say...
+# Using a delimiter of Pipe Characters ( | )
+# What I will need from the 3rd party:
+# Registrant Information - what it will include!
+# First Name | Last Name | Street Address (optional) | City | State (2 Letter designation) | Email Address (optional) | IsSpeaker (i.e. 0 - not a speaker OR 1 - is a speaker) | Interest (will be determined later)
+Duane | Newman | | Dubuque | IA | | TRUE

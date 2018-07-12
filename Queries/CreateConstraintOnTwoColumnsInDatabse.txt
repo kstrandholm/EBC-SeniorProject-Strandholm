@@ -1,0 +1,30 @@
+USE tempdb;
+GO
+
+CREATE TABLE dbo.Person
+(
+  ID INT IDENTITY(1,1) PRIMARY KEY,
+  Name NVARCHAR(32),
+  Active BIT,
+  PersonNumber INT
+);
+GO
+
+ALTER TABLE dbo.Person 
+  ADD CONSTRAINT uq_Person UNIQUE(PersonNumber, Active);
+GO
+
+-- succeeds:
+INSERT dbo.Person(Name, Active, PersonNumber)
+  VALUES(N'foo', 1, 22);
+GO
+
+-- succeeds:
+INSERT dbo.Person(Name, Active, PersonNumber)
+  VALUES(N'foo', 0, 22);
+GO
+
+-- fails:
+INSERT dbo.Person(Name, Active, PersonNumber)
+  VALUES(N'foo', 1, 22);
+GO
