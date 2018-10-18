@@ -1,5 +1,16 @@
 # Dubuque Code Camp Manager
-> Managing your code camp
+> Managing your code camp!
+
+## Project Premise
+The Dubuque Code Camp needs an administration program to handle creating a schedule for the talks and on-site registration.
+
+Dubuque Code Camp (DCC) has been running their convention by hand for several years now.  However, as their convention has grown, it's become harder for them to keep everything organized.  They've turned to you to build a system to help them figure out how best to schedule talks for their event.
+
+Pre-registrations are handled by a third-party which is willing to export their data in any format you specify.  DCC would also like to handle on-site registrations using a kiosk.  Registrants will supply personal information along with a list of talks they'd like to attend.
+
+The event is being held this year at the Skyward Hotel and Convention Center.  A map of the facility has been included for your review.  DCC will be using the colored rooms on the map to host talks.  They've also included a sample schedule from last year's event.
+
+Build a system to produce a schedule for the event, selecting the best room for the talk based on the number of attendees interested in that talk.  You must also write an application to automate on-site registrations.  Your solution should use a SQL database for data storage.
 
 ## Getting started
 
@@ -96,4 +107,4 @@ Enable on-site registration with the option to select interesting talks!
 
 ## Licensing
 
-> This code base is probably liscensed by Platinum Supplemental Insurance
+> I wouldn't know if I had a license on this or not.  Probably something out there about free use or something.
